@@ -587,7 +587,14 @@ def loc():
             if listepokemon[i].zonegen2cristal[i3] == localisation:
                 print(listepokemon[i].nom)
         
-                    
+def get_nom(num):
+    for i in range(len(listepokemon)):
+        if listepokemon[i].num == num:
+            return listepokemon[i].nom
+def get_num(nom):
+    for i in range(len(listepokemon)):
+        if listepokemon[i].nom == nom:
+            return listepokemon[i].num
     
 class Attaque:
     def __init__(self,nom,typeattaque,statutattaque,puissance,precision,ppmin,ppmax,tauxcritique,priorite,attaquedirecte,effethorscombat,effetsecondaires):
@@ -608,8 +615,8 @@ class Attaque:
     
 listepokemon=[]
 
-listepokemon.append(Pokemon(1,'Bulbizarre',45,49,49,45,65,65,65,False,['Herbizzare'],False,False,16,False,False,False,['Offert par le professeur Chen en début de jeu'],['Offert par le professeur Chen en début de jeu'],['Offert par une fille à Azuria'],[],[],[],'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrique'],['Plante'],False))
-bulbizzare=Pokemon(1,'Bulbizarre',45,49,49,45,65,65,65,False,['Herbizzare'],False,False,16,False,False,False,['Offert par le professeur Chen en début de jeu'],['Offert par le professeur Chen en début de jeu'],['Offert par une fille à Azuria'],[],[],[],'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrique'],['Plante'],False)
+listepokemon.append(Pokemon(1,['Bulbizarre'],45,49,49,45,65,65,65,False,['Herbizzare'],False,False,16,False,False,False,['Offert par le professeur Chen en début de jeu'],['Offert par le professeur Chen en début de jeu'],['Offert par une fille à Azuria'],[],[],[],'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrique'],['Plante'],False))
+bulbizzare=Pokemon(1,['Bulbizarre'],45,49,49,45,65,65,65,False,['Herbizzare'],False,False,16,False,False,False,['Offert par le professeur Chen en début de jeu'],['Offert par le professeur Chen en début de jeu'],['Offert par une fille à Azuria'],[],[],[],'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrique'],['Plante'],False)
 listepokemon.append(Pokemon(2,'Herbizzare',60,62,63,60,80,80,80,'Bulbizzare',['Florizzare'],False,False,32,False,False,False,[],[],[],[],[],[],'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrique'],['Plante'],False))
 herbizzare=Pokemon(2,'Herbizzare',60,62,63,60,80,80,80,'Bulbizzare',['Florizzare'],False,False,32,False,False,False,[],[],[],[],[],[],'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrique'],['Plante'],False)
 listepokemon.append(Pokemon(3,'Florizzare',80,82,83,80,100,100,100,['Herbizzare'],False,False,False,False,False,False,False,[],[],[],[],[],[],'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrique'],['Plante'],False))
@@ -657,8 +664,17 @@ dracolosse=Pokemon(149,'Dracolosse',91,134,95,80,100,100,100,'Draco',False,False
 listepokemon.append(Pokemon(150,'Mewtwo',106,110,90,130,154,154,90,False,False,False,False,False,False,False,False,['Grotte Inconnue'],['Grotte Inconnue'],['Grotte Inconnue'],[],[],[],'Psy',False,30345,0,0,3,['Insecte','Spectre','Ténèbres'],False,['Combat','Psy'],False,False))
 mewtwo=Pokemon(150,'Mewtwo',106,110,90,130,154,154,90,False,False,False,False,False,False,False,False,['Grotte Inconnue'],['Grotte Inconnue'],['Grotte Inconnue'],[],[],[],'Psy',False,30345,0,0,3,['Insecte','Spectre','Ténèbres'],False,['Combat','Psy'],False,False)
 
-
+listenompokemon=[]
+for i in range(len(listepokemon)):
+    listenompokemon += str(listepokemon[i].nom)
+    
+for i in range(len(listepokemon)):
+    for i2 in range(len(listepokemon[i].nom)):
+            print(listepokemon[i].nom)
+    
 print('Pokédex valable pour la première et la deuxième génération (Pokémon Rouge, Bleu, Jaune, Or, Argent, et Cristal')
 print('tapez aide() pour obtenir la liste des commandes')
 print('Version 0.08')
-print()
+print(listenompokemon)
+print(len(listenompokemon))
+print(len(listepokemon))
