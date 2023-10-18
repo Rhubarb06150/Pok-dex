@@ -596,14 +596,42 @@ def get_num(nom):
     for i in range(len(listepokemon)):
         if listepokemon[i].nom == nom:
             return listepokemon[i].num
+
 def get_types(nom):
     for i in range(len(listepokemon)):
         if listepokemon[i].nom == nom:
             if listepokemon[i].type2==False:
-                return listepokemon[i].type1
+                return ('Type: '+listepokemon[i].type1)
             else:
-                return listepokemon[i].type1,listepokemon[i].type2
+                return ('Types: '+listepokemon[i].type1+' et '+listepokemon[i].type2)
     
+def get_pv(nom):
+    for i in range(len(listepokemon)):
+        if listepokemon[i].nom == nom:
+            return listepokemon[i].pv
+        
+def get_force(nom):
+    for i in range(len(listepokemon)):
+        if listepokemon[i].nom == nom:
+            return listepokemon[i].force
+        
+def get_defense(nom):
+    for i in range(len(listepokemon)):
+        if listepokemon[i].nom == nom:
+            return listepokemon[i].defense
+        
+def get_vitesse(nom):
+    for i in range(len(listepokemon)):
+        if listepokemon[i].nom == nom:
+            return listepokemon[i].vitesse
+        
+def get_specialgen1(nom):
+    for i in range(len(listepokemon)):
+        if listepokemon[i].nom == nom:
+            return listepokemon[i].specialgen1
+
+
+
 class Attaque:
     def __init__(self,nom,typeattaque,statutattaque,puissance,precision,ppmin,ppmax,tauxcritique,priorite,attaquedirecte,effethorscombat,effetsecondaires):
         self.nom=nom
