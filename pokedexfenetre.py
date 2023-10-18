@@ -7,28 +7,51 @@ import keyboard
 from pokedex2proto import listepokemon
 from pokedex2proto import listenompokemon
 from pokedex2proto import *
+from PIL import Image,ImageTk
 
 #Fonctions bouttons
 def fond1():
     bg = PhotoImage(file = 'images/fonds/fond1.png')
     label1 = Label( root, image = bg) 
     label1.place(x = -2, y = -2)
+    label1.config(image=img)
+    label1.im=img
+    gen.tkraise()
+    
 def fond2():
     bg = PhotoImage(file = 'images/fonds/fond2.png')
     label1 = Label( root, image = bg) 
     label1.place(x = -2, y = -2)
+    label1.config(image=img)
+    label1.im=img
+    gen.tkraise()
+    
 def fond3():
     bg = PhotoImage(file = 'images/fonds/fond3.png')
     label1 = Label( root, image = bg) 
     label1.place(x = -2, y = -2)
+    label1.config(image=img)
+    label1.im=img
+    gen.tkraise()
+    
+    
 def fond4():
     bg = PhotoImage(file = 'images/fonds/fond4.png')
     label1 = Label( root, image = bg) 
     label1.place(x = -2, y = -2)
+    label1.config(image=img)
+    label1.im=img
+    gen.tkraise()
+    
+    
 def fond5():
     bg = PhotoImage(file = 'images/fonds/fond5.png')
     label1 = Label( root, image = bg) 
     label1.place(x = -2, y = -2)
+    label1.config(image=img)
+    label1.im=img
+    gen.tkraise()
+    
 
 def changerlefond():
     fondselect=Tk()
@@ -47,6 +70,19 @@ def changerlefond():
     bfond4.pack()
     bfond5.pack()
     fondselect.mainloop()
+    
+def changergen():
+    changergen=Tk()
+    changergen.title('Choix de la génération')
+    changergen.geometry('200x60+50+50')
+    changergen.resizable(False,False)
+    changergen.iconbitmap('images/icones/Mewtwo.ico')
+    gen1=Button(changergen, text='Première génération',command=choixgen1)
+    gen1.place(x=2,y=2)
+    gen2=Button(changergen, text='Deuxième génération',command=choixgen2)
+    gen2.place(x=2,y=30)
+    
+    
 
 def choixgen1():
     gen1.pack_forget()
@@ -54,6 +90,7 @@ def choixgen1():
     root.title('Pokédex (Première Génération)')
     root.iconbitmap('images/icones/dracaufeu.ico')
     messagebox.showinfo(title="Choix de génération", message='Vous avez choisi la première génération, soit les jeux: Pokémon Rouge, Pokémon Bleu et Pokémon Jaune')
+    changergen.destroy()
     
 def choixgen2():
     gen1.pack_forget()
@@ -61,13 +98,41 @@ def choixgen2():
     root.title('Pokédex (Deuxième Génération)')
     root.iconbitmap('images/icones/hooh.ico')
     messagebox.showinfo(title="Choix de génération",message='Vous avez choisi la deuxième génération, soit les jeux: Pokémon Or, Pokémon Argent et Pokémon Cristal')
-    
+    changergen.destroy()
     
     
 def avoirlenom():
-    messageboite='Le nom du Pokémon est',get_nom(numspinbox.get())
-    messagebox.showinfo(title="Pokémon",message=(get_nom(numspinbox.get())))
+    messagebox.showinfo(title="Pokémon",message=(get_types(numspinbox.get())))
+    
 
+def afficher_pokemon():
+    if isshiny.get() == 1:
+        
+        image = Image.open("images/sprites/"+numpokemon.get()+versionpokemon.get()+"Shiny.png")
+        image = ImageTk.PhotoImage(image)
+
+        label_image = Label(root, image=image)
+        label_image.pack()
+        
+    if isshiny.get() == 0:
+
+        image = Image.open("images/sprites/"+numpokemon.get()+versionpokemon.get()+".png")
+        image = ImageTk.PhotoImage(image)
+
+        label_image = Label(root, image=image)
+        label_image.pack()
+        
+    img=image
+    label_image.place(x=2,y=2)
+        
+    label_image.config(image=img)
+    label_image.im=img
+    
+    photopokemon.title(numspinbox.get())
+    photopokemon.iconbitmap('images/icones/'+numspinbox.get()+'.ico')
+    
+
+    
 fond=random.randint(1,6)
 cheminfond="images/fonds/fond"+str(fond)+".png"
 root=Tk()
@@ -75,24 +140,46 @@ root.title('Pokédex (Première Génération)')
 width = 680
 height = 576
 
-numspinbox=tk.IntVar()
+numspinbox=StringVar(root)
 numspinbox.set(1)
+
+versionpokemon=StringVar(root)
+versionpokemon.set(1)
+
+isshiny = tk.IntVar()
 
 root.geometry('640x576+50+50')
 root.attributes('-alpha', 1)
 root.resizable(False,False)
-root.iconbitmap('images/icones/dracaufeu.ico')
+root.iconbitmap('images/icones/Dracaufeu.ico')
 bg = PhotoImage(file = cheminfond)
 label1 = Label( root, image = bg) 
 label1.place(x = -2, y = -2)
-gen=Button(root, text = "Changer le fond",bd=2,padx=30,command=changerlefond)
-gen.place(x=5,y=545)
+fond=Button(root, text = "Changer le fond",bd=2,padx=30,command=changerlefond)
+fond.place(x=5,y=545)
+gen=Button(root, text = "Changer la génération",bd=2,padx=30,command=changergen)
+gen.place(x=5,y=515)
 gen1=Button(root, text='Première génération',command=choixgen1)
 gen2=Button(root, text='Deuxième génération',command=choixgen2)
 getnom=Button(root, text='Nom',command=avoirlenom)
-numpokemon=Spinbox(root, from_=1, to=120 , values = listenompokemon, textvariable=numspinbox)
+
+numpokemon=Spinbox(photopokemon, from_=1, to=120 , values = listenompokemon, textvariable=numspinbox, command=afficher_pokemon)
+
+version=Spinbox(photopokemon, from_=1, to=4 , values = listeversion, textvariable=versionpokemon, command=afficher_pokemon)
+
+shiny=tk.Checkbutton(photopokemon, text='Shiny',variable=isshiny, onvalue=1, offvalue=0, command=afficher_pokemon)
+
 numpokemon.pack()
+version.pack()
 getnom.pack()
+shiny.pack()
+
+photopokemon=Tk()
+photopokemon.title(numpokemon.get())
+photopokemon.resizable(False,False)
+photopokemon.geometry('224x300+50+50')
+photopokemon.iconbitmap('images/icones/'+numspinbox.get()+'.ico')
+image=Image.open('images/sprites/'+numspinbox.get()+versionpokemon.get()+'.png')
 
 gen.pack
 root.mainloop()
