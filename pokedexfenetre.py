@@ -225,6 +225,45 @@ def cri_pokemon():
     thread = Thread(target=thread_cri)
     thread.start()
 
+def version_argent():
+    versionpokemon.set('Argent')
+    afficher_pokemon()
+    
+def version_or():
+    versionpokemon.set('Or')
+    afficher_pokemon()
+    
+shinynb=0
+def tempo_shiny():
+    
+    global shinynb
+    shinynb+=1
+    if isshiny.get() == 0:
+        isshiny.set(1)
+    else:
+        isshiny.set(0)
+    afficher_pokemon()
+
+    afficher_pokemon()
+    
+def desactiver_shiny():
+    global shinynb
+    shinynb=0
+    
+    if isshiny.get() == 1:
+        isshiny.set(0)
+    else:
+        isshiny.set(1)
+        
+    afficher_pokemon()
+    
+def shiny_on_hold():
+    global shinynb
+    if shinynb == 0:
+        tempo_shiny()
+    
+    
+
 root=Tk()
 
 numspinbox=StringVar(root)
@@ -258,6 +297,13 @@ rechercher=Button(root,text='Rechercher le Pokémon',command=recherchedupokemon)
 root.bind('<Return>',lambda event:recherchedupokemon())
 root.bind('<Left>',lambda event:pk_precedent())
 root.bind('<Right>',lambda event:pk_suivant())
+
+root.bind('<Down>',lambda event:version_argent())
+root.bind('<Up>',lambda event:version_or())
+
+root.bind('<Control-Shift-S>',lambda event:shiny_on_hold())
+root.bind('<KeyRelease-S>',lambda event:desactiver_shiny())
+
 root.bind('<Control-s>',lambda event:cri_pokemon())
 root.bind('<Control-S>',lambda event:cri_pokemon())
 
@@ -265,7 +311,7 @@ recherchepokemon = tk.Entry(root)
 
 suivant=Button(root,text='Pokémon Suivant',command=pk_suivant)
 precedent=Button(root,text='Pokémon Précédent',command=pk_precedent)
-cri=Button(root,text='Cri',command=cri_pokemon)
+cri=Button(root,text='Écouter le cri',command=cri_pokemon)
 
 
 numpokemon.place(x=160,y=20)
@@ -285,6 +331,8 @@ evo.place(x=30,y=329)
 rechercher.place(x=552,y=34)
 recherchepokemon.place(x=558,y=14)
 cri.place(x=215,y=105)
+
+afficher_pokemon()
 
 #sprites=Button(menupokemon, text = "Pokédex",bd=2,padx=30,command=changergen)
 #sprites.place(x=5,y=485)
