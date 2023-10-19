@@ -9,6 +9,10 @@ from pokedex2proto import listenompokemon
 from pokedex2proto import *
 from PIL import Image,ImageTk
 from functools import partial
+import time
+import winsound
+from threading import Thread
+
 
 #Fonctions bouttons
 def fond1():
@@ -158,7 +162,7 @@ def recherchedupokemon():
             afficher_pokemon()
             
     if pokemontrouve == False:
-        messagebox.showinfo(title="Aucun Pokémon Trouvé!",message="Aucun pokémon correspondant à ce nom n'a été trouvé")
+        messagebox.showinfo(title="Aucun Pokémon Trouvé!",message="Aucun Pokémon correspondant à ce nom n'a été trouvé")
     recherchepokemon.delete(0,100)
     
 def afficher_pokemon():
@@ -206,7 +210,20 @@ def afficher_pokemon():
     numero.config(text=('Numéro: '+str(get_num(numpokemon.get()))))
     evo.config(text=(get_evo(numpokemon.get())))
 
+def thread_cri():
+    numero_pkmn=get_num(numspinbox.get())
+    if numero_pkmn < 10:
+        chemincri=('sons/cris/00'+str(numero_pkmn)+'.wav')
+    elif numero_pkmn < 100:
+        chemincri=('sons/cris/0'+str(numero_pkmn)+'.wav')
+    else:        
+        chemincri=('sons/cris/'+str(numero_pkmn)+'.wav')
+    winsound.PlaySound(chemincri, winsound.SND_FILENAME)
+    
+def cri_pokemon():
 
+    thread = Thread(target=thread_cri)
+    thread.start()
 
 root=Tk()
 
@@ -241,15 +258,19 @@ rechercher=Button(root,text='Rechercher le Pokémon',command=recherchedupokemon)
 root.bind('<Return>',lambda event:recherchedupokemon())
 root.bind('<Left>',lambda event:pk_precedent())
 root.bind('<Right>',lambda event:pk_suivant())
+root.bind('<Control-s>',lambda event:cri_pokemon())
+root.bind('<Control-S>',lambda event:cri_pokemon())
+
 recherchepokemon = tk.Entry(root)
 
 suivant=Button(root,text='Pokémon Suivant',command=pk_suivant)
 precedent=Button(root,text='Pokémon Précédent',command=pk_precedent)
+cri=Button(root,text='Cri',command=cri_pokemon)
 
 
 numpokemon.place(x=160,y=20)
 version.place(x=160,y=40)
-shiny.place(x=300,y=30)
+shiny.place(x=300,y=28)
 nomdupokemon.place(x=160,y=60)
 types.place(x=160,y=80)
 statistiques.place(x=30,y=208)
@@ -263,7 +284,7 @@ suivant.place(x=585,y=460)
 evo.place(x=30,y=329)
 rechercher.place(x=552,y=34)
 recherchepokemon.place(x=558,y=14)
-
+cri.place(x=215,y=105)
 
 #sprites=Button(menupokemon, text = "Pokédex",bd=2,padx=30,command=changergen)
 #sprites.place(x=5,y=485)
