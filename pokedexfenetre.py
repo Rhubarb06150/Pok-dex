@@ -8,11 +8,12 @@ from pokedex2proto import listepokemon
 from pokedex2proto import listenompokemon
 from pokedex2proto import *
 from PIL import Image,ImageTk
+from functools import partial
 
 #Fonctions bouttons
 def fond1():
     bg = PhotoImage(file = 'images/fonds/fond1.png')
-    label1 = Label( root, image = bg) 
+    label1 = Label( menupokemon, image = bg) 
     label1.place(x = -2, y = -2)
     label1.config(image=img)
     label1.im=img
@@ -20,7 +21,7 @@ def fond1():
     
 def fond2():
     bg = PhotoImage(file = 'images/fonds/fond2.png')
-    label1 = Label( root, image = bg) 
+    label1 = Label( menupokemon, image = bg) 
     label1.place(x = -2, y = -2)
     label1.config(image=img)
     label1.im=img
@@ -28,7 +29,7 @@ def fond2():
     
 def fond3():
     bg = PhotoImage(file = 'images/fonds/fond3.png')
-    label1 = Label( root, image = bg) 
+    label1 = Label( menupokemon, image = bg) 
     label1.place(x = -2, y = -2)
     label1.config(image=img)
     label1.im=img
@@ -37,7 +38,7 @@ def fond3():
     
 def fond4():
     bg = PhotoImage(file = 'images/fonds/fond4.png')
-    label1 = Label( root, image = bg) 
+    label1 = Label( menupokemon, image = bg) 
     label1.place(x = -2, y = -2)
     label1.config(image=img)
     label1.im=img
@@ -46,7 +47,7 @@ def fond4():
     
 def fond5():
     bg = PhotoImage(file = 'images/fonds/fond5.png')
-    label1 = Label( root, image = bg) 
+    label1 = Label( menupokemon, image = bg) 
     label1.place(x = -2, y = -2)
     label1.config(image=img)
     label1.im=img
@@ -88,16 +89,16 @@ def changergen():
 def choixgen1():
     gen1.pack_forget()
     gen2.pack_forget()
-    root.title('Pokédex (Première Génération)')
-    root.iconbitmap('images/icones/dracaufeu.ico')
+    menupokemon.title('Pokédex (Première Génération)')
+    menupokemon.iconbitmap('images/icones/dracaufeu.ico')
     messagebox.showinfo(title="Choix de génération", message='Vous avez choisi la première génération, soit les jeux: Pokémon Rouge, Pokémon Bleu et Pokémon Jaune')
     changergen.destroy()
     
 def choixgen2():
     gen1.pack_forget()
     gen2.pack_forget()
-    root.title('Pokédex (Deuxième Génération)')
-    root.iconbitmap('images/icones/hooh.ico')
+    menupokemon.title('Pokédex (Deuxième Génération)')
+    menupokemon.iconbitmap('images/icones/hooh.ico')
     messagebox.showinfo(title="Choix de génération",message='Vous avez choisi la deuxième génération, soit les jeux: Pokémon Or, Pokémon Argent et Pokémon Cristal')
     changergen.destroy()
     
@@ -105,14 +106,68 @@ def choixgen2():
 def avoirlenom():
     messagebox.showinfo(title="Pokémon",message=(get_types(numspinbox.get())))
     
+def pk_suivant():
+    
+    if get_num(numpokemon.get()) > 0 and get_num(numpokemon.get()) < 251:
+        
+        numspinbox.set(get_nom(get_num(numpokemon.get())+1))
+        afficher_pokemon()
+    
+    else:
+        
+        messagebox.showinfo(title="Aucun Pokémon Suivant",message="Vous ne pouvez pas aller plus loin!")
+    recherchepokemon.delete(0,100)
+        
+def pk_precedent():
+    
+    if get_num(numpokemon.get()) > 1:
+        
+        numspinbox.set(get_nom(get_num(numpokemon.get())-1))
+        afficher_pokemon()
+        
+    else:
+        
+        messagebox.showinfo(title="Aucun Pokémon Précédent",message="Vous ne pouvez pas aller plus loin!")
+    recherchepokemon.delete(0,100)
 
+def recherchedupokemon():
+    pokemontrouve=False
+    
+    for i in range (len(listepokemon)):
+        
+        if len(listepokemon[i].rawnom)== 1 :
+            
+            if listepokemon[i].rawnom == recherchepokemon.get() :
+                
+                pokemontrouve=True
+                numspinbox.set(listepokemon[i].nom)
+                afficher_pokemon()
+                
+        for i2 in range (len(listepokemon[i].rawnom)):
+            
+            if listepokemon[i].rawnom[i2] == recherchepokemon.get():
+                
+                pokemontrouve=True
+                numspinbox.set(listepokemon[i].nom)
+                afficher_pokemon()
+                
+        if recherchepokemon.get() == listepokemon[i].nom:
+            
+            pokemontrouve=True
+            numspinbox.set(listepokemon[i].nom)
+            afficher_pokemon()
+            
+    if pokemontrouve == False:
+        messagebox.showinfo(title="Aucun Pokémon Trouvé!",message="Aucun pokémon correspondant à ce nom n'a été trouvé")
+    recherchepokemon.delete(0,100)
+    
 def afficher_pokemon():
     if isshiny.get() == 1:
         
         image = Image.open("images/sprites/"+numpokemon.get()+versionpokemon.get()+"Shiny.png")
         image = ImageTk.PhotoImage(image)
 
-        label_image = Label(photopokemon, image=image)
+        label_image = Label(root, image=image)
         label_image.pack()
         
     if isshiny.get() == 0:
@@ -120,34 +175,40 @@ def afficher_pokemon():
         image = Image.open("images/sprites/"+numpokemon.get()+versionpokemon.get()+".png")
         image = ImageTk.PhotoImage(image)
 
-        label_image = Label(photopokemon, image=image)
+        label_image = Label(root, image=image)
         label_image.pack()
         
+        
+    imagepas = Image.open("images/pas/"+numpokemon.get()+".png")
+    imagepas = ImageTk.PhotoImage(imagepas)
+
+    label_imagepas = Label(root, image=imagepas)
+    label_imagepas.pack()
+        
     img=image
+    img2=imagepas
     label_image.place(x=30,y=32)
+    label_imagepas.place(x=167,y=114)
         
     label_image.config(image=img)
     label_image.im=img
+    label_imagepas.config(image=img2)
+    label_imagepas.im=img2
     
-    photopokemon.title('Fiche de '+numspinbox.get())
-    photopokemon.iconbitmap('images/icones/'+numspinbox.get()+'.ico')
+    root.title('Fiche de '+numspinbox.get())
+    root.iconbitmap('images/icones/'+numspinbox.get()+'.ico')
     nomdupokemon.config(text='Nom: '+numpokemon.get())
     types.config(text=(get_types(numpokemon.get())))
     pv.config(text=('Pv: '+str(get_pv(numpokemon.get()))))
     force.config(text=('Force: '+str(get_force(numpokemon.get()))))
     defense.config(text=('Défense: '+str(get_defense(numpokemon.get()))))
     vitesse.config(text=('Vitesse: '+str(get_vitesse(numpokemon.get()))))
+    numero.config(text=('Numéro: '+str(get_num(numpokemon.get()))))
+    evo.config(text=(get_evo(numpokemon.get())))
 
-    
 
 
-    
-fond=random.randint(1,6)
-cheminfond="images/fonds/fond"+str(fond)+".png"
 root=Tk()
-root.title('Pokédex (Première Génération)')
-width = 680
-height = 576
 
 numspinbox=StringVar(root)
 numspinbox.set(1)
@@ -155,25 +216,35 @@ numspinbox.set(1)
 versionpokemon=StringVar(root)
 isshiny = tk.IntVar()
 
-
-photopokemon=Toplevel()
-photopokemon.title('Sprites')
-photopokemon.resizable(False,False)
-photopokemon.geometry('700x500+50+50')
+root.title('Sprites')
+root.resizable(False,False)
+root.geometry('700x500+50+50')
 bg2 = PhotoImage(file = 'images/fonds/fondsprites.png')
-label2 = Label( photopokemon, image = bg2) 
+label2 = Label( root, image = bg2) 
 label2.place(x = -2, y = -2)
-photopokemon.iconbitmap('images/icones/icone.ico')
-numpokemon=Spinbox(photopokemon, from_=1, to=120 , values = listenompokemon, textvariable=numspinbox, command=afficher_pokemon)
-version=Spinbox(photopokemon, from_=1, to=4 , values = listeversion, textvariable=versionpokemon, command=afficher_pokemon)
-shiny=tk.Checkbutton(photopokemon, text='Shiny',variable=isshiny, onvalue=1, offvalue=0, command=afficher_pokemon)
-nomdupokemon=Label(photopokemon,text=('Nom: '+numpokemon.get()))
-types=Label(photopokemon,text=(get_types(numpokemon.get())))
-statistiques=Label(photopokemon,text='Statistiques:')
-pv=Label(photopokemon,text='Pv: '+str(get_pv(numpokemon.get())))
-force=Label(photopokemon,text='Force: '+str(get_force(numpokemon.get())))
-defense=Label(photopokemon,text='Défense: '+str(get_defense(numpokemon.get())))
-vitesse=Label(photopokemon,text='Vitesse: '+str(get_vitesse(numpokemon.get())))
+root.iconbitmap('images/icones/icone.ico')
+numpokemon=Spinbox(root, from_=1, to=120 , values = listenompokemon, textvariable=numspinbox, command=afficher_pokemon, state = 'readonly')
+version=Spinbox(root, from_=1, to=4 , values = listeversion, textvariable=versionpokemon, command=afficher_pokemon, state = 'readonly')
+shiny=tk.Checkbutton(root, text='Shiny',variable=isshiny, onvalue=1, offvalue=0, command=afficher_pokemon)
+nomdupokemon=Label(root,text=('Nom: '+numpokemon.get()))
+types=Label(root,text=(get_types(numpokemon.get())))
+
+statistiques=Label(root,text='Statistiques:')
+pv=Label(root,text='Pv: '+str(get_pv(numpokemon.get())))
+force=Label(root,text='Force: '+str(get_force(numpokemon.get())))
+defense=Label(root,text='Défense: '+str(get_defense(numpokemon.get())))
+vitesse=Label(root,text='Vitesse: '+str(get_vitesse(numpokemon.get())))
+numero=Label(root,text='Numéro: '+str(get_num(numpokemon.get())))
+
+evo=Label(root,text=(get_evo(numpokemon.get())))
+rechercher=Button(root,text='Rechercher le Pokémon',command=recherchedupokemon)
+root.bind('<Return>',lambda event:recherchedupokemon())
+root.bind('<Left>',lambda event:pk_precedent())
+root.bind('<Right>',lambda event:pk_suivant())
+recherchepokemon = tk.Entry(root)
+
+suivant=Button(root,text='Pokémon Suivant',command=pk_suivant)
+precedent=Button(root,text='Pokémon Précédent',command=pk_precedent)
 
 
 numpokemon.place(x=160,y=20)
@@ -181,35 +252,29 @@ version.place(x=160,y=40)
 shiny.place(x=300,y=30)
 nomdupokemon.place(x=160,y=60)
 types.place(x=160,y=80)
-statistiques.place(x=30,y=160)
-pv.place(x=35,y=180)
-force.place(x=35,y=195)
-defense.place(x=35,y=210)
-vitesse.place(x=35,y=225)
+statistiques.place(x=30,y=208)
+pv.place(x=35,y=231)
+force.place(x=35,y=246)
+defense.place(x=35,y=261)
+vitesse.place(x=35,y=276)
+numero.place(x=30,y=168)
+precedent.place(x=12,y=460)
+suivant.place(x=585,y=460)
+evo.place(x=30,y=329)
+rechercher.place(x=552,y=34)
+recherchepokemon.place(x=558,y=14)
 
 
-root.geometry('640x576+50+50')
-root.attributes('-alpha', 1)
-root.resizable(False,False)
-root.iconbitmap('images/icones/Dracaufeu.ico')
-bg = PhotoImage(file = cheminfond)
-label1 = Label( root, image = bg) 
-label1.place(x = -2, y = -2)
-fond=Button(root, text = "Changer le fond",bd=2,padx=30,command=changerlefond)
-fond.place(x=5,y=545)
-gen=Button(root, text = "Changer la génération",bd=2,padx=30,command=changergen)
-gen.place(x=5,y=515)
-#sprites=Button(root, text = "Pokédex",bd=2,padx=30,command=changergen)
+#sprites=Button(menupokemon, text = "Pokédex",bd=2,padx=30,command=changergen)
 #sprites.place(x=5,y=485)
 
-gen1=Button(root, text='Première génération',command=choixgen1)
-gen2=Button(root, text='Deuxième génération',command=choixgen2)
-getnom=Button(root, text='Nom',command=avoirlenom)
-
-
-
-
-
-gen.pack
-photopokemon.mainloop()
+root.mainloop()
 print(listenompokemon)
+
+#À la création d'un Pokémon:
+#les 4 sprites
+#le nom dans listenompokemon
+#lajout dans listepokemon et dans la classe Pokémon
+#le sprite du pas
+#son cri
+#son icône
