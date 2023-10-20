@@ -23,5 +23,7 @@ def fenetre_controles():
     voirshiny.place(x=20,y=175)
     ecoutercri=Label(aide,text='-Écouter le cri du Pokémon: Ctrl + S')
     ecoutercri.place(x=20,y=190)
+    afficherliste=Label(aide,text='-Afficher la liste des Pokémons: Ctrl + L')
+    afficherliste.place(x=20,y=205)
     
     aide.mainloop()

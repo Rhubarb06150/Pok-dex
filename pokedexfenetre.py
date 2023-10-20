@@ -334,11 +334,11 @@ isshiny = tk.IntVar()
 root.title('Sprites')
 root.resizable(False,False)
 root.geometry('700x500+20+20')
-bg2 = PhotoImage(file = 'images/fonds/fondsprites.png')
+bg2 = PhotoImage(file = 'images/fonds/fondspritestest.png')
 label2 = Label( root, image = bg2) 
 label2.place(x = -2, y = -2)
 root.iconbitmap('images/icones/icone.ico')
-numpokemon=Spinbox(root, from_=1, to=120 , values = listenompokemon, textvariable=numspinbox, command=afficher_pokemon, state = 'readonly')
+numpokemon=Spinbox(root, from_=1, to=251 , values = listenompokemon, textvariable=numspinbox, command=afficher_pokemon, state = 'readonly')
 version=Spinbox(root, from_=1, to=4 , values = listeversion, textvariable=versionpokemon, command=afficher_pokemon, state = 'readonly')
 shiny=tk.Checkbutton(root, text='Shiny',variable=isshiny, onvalue=1, offvalue=0, command=afficher_pokemon)
 nomdupokemon=Label(root,text=('Nom: '+numpokemon.get()))
@@ -438,7 +438,9 @@ print()
 
 
 root.mainloop()
+
 #À la création d'un Pokémon:
+
 #les 4 sprites
 #le nom dans listenompokemon
 #lajout dans listepokemon et dans la classe Pokémon
