@@ -1,6 +1,7 @@
 #Pokédex 2 proto
 #4/10/23
 #Rhubarb
+
                                                         
 #importer les truc utiles
 import time
@@ -548,6 +549,16 @@ def get_specialgen1(nom):
     for i in range(len(listepokemon)):
         if listepokemon[i].nom == nom:
             return listepokemon[i].specialgen1
+
+def get_pre_evo(nom):
+    for i in listepokemon:
+        if i.nom == nom:
+            if i.pre_evolution != False:
+                return (i.pre_evolution)
+            if i.pre_evolution2 != False:
+                return (i.pre_evolution2)
+            if i.pre_evolution == False and i.pre_evolution2 == False:
+                return 'Aucune pré-évolution'
         
 def get_evo(nom):
     nbevolutions=0
@@ -570,17 +581,28 @@ def get_evo(nom):
                         listeevolution += str(listepokemon[i].evolution2[i2])
                         nbevolutions+=1
                 if nbevolutions > 1:
-                    resultat=('Évolutions: '+listeevolution)
+                    resultat=(listeevolution)
                     return resultat
                 else:
-                    resultat=('Évolution: '+listeevolution)
+                    resultat=(listeevolution)
                     return resultat
             if listepokemon[i].evolution == False and listepokemon[i].evolution == False:
                 return 'Aucune évolution'
+            
 def get_specialgen1(nom):
     for i in range(len(listepokemon)):
         if listepokemon[i].nom == nom:
             return listepokemon[i].specialgen1
+        
+def get_attspec(nom):
+    for i in listepokemon:
+        if i.nom == nom:
+            return i.attaquespeciale
+            
+def get_defspec(nom):
+    for i in listepokemon:
+        if i.nom == nom:
+            return i.defensespeciale
 
 class Attaque:
     def __init__(self,nom,typeattaque,statutattaque,puissance,precision,ppmin,ppmax,tauxcritique,priorite,attaquedirecte,effethorscombat,effetsecondaires):
@@ -605,7 +627,7 @@ listepokemon.append(Pokemon(1,['bulbizarre','bublizarre','Bublizarre','bublizzar
 bulbizarre=Pokemon(1,['bulbizarre'],'Bulbizarre',45,49,49,45,65,65,65,False,['Herbizarre'],False,False,16,False,False,False,['Offert par le professeur Chen en début de jeu'],['Offert par le professeur Chen en début de jeu'],['Offert par une fille à Azuria'],[],[],[],'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrique'],['Plante'],False)
 listepokemon.append(Pokemon(2,['herbizarre','herbizzare','herbizzarre','Herbizzare','Herbizzarre'],'Herbizarre',60,62,63,60,80,80,80,'Bulbizarre',['Florizarre'],False,False,32,False,False,False,[],[],[],[],[],[],'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrique'],['Plante'],False))
 herbizarre=Pokemon(2,['herbizarre'],'Herbizarre',60,62,63,60,80,80,80,'Bulbizarre',['Florizarre'],False,False,32,False,False,False,[],[],[],[],[],[],'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrique'],['Plante'],False)
-listepokemon.append(Pokemon(3,['florizarre','florizzare','florizzarre','Florizzare','Florizzarre'],'Florizarre',80,82,83,80,100,100,100,['Herbizarre'],False,False,False,False,False,False,False,[],[],[],[],[],[],'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrique'],['Plante'],False))
+listepokemon.append(Pokemon(3,['florizarre','florizzare','florizzarre','Florizzare','Florizzarre'],'Florizarre',80,82,83,80,100,100,100,'Herbizarre',False,False,False,False,False,False,False,[],[],[],[],[],[],'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrique'],['Plante'],False))
 florizarre=Pokemon(3,['florizarre'],'Florizarre',80,82,83,80,100,100,100,'Herbizarre',False,False,False,False,False,False,False,[],[],[],[],[],[],'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrique'],['Plante'],False)
 
 
@@ -637,6 +659,8 @@ listepokemon.append(Pokemon(13,['aspicot'],'Aspicot',40,35,30,50,20,20,20,False,
 aspicot=Pokemon(13,['aspicot'],'Aspicot',40,35,30,50,20,20,20,False,['Coconfort'],False,False,7,False,False,False,['Forêt de Jade','Route 2','Route 24','Route 25'],['Forêt de Jade','Route 25'],['Obtention par échange'],["Parc naturel (Concours de capture d'insectes)"],['Bois aux Chênes','Parc naturel',"Parc naturel (Concours de capture d'insectes)","Coup d'Boule sur abustres",'Route 2','Route 30','Route 31'],['Bois aux Chênes','Parc naturel',"Coup d'Boule sur arbustres (Bois aux chênes)","Parc naturel (Concours de capture d'insectes)",'Route 30','Route 31'],'Insecte','Poison',3825,50,50,255,['Feu','Psy','Roche','Vol'],False,['Insecte','Poison'],['Combat','Plante'],False)
 listepokemon.append(Pokemon(14,['coconfort'],'Coconfort',45,25,50,35,25,25,25,'Aspicot',['Dardagnan'],False,False,10,False,False,False,['Forêt de Jade','Route 24'],['Forêt de Jade','Route 24','Route 25'],[],["Parc naturel (Concours de captures d'insectes"],['Bois aux chênes',"Coup d'Boule aux Arbustes (Bois aux chênes, Écorcia, Lac Colère, Route 26, Route 27, Route 34, Route 35, Route 36, Route 37, Route 38, Route 39)",'Parc naturel',"Parc naturel (Concours de captures d'insectes)",'Route 2','Route 30','Route 31'],['Bois aux chênes',"Coup d'Boule sur Arbustes (Bois aux chênes)",'Parc naturel',"Parc naturel (Concours de captures d'insectes)"],'Insecte','Poison',3825,50,50,255,['Feu','Psy','Roche','Vol'],False,['Insecte','Poison'],['Combat','Plante'],False))
 coconfort=Pokemon(14,['coconfort'],'Coconfort',45,25,50,35,25,25,25,'Aspicot',['Dardagnan'],False,False,10,False,False,False,['Forêt de Jade','Route 24'],['Forêt de Jade','Route 24','Route 25'],[],["Parc naturel (Concours de captures d'insectes"],['Bois aux chênes',"Coup d'Boule aux Arbustes (Bois aux chênes, Écorcia, Lac Colère, Route 26, Route 27, Route 34, Route 35, Route 36, Route 37, Route 38, Route 39)",'Parc naturel',"Parc naturel (Concours de captures d'insectes)",'Route 2','Route 30','Route 31'],['Bois aux chênes',"Coup d'Boule sur Arbustes (Bois aux chênes)",'Parc naturel',"Parc naturel (Concours de captures d'insectes)"],'Insecte','Poison',3825,50,50,255,['Feu','Psy','Roche','Vol'],False,['Insecte','Poison'],['Combat','Plante'],False)
+listepokemon.append(Pokemon(15,['dardagnan'],'Dardagnan',65,80,40,75,45,80,45,'Coconfort',False,False,False,False,False,False,False,[],[],[],["Parc naturel (Concours de capture d'insectes)"],["Coup d'Boule sur Arbustes (Bois aux chênes, Écorcia, Lac Colère, Route 26, Route 27, Route 34, Route 35, Route 36, Route 37, Route 38, Route 39)","Parc naturel (Concours de capture d'insectes)",'Route 2 (Matin)'],["Coup d'Boule sur Arbustes (Bois aux chênes","Parc naturel (Concours de capture d'insectes"],'Insecte','Poison',3825,50,50,255,['Feu','Psy','Roche','Vol'],False,['Insecte','Poison'],['Combat','Plante'],False))
+dardagnan=Pokemon(15,['dardagnan'],'Dardagnan',65,80,40,75,45,80,45,'Coconfort',False,False,False,False,False,False,False,[],[],[],["Parc naturel (Concours de capture d'insectes)"],["Coup d'Boule sur Arbustes (Bois aux chênes, Écorcia, Lac Colère, Route 26, Route 27, Route 34, Route 35, Route 36, Route 37, Route 38, Route 39)","Parc naturel (Concours de capture d'insectes)",'Route 2 (Matin)'],["Coup d'Boule sur Arbustes (Bois aux chênes","Parc naturel (Concours de capture d'insectes"],'Insecte','Poison',3825,50,50,255,['Feu','Psy','Roche','Vol'],False,['Insecte','Poison'],['Combat','Plante'],False)
 
 
 listepokemon.append(Pokemon(131,['lokhlass'],'Lokhlass',130,85,80,60,95,85,95,False,False,False,False,False,False,False,False,['Offert par un employé de la Sylphe SARL à Safrania après avoir battu le Rival'],['Offert par un employé de la Sylphe SARL à Safrania après avoir battu le Rival'],['Offert par un employé de la Sylphe SARL à Safrania après avoir battu le Rival'],['Caves Jumelles (second sous-sol, le vendredi uniquement'],['Caves Jumelles (second sous-sol, le vendredi uniquement'],['Caves Jumelles (second sous-sol, le vendredi uniquement'],'Eau','Glace',9945,50,50,45,['Combat','Électrique','Plante','Roche'],False,['Eau'],['Glace'],False))
@@ -674,12 +698,5 @@ lugia=Pokemon(249,['lugia'],'Lugia',106,90,130,110,0,90,154,False,False,False,Fa
 listepokemon.append(Pokemon(249,['lugia'],'Lugia',106,90,130,110,0,90,154,False,False,False,False,False,False,False,False,[],[],[],["Tourb'Îles (néssécite l'Argent'Aile"],["Tourb'Îles (néssécite l'Argent'Aile"],["Tourb'Îles (néssécite l'Argent'Aile"],'Psy','Vol',30345,0,0,3,['Électrique','Glace','Roche','Spectre','Ténèbres'],False,['Plante','Psy'],['Combat'],['Sol']))
 
 
-listenompokemon=['Bulbizarre','Herbizarre','Florizarre','Salamèche','Reptincel','Dracaufeu','Carapuce','Carabaffe','Tortank','Chenipan','Chrysacier','Papillusion','Aspicot','Coconfort','Dardagnan','Roucool','Roucoups','Roucarnage','Rattata','Rattatac','Piafabec','Rapasdepic','Abo','Arbok','Pikachu','Raichu','Ptéra','Magicarpe','Léviator','Lokhlass','Évoli','Aquali','Voltali','Pyroli','Kabuto','Kabutops','Artikodin','Électhor','Sulfura','Mewtwo','Germignon','Macronium','Méganium','Héricendre','Feurisson','Typhlosion','Kaiminus','Crocrodil','Aligatueur','Mentali','Noctali','Lugia','Ho-Oh']
+listenompokemon=['Bulbizarre','Herbizarre','Florizarre','Salamèche','Reptincel','Dracaufeu','Carapuce','Carabaffe','Tortank','Chenipan','Chrysacier','Papillusion','Aspicot','Coconfort','Dardagnan','Roucool','Roucoups','Roucarnage','Rattata','Rattatac','Piafabec','Rapasdepic','Abo','Arbok','Pikachu','Raichu','Fantominus','Spectrum','Ectoplasma','Magicarpe','Léviator','Lokhlass','Évoli','Aquali','Voltali','Pyroli','Kabuto','Ptéra','Kabutops','Artikodin','Électhor','Sulfura','Mewtwo','Germignon','Macronium','Méganium','Héricendre','Feurisson','Typhlosion','Kaiminus','Crocrodil','Aligatueur','Mentali','Noctali','Lugia','Ho-Oh']
 listeversion=['Or','Argent']
-
-print('Pokédex valable pour la première et la deuxième génération (Pokémon Rouge, Bleu, Jaune, Or, Argent, et Cristal')
-print('tapez aide() pour obtenir la liste des commandes')
-print('Version 0.08')
-print(listenompokemon)
-print(len(listenompokemon))
-print(len(listepokemon))

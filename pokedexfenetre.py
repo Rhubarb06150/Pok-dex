@@ -1,3 +1,8 @@
+import urllib.request
+import requests
+import urllib
+from urllib.request import urlopen
+import urllib3
 import tkinter
 import tkinter as tk
 from tkinter import *
@@ -7,12 +12,29 @@ import keyboard
 from pokedex2proto import listepokemon
 from pokedex2proto import listenompokemon
 from pokedex2proto import *
+from fenetrecontroles import *
+from fenetreparametres import *
+from fenetreapropos import *
 from PIL import Image,ImageTk
 from functools import partial
 import time
 import winsound
 from threading import Thread
+import webbrowser
 
+#vérifications version
+ajour=False
+version=0.02
+
+
+
+urlnv='https://github.com/Rhubarb06150/Pok-dex'
+url = 'https://mcrhubarb.net/version.txt'
+for line in urllib.request.urlopen(url):
+    version_check=(line.decode('utf-8'))
+
+if version == float(version_check):
+    ajour=True
 
 #Fonctions bouttons
 def fond1():
@@ -203,12 +225,38 @@ def afficher_pokemon():
     root.iconbitmap('images/icones/'+numspinbox.get()+'.ico')
     nomdupokemon.config(text='Nom: '+numpokemon.get())
     types.config(text=(get_types(numpokemon.get())))
+    
     pv.config(text=('Pv: '+str(get_pv(numpokemon.get()))))
     force.config(text=('Force: '+str(get_force(numpokemon.get()))))
     defense.config(text=('Défense: '+str(get_defense(numpokemon.get()))))
     vitesse.config(text=('Vitesse: '+str(get_vitesse(numpokemon.get()))))
+    special.config(text=('Spécial: '+str(get_specialgen1(numpokemon.get()))))
+    attaque_speciale.config(text=('Attaque spéciale: '+str(get_attspec(numpokemon.get()))))
+    defense_speciale.config(text=('Défense spéciale: '+str(get_defspec(numpokemon.get()))))
     numero.config(text=('Numéro: '+str(get_num(numpokemon.get()))))
-    evo.config(text=(get_evo(numpokemon.get())))
+    
+    if get_evo(numpokemon.get()) == 'Aucune évolution':
+        evo.config(text=(get_evo(numpokemon.get())))
+    else:
+        evo.config(text=('Évolution: '+get_evo(numpokemon.get())))
+    
+    
+    if get_pre_evo(numpokemon.get()) == 'Aucune pré-évolution':
+        pre_evo.config(text=(get_pre_evo(numpokemon.get())))
+    else:
+        pre_evo.config(text=('Pré évolution: '+get_pre_evo(numpokemon.get())))
+    
+    
+    
+    if get_evo(numpokemon.get()) == 'Aucune évolution':
+        afficher_evolution["state"] = "disabled"
+    else:
+        afficher_evolution["state"] = "normal"
+        
+    if get_pre_evo(numpokemon.get()) == 'Aucune pré-évolution':
+        afficher_pre_evolution["state"] = "disabled"
+    else:
+        afficher_pre_evolution["state"] = "normal"
 
 def thread_cri():
     numero_pkmn=get_num(numspinbox.get())
@@ -219,6 +267,16 @@ def thread_cri():
     else:        
         chemincri=('sons/cris/'+str(numero_pkmn)+'.wav')
     winsound.PlaySound(chemincri, winsound.SND_FILENAME)
+    
+    
+def afficher_evolution():
+    numspinbox.set(get_evo(numpokemon.get()))
+    afficher_pokemon()
+    
+def afficher_pre_evolution():
+    numspinbox.set(get_pre_evo(numpokemon.get()))
+    afficher_pokemon()
+    
     
 def cri_pokemon():
 
@@ -286,13 +344,21 @@ nomdupokemon=Label(root,text=('Nom: '+numpokemon.get()))
 types=Label(root,text=(get_types(numpokemon.get())))
 
 statistiques=Label(root,text='Statistiques:')
+
+
 pv=Label(root,text='Pv: '+str(get_pv(numpokemon.get())))
 force=Label(root,text='Force: '+str(get_force(numpokemon.get())))
 defense=Label(root,text='Défense: '+str(get_defense(numpokemon.get())))
 vitesse=Label(root,text='Vitesse: '+str(get_vitesse(numpokemon.get())))
+special=Label(root,text=('Spécial: '+str(get_specialgen1(numpokemon.get()))))
+attaque_speciale=Label(root,text=('Attaque spéciale: '+str(get_attspec(numpokemon.get()))))
+defense_speciale=Label(root,text=('Défense spéciale: '+str(get_defspec(numpokemon.get()))))
+
+
 numero=Label(root,text='Numéro: '+str(get_num(numpokemon.get())))
 
 evo=Label(root,text=(get_evo(numpokemon.get())))
+pre_evo=Label(root,text=(get_pre_evo(numpokemon.get())))
 rechercher=Button(root,text='Rechercher le Pokémon',command=recherchedupokemon)
 root.bind('<Return>',lambda event:recherchedupokemon())
 root.bind('<Left>',lambda event:pk_precedent())
@@ -309,9 +375,11 @@ root.bind('<Control-S>',lambda event:cri_pokemon())
 
 recherchepokemon = tk.Entry(root)
 
-suivant=Button(root,text='Pokémon Suivant',command=pk_suivant)
-precedent=Button(root,text='Pokémon Précédent',command=pk_precedent)
+a_propos=Button(root,text='À propos',command=fenetre_a_propos)
+parametres=Button(root,text='Paramètres',command=fenetre_parametres)
 cri=Button(root,text='Écouter le cri',command=cri_pokemon)
+afficher_evolution=Button(root,text="Afficher l'évolution",command=afficher_evolution)
+afficher_pre_evolution=Button(root,text="Afficher la pré-évolution",command=afficher_pre_evolution)
 
 
 numpokemon.place(x=160,y=20)
@@ -320,26 +388,48 @@ shiny.place(x=300,y=28)
 nomdupokemon.place(x=160,y=60)
 types.place(x=160,y=80)
 statistiques.place(x=30,y=208)
-pv.place(x=35,y=231)
-force.place(x=35,y=246)
-defense.place(x=35,y=261)
-vitesse.place(x=35,y=276)
+
+
+pv.place(x=35,y=230)
+force.place(x=35,y=245)
+defense.place(x=35,y=260)
+vitesse.place(x=35,y=275)
+special.place(x=35,y=290)
+attaque_speciale.place(x=219,y=207)
+defense_speciale.place(x=219,y=222)
+
+
 numero.place(x=30,y=168)
-precedent.place(x=12,y=460)
-suivant.place(x=585,y=460)
 evo.place(x=30,y=329)
+pre_evo.place(x=30,y=372)
 rechercher.place(x=552,y=34)
 recherchepokemon.place(x=558,y=14)
 cri.place(x=215,y=105)
+
+a_propos.place(x=628,y=460)
+parametres.place(x=618,y=430)
+
+afficher_evolution.place(x=30,y=348)
+afficher_pre_evolution.place(x=30,y=392)
 
 afficher_pokemon()
 
 #sprites=Button(menupokemon, text = "Pokédex",bd=2,padx=30,command=changergen)
 #sprites.place(x=5,y=485)
 
-root.mainloop()
-print(listenompokemon)
+if ajour == True:
+    print('À jour!')
+else:
+    print('Nouvelle version disponible!')
+    MsgBox = tk.messagebox.askquestion("Nouvelle version disponible!", "Une nouvelle version est disponible, voulez vous la télécharger?", icon="question")
+    
+    if MsgBox == "yes":
+        root.destroy()
+        webbrowser.open_new_tab(urlnv)
+print()
+print("Merci d'utiliser mon Pokédex :)")
 
+root.mainloop()
 #À la création d'un Pokémon:
 #les 4 sprites
 #le nom dans listenompokemon
