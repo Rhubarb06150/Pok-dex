@@ -28,8 +28,9 @@ version=0.02
 
 
 
+
 urlnv='https://github.com/Rhubarb06150/Pok-dex'
-url = 'https://mcrhubarb.net/version.txt'
+url = 'https://raw.githubusercontent.com/Rhubarb06150/Pok-dex/main/version.txt'
 for line in urllib.request.urlopen(url):
     version_check=(line.decode('utf-8'))
 
@@ -332,7 +333,7 @@ isshiny = tk.IntVar()
 
 root.title('Sprites')
 root.resizable(False,False)
-root.geometry('700x500+50+50')
+root.geometry('700x500+20+20')
 bg2 = PhotoImage(file = 'images/fonds/fondsprites.png')
 label2 = Label( root, image = bg2) 
 label2.place(x = -2, y = -2)
@@ -373,6 +374,9 @@ root.bind('<KeyRelease-S>',lambda event:desactiver_shiny())
 root.bind('<Control-s>',lambda event:cri_pokemon())
 root.bind('<Control-S>',lambda event:cri_pokemon())
 
+root.bind('<Control-L>',lambda event:ouvrir())
+root.bind('<Control-l>',lambda event:ouvrir())
+
 recherchepokemon = tk.Entry(root)
 
 a_propos=Button(root,text='À propos',command=fenetre_a_propos)
@@ -396,7 +400,7 @@ defense.place(x=35,y=260)
 vitesse.place(x=35,y=275)
 special.place(x=35,y=290)
 attaque_speciale.place(x=219,y=207)
-defense_speciale.place(x=219,y=222)
+defense_speciale.place(x=219,y=225)
 
 
 numero.place(x=30,y=168)
@@ -417,9 +421,13 @@ afficher_pokemon()
 #sprites=Button(menupokemon, text = "Pokédex",bd=2,padx=30,command=changergen)
 #sprites.place(x=5,y=485)
 
+print("Merci d'utiliser mon Pokédex :)")
+
 if ajour == True:
+    print()
     print('À jour!')
 else:
+    print()
     print('Nouvelle version disponible!')
     MsgBox = tk.messagebox.askquestion("Nouvelle version disponible!", "Une nouvelle version est disponible, voulez vous la télécharger?", icon="question")
     
@@ -427,7 +435,7 @@ else:
         root.destroy()
         webbrowser.open_new_tab(urlnv)
 print()
-print("Merci d'utiliser mon Pokédex :)")
+
 
 root.mainloop()
 #À la création d'un Pokémon:

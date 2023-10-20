@@ -6,7 +6,7 @@ def fenetre_controles():
     aide = tk.Toplevel()
     aide.title('Aide et contrôles')
     aide.iconbitmap('images/icones/icone.ico')
-    aide.geometry('350x550+50+50')
+    aide.geometry('350x550+1460+20')
     bg=PhotoImage(file='images/fonds/fondaide.png')
     fond=Label(aide, image=bg)
     fond.place(x=-2,y=-2)

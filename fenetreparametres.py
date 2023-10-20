@@ -6,7 +6,7 @@ def fenetre_parametres():
     parametres = tk.Toplevel()
     parametres.title('Paramètres')
     parametres.iconbitmap('images/icones/icone.ico')
-    parametres.geometry('400x300+50+50')
+    parametres.geometry('400x300+340+570')
     parametres.resizable(False,False)
     bg=PhotoImage(file='images/fonds/fondparametres.png')
     

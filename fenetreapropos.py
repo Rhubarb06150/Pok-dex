@@ -1,6 +1,7 @@
 import tkinter as tk, threading
 from tkinter import *
 from fenetrecontroles import *
+from listepokemon import *
 import webbrowser
 
 url = 'https://github.com/Rhubarb06150/Pok-dex'
@@ -14,7 +15,7 @@ def fenetre_a_propos():
     a_propos = tk.Toplevel()
     a_propos.title('À propos')
     a_propos.iconbitmap('images/icones/icone.ico')
-    a_propos.geometry('300x200+50+50')
+    a_propos.geometry('300x200+20+570')
     a_propos.resizable(False,False)
     bg=PhotoImage(file='images/fonds/fondapropos.png')
     
@@ -26,6 +27,9 @@ def fenetre_a_propos():
     
     code_source=Button(a_propos,text='Code source',command=site)
     code_source.place(x=80,y=120)
+    
+    code_source=Button(a_propos,text='Liste des Pokémons',command=ouvrir)
+    code_source.place(x=160,y=120)
     
     rhubarb=Label(a_propos,text='Fait par Rhubarb')
     rhubarb.place(x=15,y=167)
