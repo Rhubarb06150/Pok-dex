@@ -693,15 +693,28 @@ listepokemon.append(Pokemon(151,['mew'],'Mew',100,100,100,100,100,100,100,False,
 mew=Pokemon(151,['mew'],'Mew',100,100,100,100,100,100,100,False,False,False,False,False,False,False,False,['Évennement Nintendo'],['Évennement Nintendo'],['Évennement Nintendo'],['Évennement Nintendo'],['Évennement Nintendo'],['Évennement Nintendo'],'Psy',False,30345,0,0,3,['Insecte','Spectre','Ténèbres'],False,['Combat','Psy'],False,False)
 
 
+raikou=Pokemon(243,['raiku','raikou','Raiku'],'Raikou',90,85,75,115,0,115,100,False,False,False,False,False,False,False,False,[],[],[],['À travers de Jotho'],['À travers de Jotho'],['À travers de Jotho'],'Électrique',False,30345,0,0,3,['Sol'],False,['Acier','Électrique','Vol'],False,False)
+listepokemon.append(Pokemon(243,['raiku','raikou','Raiku'],'Raikou',90,85,75,115,0,115,100,False,False,False,False,False,False,False,False,[],[],[],['À travers de Jotho'],['À travers de Jotho'],['À travers de Jotho'],'Électrique',False,30345,0,0,3,['Sol'],False,['Acier','Électrique','Vol'],False,False))
+entei=Pokemon(244,['entei'],'Entei',115,115,85,100,0,90,75,False,False,False,False,False,False,False,False,[],[],[],['À travers de Jotho'],['À travers de Jotho'],['À travers de Jotho'],'Feu',False,30345,0,0,3,['Eau','Roche','Sol'],False,['Acier','Feu','Glace','Insecte','Plante'],False,False)
+listepokemon.append(Pokemon(244,['entei'],'Entei',115,115,85,100,0,90,75,False,False,False,False,False,False,False,False,[],[],[],['À travers de Jotho'],['À travers de Jotho'],['À travers de Jotho'],'Feu',False,30345,0,0,3,['Eau','Roche','Sol'],False,['Acier','Feu','Glace','Insecte','Plante'],False,False))
+suicune=Pokemon(245,['suicune'],'Suicune',100,75,115,85,0,90,115,False,False,False,False,False,False,False,False,[],[],[],['À travers de Jotho'],['À travers de Jotho'],['Tour Ferraille'],'Eau',False,30345,0,0,3,['Électrique','Plante'],False,['Acier','Eau','Feu','Glace'],False,False)
+listepokemon.append(Pokemon(245,['suicune'],'Suicune',100,75,115,85,0,90,115,False,False,False,False,False,False,False,False,[],[],[],['À travers de Jotho'],['À travers de Jotho'],['Tour Ferraille'],'Eau',False,30345,0,0,3,['Électrique','Plante'],False,['Acier','Eau','Feu','Glace'],False,False))
 
-hooh=Pokemon(250,['hooh','ho-oh','Hooh','Ho-oh'],'Ho-Oh',106,130,90,90,0,110,154,False,False,False,False,False,False,False,False,[],[],[],["Tour Ferraille (néssécite l'Arcenci'aile)"],["Tour Ferraille (néssécite l'Arcenci'aile)"],["Tour Ferraille (néssécite l'Arcenci'aile)"],'Feu','Vol',30345,0,0,3,['Eau','Électrique'],['Roche'],['Acier','Combat','Feu'],['Insecte','Plante'],['Sol'])
-listepokemon.append(Pokemon(250,['hooh','ho-oh'],'Ho-Oh',106,130,90,90,0,110,154,False,False,False,False,False,False,False,False,[],[],[],["Tour Ferraille (néssécite l'Arcenci'aile)"],["Tour Ferraille (néssécite l'Arcenci'aile)"],["Tour Ferraille (néssécite l'Arcenci'aile)"],'Feu','Vol',30345,0,0,3,['Eau','Électrique'],['Roche'],['Acier','Combat','Feu'],['Insecte','Plante'],['Sol']))
 lugia=Pokemon(249,['lugia'],'Lugia',106,90,130,110,0,90,154,False,False,False,False,False,False,False,False,[],[],[],["Tourb'Îles (néssécite l'Argent'Aile"],["Tourb'Îles (néssécite l'Argent'Aile"],["Tourb'Îles (néssécite l'Argent'Aile"],'Psy','Vol',30345,0,0,3,['Électrique','Glace','Roche','Spectre','Ténèbres'],False,['Plante','Psy'],['Combat'],['Sol'])
 listepokemon.append(Pokemon(249,['lugia'],'Lugia',106,90,130,110,0,90,154,False,False,False,False,False,False,False,False,[],[],[],["Tourb'Îles (néssécite l'Argent'Aile"],["Tourb'Îles (néssécite l'Argent'Aile"],["Tourb'Îles (néssécite l'Argent'Aile"],'Psy','Vol',30345,0,0,3,['Électrique','Glace','Roche','Spectre','Ténèbres'],False,['Plante','Psy'],['Combat'],['Sol']))
+hooh=Pokemon(250,['hooh','ho-oh','Hooh','Ho-oh'],'Ho-Oh',106,130,90,90,0,110,154,False,False,False,False,False,False,False,False,[],[],[],["Tour Ferraille (néssécite l'Arcenci'aile)"],["Tour Ferraille (néssécite l'Arcenci'aile)"],["Tour Ferraille (néssécite l'Arcenci'aile)"],'Feu','Vol',30345,0,0,3,['Eau','Électrique'],['Roche'],['Acier','Combat','Feu'],['Insecte','Plante'],['Sol'])
+listepokemon.append(Pokemon(250,['hooh','ho-oh'],'Ho-Oh',106,130,90,90,0,110,154,False,False,False,False,False,False,False,False,[],[],[],["Tour Ferraille (néssécite l'Arcenci'aile)"],["Tour Ferraille (néssécite l'Arcenci'aile)"],["Tour Ferraille (néssécite l'Arcenci'aile)"],'Feu','Vol',30345,0,0,3,['Eau','Électrique'],['Roche'],['Acier','Combat','Feu'],['Insecte','Plante'],['Sol']))
 
+celebi=Pokemon(251,['celebi','célébi','Célébi'],'Celebi',100,100,100,100,0,100,100,False,False,False,False,False,False,False,False,[],[],[],['Évènnement Nintendo'],['Évènnement Nintendo'],['Évènnement Nintendo'],'Psy','Plante',30345,0,0,3,['Feu','Glace','Poison','Spectre','Ténèbres','Vol'],['Insecte'],['Combat','Eau','Électrique','Plante','Psy','Sol'],False,False)
+listepokemon.append(Pokemon(251,['celebi','célébi','Célébi'],'Celebi',100,100,100,100,0,100,100,False,False,False,False,False,False,False,False,[],[],[],['Évènnement Nintendo'],['Évènnement Nintendo'],['Évènnement Nintendo'],'Psy','Plante',30345,0,0,3,['Feu','Glace','Poison','Spectre','Ténèbres','Vol'],['Insecte'],['Combat','Eau','Électrique','Plante','Psy','Sol'],False,False))
 
 listenompokemon=[]
 
 for i in listepokemon:
     listenompokemon.append(i.nom)
+    
+def positionlistepokemon(nom):
+    for i in listenompokemon:
+        if i == nom:
+            return get_num(i)
 listeversion=['Or','Argent']

@@ -26,9 +26,6 @@ import webbrowser
 ajour=False
 version=0.02
 
-
-
-
 urlnv='https://github.com/Rhubarb06150/Pok-dex'
 url = 'https://raw.githubusercontent.com/Rhubarb06150/Pok-dex/main/version.txt'
 for line in urllib.request.urlopen(url):
@@ -134,59 +131,69 @@ def avoirlenom():
     messagebox.showinfo(title="Pokémon",message=(get_types(numspinbox.get())))
     
 def pk_suivant():
-    
-    if get_num(numpokemon.get()) > 0 and get_num(numpokemon.get()) < 251:
-        
-        numspinbox.set(get_nom(get_num(numpokemon.get())+1))
-        afficher_pokemon()
-    
-    else:
-        
-        messagebox.showinfo(title="Aucun Pokémon Suivant",message="Vous ne pouvez pas aller plus loin!")
-    recherchepokemon.delete(0,100)
+    focus=str(root.focus_get())
+    if focus == '.':
+        if get_num(numpokemon.get()) > 0 and get_num(numpokemon.get()) < 251:
+            
+            for i in range(len(listenompokemon)):
+                if numspinbox.get() == listenompokemon[i]: 
+                    numspinbox.set(listenompokemon[i+1])
+                    break
+            afficher_pokemon()
+
         
 def pk_precedent():
-    
-    if get_num(numpokemon.get()) > 1:
+   focus=str(root.focus_get())
+   if focus == '.':
+        if get_num(numpokemon.get()) > 1:
+            
+            for i in range(len(listenompokemon)):
+                if numspinbox.get() == listenompokemon[i]: 
+                    numspinbox.set(listenompokemon[i-1])
+                    break
+            afficher_pokemon()
+            
+def callback(root,recherchepokemon):
+    x = root.winfo_pointerx() - root.winfo_rootx()
+    y = root.winfo_pointery() - root.winfo_rooty()
+    if y > 50 or y < 29 or x < 556 or x > 680:
         
-        numspinbox.set(get_nom(get_num(numpokemon.get())-1))
-        afficher_pokemon()
-        
-    else:
-        
-        messagebox.showinfo(title="Aucun Pokémon Précédent",message="Vous ne pouvez pas aller plus loin!")
-    recherchepokemon.delete(0,100)
+            root.focus()
 
 def recherchedupokemon():
     pokemontrouve=False
     
-    for i in range (len(listepokemon)):
+    if str(recherchepokemon.focus_get()) != '.':
+        for i in range (len(listepokemon)):
+            
+            if len(listepokemon[i].rawnom)== 1 :
+                
+                if listepokemon[i].rawnom == recherchepokemon.get() :
+                    
+                    pokemontrouve=True
+                    numspinbox.set(listepokemon[i].nom)
+                    afficher_pokemon()
+                    
+            for i2 in range (len(listepokemon[i].rawnom)):
+                
+                if listepokemon[i].rawnom[i2] == recherchepokemon.get():
+                    
+                    pokemontrouve=True
+                    numspinbox.set(listepokemon[i].nom)
+                    afficher_pokemon()
+                    
+            if recherchepokemon.get() == listepokemon[i].nom:
+                
+                pokemontrouve=True
+                numspinbox.set(listepokemon[i].nom)
+                afficher_pokemon()
+                        
+        if pokemontrouve == False:
+            messagebox.showinfo(title="Aucun Pokémon Trouvé!",message="Aucun Pokémon correspondant à ce nom n'a été trouvé")
+        if pokemontrouve == True:
+            recherchepokemon.delete(0,1000)
+            root.focus()
         
-        if len(listepokemon[i].rawnom)== 1 :
-            
-            if listepokemon[i].rawnom == recherchepokemon.get() :
-                
-                pokemontrouve=True
-                numspinbox.set(listepokemon[i].nom)
-                afficher_pokemon()
-                
-        for i2 in range (len(listepokemon[i].rawnom)):
-            
-            if listepokemon[i].rawnom[i2] == recherchepokemon.get():
-                
-                pokemontrouve=True
-                numspinbox.set(listepokemon[i].nom)
-                afficher_pokemon()
-                
-        if recherchepokemon.get() == listepokemon[i].nom:
-            
-            pokemontrouve=True
-            numspinbox.set(listepokemon[i].nom)
-            afficher_pokemon()
-            
-    if pokemontrouve == False:
-        messagebox.showinfo(title="Aucun Pokémon Trouvé!",message="Aucun Pokémon correspondant à ce nom n'a été trouvé")
-    recherchepokemon.delete(0,100)
     
 def afficher_pokemon():
     if isshiny.get() == 1:
@@ -267,7 +274,7 @@ def thread_cri():
         chemincri=('sons/cris/0'+str(numero_pkmn)+'.wav')
     else:        
         chemincri=('sons/cris/'+str(numero_pkmn)+'.wav')
-    winsound.PlaySound(chemincri, winsound.SND_FILENAME)
+    winsound.PlaySound(chemincri, winsound.SND_ASYNC)
     
     
 def afficher_evolution():
@@ -292,29 +299,34 @@ def version_or():
     versionpokemon.set('Or')
     afficher_pokemon()
     
+shinytempo=False
 shinynb=0
 def tempo_shiny():
     
+    global shinytempo
     global shinynb
     shinynb+=1
+    shinytempo=True
     if isshiny.get() == 0:
         isshiny.set(1)
     else:
         isshiny.set(0)
     afficher_pokemon()
-
+    
     afficher_pokemon()
     
 def desactiver_shiny():
+    global shinytempo
     global shinynb
-    shinynb=0
-    
-    if isshiny.get() == 1:
-        isshiny.set(0)
-    else:
-        isshiny.set(1)
+    if shinytempo == True:
+        shinynb=0
         
-    afficher_pokemon()
+        if isshiny.get() == 1:
+            isshiny.set(0)
+        else:
+            isshiny.set(1)
+        shinytempo=False
+        afficher_pokemon()
     
 def shiny_on_hold():
     global shinynb
@@ -357,10 +369,8 @@ defense_speciale=Label(root,text=('Défense spéciale: '+str(get_defspec(numpoke
 
 
 numero=Label(root,text='Numéro: '+str(get_num(numpokemon.get())))
-
 evo=Label(root,text=(get_evo(numpokemon.get())))
 pre_evo=Label(root,text=(get_pre_evo(numpokemon.get())))
-rechercher=Button(root,text='Rechercher le Pokémon',command=recherchedupokemon)
 root.bind('<Return>',lambda event:recherchedupokemon())
 root.bind('<Left>',lambda event:pk_precedent())
 root.bind('<Right>',lambda event:pk_suivant())
@@ -369,14 +379,18 @@ root.bind('<Down>',lambda event:version_argent())
 root.bind('<Up>',lambda event:version_or())
 
 root.bind('<Control-Shift-S>',lambda event:shiny_on_hold())
+root.bind('<Control-Shift-s>',lambda event:shiny_on_hold())
 root.bind('<KeyRelease-S>',lambda event:desactiver_shiny())
+root.bind('<KeyRelease-s>',lambda event:desactiver_shiny())
 
 root.bind('<Control-s>',lambda event:cri_pokemon())
 root.bind('<Control-S>',lambda event:cri_pokemon())
 
 root.bind('<Control-L>',lambda event:ouvrir())
 root.bind('<Control-l>',lambda event:ouvrir())
+root.bind('<Button-1>',lambda event:callback(root,recherchepokemon))
 
+rechercherunpokemon=Label(text='Rechercher un Pokémon')
 recherchepokemon = tk.Entry(root)
 
 a_propos=Button(root,text='À propos',command=fenetre_a_propos)
@@ -406,8 +420,8 @@ defense_speciale.place(x=219,y=225)
 numero.place(x=30,y=168)
 evo.place(x=30,y=329)
 pre_evo.place(x=30,y=372)
-rechercher.place(x=552,y=34)
-recherchepokemon.place(x=558,y=14)
+rechercherunpokemon.place(x=551,y=12)
+recherchepokemon.place(x=557,y=30)
 cri.place(x=215,y=105)
 
 a_propos.place(x=628,y=460)
@@ -420,6 +434,9 @@ afficher_pokemon()
 
 #sprites=Button(menupokemon, text = "Pokédex",bd=2,padx=30,command=changergen)
 #sprites.place(x=5,y=485)
+
+nb=(int(len(listenompokemon)*100)/251)
+print((nb),'% des Pokémons implémantés')
 
 print("Merci d'utiliser mon Pokédex :)")
 
@@ -447,3 +464,4 @@ root.mainloop()
 #le sprite du pas
 #son cri
 #son icône
+

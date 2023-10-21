@@ -11,8 +11,12 @@ def page_2_from_1():#1 ----> 2
     fenetre_listepokemon2(fenetrelistepokemon)
     
 def ouvrir():
+    
     global fenetrelistepokemon
     fenetrelistepokemon = tk.Toplevel()
+    fenetrelistepokemon.geometry('700x400+740+20')
+    fenetrelistepokemon.resizable(False,False)
+    
     fenetre_listepokemon(fenetrelistepokemon)
     nomlistepokemon = fenetrelistepokemon
 
@@ -20,8 +24,7 @@ def fenetre_listepokemon(master):
     
     master.title('Liste des Pokémon (Page 1)')
     master.iconbitmap('images/icones/icone.ico')
-    master.geometry('700x400+740+20')
-    master.resizable(False,False)
+    
     
     bg=PhotoImage(file='images/fonds/fondlistepokemon.png')
     fond=Label(master, image=bg)
@@ -29,25 +32,31 @@ def fenetre_listepokemon(master):
     
     
     pokemon1=Label(master,text='Bublizarre')
-    pokemon1.place(x=70,y=25)
+    pokemon1.place(x=50,y=25)
     pokemon2=Label(master,text='Herbizarre')
-    pokemon2.place(x=70,y=75)
+    pokemon2.place(x=60,y=75)
     pokemon3=Label(master,text='Florizarre')
     pokemon3.place(x=70,y=125)
-    
     pokemon4=Label(master,text='Salamèche')
-    pokemon4.place(x=70,y=165)
+    pokemon4.place(x=50,y=165)
     pokemon5=Label(master,text='Reptincel')
-    pokemon5.place(x=70,y=205)
+    pokemon5.place(x=60,y=205)
     pokemon6=Label(master,text='Dracaufeu')
     pokemon6.place(x=70,y=255)
-    
     pokemon7=Label(master,text='Carapuce')
-    pokemon7.place(x=70,y=295)
+    pokemon7.place(x=65,y=295)
     pokemon8=Label(master,text='Carabaffe')
-    pokemon8.place(x=70,y=345)
+    pokemon8.place(x=65,y=345)
+    
     pokemon9=Label(master,text='Tortank')
-    pokemon9.place(x=70,y=385)
+    pokemon9.place(x=210,y=35)
+    pokemon10=Label(master,text='Chenipan')
+    pokemon10.place(x=210,y=75)
+    pokemon11=Label(master,text='Chrysacier')
+    pokemon11.place(x=210,y=115)
+    pokemon12=Label(master,text='Papillusion')
+    pokemon12.place(x=215,y=150)
+
     
     page2=Button(master,text='>>>', command = page_2_from_1)
     page2.place(x=653,y=360)
@@ -61,8 +70,6 @@ def fenetre_listepokemon2(master):
     
     master.title('Liste des Pokémon (Page 2)')
     master.iconbitmap('images/icones/icone.ico')
-    master.geometry('700x400+740+20')
-    master.resizable(False,False)
     
     bg=PhotoImage(file='images/fonds/fondlistepokemon2.png')
     fond=Label(master, image=bg)

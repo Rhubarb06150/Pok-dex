@@ -4,6 +4,8 @@ from fenetrecontroles import *
 from listepokemon import *
 import webbrowser
 
+version=0.02
+
 url = 'https://github.com/Rhubarb06150/Pok-dex'
 
 def site():
@@ -12,6 +14,7 @@ def site():
 
 def fenetre_a_propos():
     
+    global version
     a_propos = tk.Toplevel()
     a_propos.title('À propos')
     a_propos.iconbitmap('images/icones/icone.ico')
@@ -33,5 +36,9 @@ def fenetre_a_propos():
     
     rhubarb=Label(a_propos,text='Fait par Rhubarb')
     rhubarb.place(x=15,y=167)
+    
+    nb_ver=('Version: '+str(version))
+    version_actuelle=Label(a_propos,text=nb_ver)
+    version_actuelle.place(x=150,y=167)
     
     a_propos.mainloop()
