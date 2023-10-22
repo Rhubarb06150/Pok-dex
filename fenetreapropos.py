@@ -40,5 +40,6 @@ def fenetre_a_propos():
     nb_ver=('Version: '+str(version))
     version_actuelle=Label(a_propos,text=nb_ver)
     version_actuelle.place(x=150,y=167)
+
     
     a_propos.mainloop()

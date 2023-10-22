@@ -21,10 +21,14 @@ import time
 import winsound
 from threading import Thread
 import webbrowser
+from recherchestats import *
+
 
 #vérifications version
 ajour=False
 version=0.02
+
+
 
 urlnv='https://github.com/Rhubarb06150/Pok-dex'
 url = 'https://raw.githubusercontent.com/Rhubarb06150/Pok-dex/main/version.txt'
@@ -34,6 +38,7 @@ for line in urllib.request.urlopen(url):
 if version == float(version_check):
     ajour=True
 
+    
 #Fonctions bouttons
 def fond1():
     bg = PhotoImage(file = 'images/fonds/fond1.png')
@@ -258,6 +263,8 @@ def afficher_pokemon():
     
     if get_evo(numpokemon.get()) == 'Aucune évolution':
         afficher_evolution["state"] = "disabled"
+    elif get_evo_nb(numpokemon.get()) > 1:
+        afficher_evolution["state"] = "disabled"
     else:
         afficher_evolution["state"] = "normal"
         
@@ -276,7 +283,16 @@ def thread_cri():
         chemincri=('sons/cris/'+str(numero_pkmn)+'.wav')
     winsound.PlaySound(chemincri, winsound.SND_ASYNC)
     
-    
+def thread_bruit_menu():
+    numero_pkmn=get_num(numspinbox.get())
+    if numero_pkmn < 10:
+        chemincri=('sons/cris/00'+str(numero_pkmn)+'.wav')
+    elif numero_pkmn < 100:
+        chemincri=('sons/cris/0'+str(numero_pkmn)+'.wav')
+    else:        
+        chemincri=('sons/cris/'+str(numero_pkmn)+'.wav')
+    winsound.PlaySound(chemincri, winsound.SND_ASYNC)
+
 def afficher_evolution():
     numspinbox.set(get_evo(numpokemon.get()))
     afficher_pokemon()
@@ -285,7 +301,10 @@ def afficher_pre_evolution():
     numspinbox.set(get_pre_evo(numpokemon.get()))
     afficher_pokemon()
     
+def ouvrir_recherche():
+    import recherchestats
     
+
 def cri_pokemon():
 
     thread = Thread(target=thread_cri)
@@ -346,12 +365,12 @@ isshiny = tk.IntVar()
 root.title('Sprites')
 root.resizable(False,False)
 root.geometry('700x500+20+20')
-bg2 = PhotoImage(file = 'images/fonds/fondspritestest.png')
+bg2 = PhotoImage(file = 'images/fonds/fondsprites.png')
 label2 = Label( root, image = bg2) 
 label2.place(x = -2, y = -2)
 root.iconbitmap('images/icones/icone.ico')
 numpokemon=Spinbox(root, from_=1, to=251 , values = listenompokemon, textvariable=numspinbox, command=afficher_pokemon, state = 'readonly')
-version=Spinbox(root, from_=1, to=4 , values = listeversion, textvariable=versionpokemon, command=afficher_pokemon, state = 'readonly')
+choixversion=Spinbox(root, from_=1, to=4 , values = listeversion, textvariable=versionpokemon, command=afficher_pokemon, state = 'readonly')
 shiny=tk.Checkbutton(root, text='Shiny',variable=isshiny, onvalue=1, offvalue=0, command=afficher_pokemon)
 nomdupokemon=Label(root,text=('Nom: '+numpokemon.get()))
 types=Label(root,text=(get_types(numpokemon.get())))
@@ -395,13 +414,15 @@ recherchepokemon = tk.Entry(root)
 
 a_propos=Button(root,text='À propos',command=fenetre_a_propos)
 parametres=Button(root,text='Paramètres',command=fenetre_parametres)
+recherche_avancee=Button(root,text='Recherche avancée',command = fenetre_recherche_stats)
+
 cri=Button(root,text='Écouter le cri',command=cri_pokemon)
 afficher_evolution=Button(root,text="Afficher l'évolution",command=afficher_evolution)
 afficher_pre_evolution=Button(root,text="Afficher la pré-évolution",command=afficher_pre_evolution)
 
 
 numpokemon.place(x=160,y=20)
-version.place(x=160,y=40)
+choixversion.place(x=160,y=40)
 shiny.place(x=300,y=28)
 nomdupokemon.place(x=160,y=60)
 types.place(x=160,y=80)
@@ -424,8 +445,9 @@ rechercherunpokemon.place(x=551,y=12)
 recherchepokemon.place(x=557,y=30)
 cri.place(x=215,y=105)
 
-a_propos.place(x=628,y=460)
-parametres.place(x=618,y=430)
+a_propos.place(x=628,y=459)
+parametres.place(x=617,y=429)
+recherche_avancee.place(x=576,y=399)
 
 afficher_evolution.place(x=30,y=348)
 afficher_pre_evolution.place(x=30,y=392)
@@ -444,15 +466,17 @@ if ajour == True:
     print()
     print('À jour!')
 else:
-    print()
-    print('Nouvelle version disponible!')
-    MsgBox = tk.messagebox.askquestion("Nouvelle version disponible!", "Une nouvelle version est disponible, voulez vous la télécharger?", icon="question")
-    
-    if MsgBox == "yes":
-        root.destroy()
-        webbrowser.open_new_tab(urlnv)
+    if maj_active == 1:
+        print()
+        print('Nouvelle version disponible!')
+        MsgBox = tk.messagebox.askquestion("Nouvelle version disponible!", "Une nouvelle version est disponible, voulez vous la télécharger?", icon="question")
+        
+        if MsgBox == "yes":
+            root.destroy()
+            webbrowser.open_new_tab(urlnv)
 print()
-
+print('version:',version)
+print('version sur site:',version_check)
 
 root.mainloop()
 
