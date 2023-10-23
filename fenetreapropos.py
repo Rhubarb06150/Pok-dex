@@ -26,13 +26,13 @@ def fenetre_a_propos():
     fond.place(x=-2,y=-2)
     
     controles=Button(a_propos,text='Contrôles',command=fenetre_controles)
-    controles.place(x=15,y=120)
+    controles.place(x=13,y=70)
     
     code_source=Button(a_propos,text='Code source',command=site)
-    code_source.place(x=80,y=120)
+    code_source.place(x=85,y=70)
     
     code_source=Button(a_propos,text='Liste des Pokémons',command=ouvrir)
-    code_source.place(x=160,y=120)
+    code_source.place(x=172,y=70)
     
     rhubarb=Label(a_propos,text='Fait par Rhubarb')
     rhubarb.place(x=15,y=167)

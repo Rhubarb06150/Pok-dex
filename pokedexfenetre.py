@@ -29,7 +29,13 @@ from recherchestats import *
 ajour=False
 version=0.02
 
+#Pokémon préféré:
 
+file=open('txts/pkmn.txt','r')
+pkmn_pref=(file.read())
+file.close
+
+#Internet
 
 urlnv='https://github.com/Rhubarb06150/Pok-dex'
 url = 'https://raw.githubusercontent.com/Rhubarb06150/Pok-dex/main/version.txt'
@@ -245,9 +251,12 @@ def afficher_pokemon():
     defense.config(text=('Défense: '+str(get_defense(numpokemon.get()))))
     vitesse.config(text=('Vitesse: '+str(get_vitesse(numpokemon.get()))))
     special.config(text=('Spécial: '+str(get_specialgen1(numpokemon.get()))))
-    attaque_speciale.config(text=('Attaque spéciale: '+str(get_attspec(numpokemon.get()))))
-    defense_speciale.config(text=('Défense spéciale: '+str(get_defspec(numpokemon.get()))))
+    attaque_speciale.config(text=('Attaque spéciale: '+str(get_attspec(numpokemon.get()))),width=15)
+    defense_speciale.config(text=('Défense spéciale: '+str(get_defspec(numpokemon.get()))),width=15)
     numero.config(text=('Numéro: '+str(get_num(numpokemon.get()))))
+    male.config(text='Male:')
+    male.config(text='Male: '+str(get_male(numpokemon.get()))+'%',width=10)
+    femelle.config(text='Femelle: '+str(get_femelle(numpokemon.get()))+'%',width=10)
     
     if get_evo(numpokemon.get()) == 'Aucune évolution':
         evo.config(text=(get_evo(numpokemon.get())))
@@ -360,7 +369,7 @@ def action_combobox_numpokemon(event):
 root=Tk()
 
 numspinbox=StringVar(root)
-numspinbox.set(1)
+numspinbox.set('Bulbizarre')
 
 versionpokemon=StringVar(root)
 isshiny = tk.IntVar()
@@ -431,6 +440,17 @@ afficher_evolution=Button(root,text="Afficher l'évolution",command=afficher_evo
 afficher_pre_evolution=Button(root,text="Afficher la pré-évolution",command=afficher_pre_evolution)
 
 
+repart_genre=Label(root,text='Répartition des',width=11)
+repart_genre.place(x=122,y=237)
+repart_genre2=Label(root,text='genres:')
+repart_genre2.place(x=140,y=252)
+
+male=Label(root,text='Male:')
+femelle=Label(root,text='Femelle:')
+male.place(x=124,y=272)
+femelle.place(x=124,y=290)
+
+
 numpokemon.place(x=160,y=20)
 choixversion.place(x=160,y=40)
 shiny.place(x=300,y=28)
@@ -444,8 +464,8 @@ force.place(x=35,y=245)
 defense.place(x=35,y=260)
 vitesse.place(x=35,y=275)
 special.place(x=35,y=290)
-attaque_speciale.place(x=219,y=207)
-defense_speciale.place(x=219,y=225)
+attaque_speciale.place(x=221,y=207)
+defense_speciale.place(x=221,y=225)
 
 
 numero.place(x=30,y=168)
@@ -468,10 +488,23 @@ if vers != 'Aucune':
 else:
     versionpokemon.set('Or')
     
+    
 if pkmn_pref != 'Aucun':
-    numspinbox.set(pkmn_pref)
+    print('Affichage du Pokémon Préféré')
+    print(pkmn_pref)
+    print()
+    if pkmn_pref == 'Nidoran Male':
+        print('oui c nidran male')
+        numspinbox.set('Nidoran ♂')
+        
+    elif pkmn_pref == 'Nidoran Femelle':
+        numspinbox.set('Nidoran ♀')
+        
+    else:
+        numspinbox.set(pkmn_pref)
 else:
     numspinbox.set('Bulbizarre')
+    
 afficher_pokemon()
 
 

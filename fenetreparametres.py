@@ -29,8 +29,6 @@ def fenetre_parametres():
     def callback(recherche):
         x = parametres.winfo_pointerx() - parametres.winfo_rootx()
         y = parametres.winfo_pointery() - parametres.winfo_rooty()
-        print(x)
-        print(y)
         if y > 74 or y < 125 or x < 75 or x > 151:
             parametres.focus()
     
@@ -63,7 +61,15 @@ def fenetre_parametres():
         global pkmn_pref
         
         file=open('txts/pkmn.txt','w')
-        file.write(str(pokemon_favori.get()))
+        
+        if pokemon_favori.get()=='Nidoran ♂':
+            file.write('Nidoran Male')
+            
+        elif pokemon_favori.get()=='Nidoran ♀':
+            file.write('Nidoran Femelle')
+        else:
+            file.write(pokemon_favori.get())
+            
         pkmn_pref=pokemon_favori.get()
         file.close
         
@@ -98,10 +104,20 @@ def fenetre_parametres():
     
     pokemon_favori.bind("<<ComboboxSelected>>", pkmn_prefere)
     
-    file=open('txts/pkmn.txt','r')
-    pokemon_favori.set(file.read())
-    print(file.read())
-    file.close
+    filepkmn = open('txts/pkmn.txt','r')
+    pkmn_pref=filepkmn.read()
+    
+    if pkmn_pref == 'Nidoran Male':
+        pokemon_favori.set('Nidoran ♂')
+        
+    elif pkmn_pref == 'Nidoran Femelle':
+        pokemon_favori.set('Nidoran ♀')
+        
+    elif pkmn_pref != 'Nidoran Mâle' and filepkmn.read() != 'Nidoran Femelle':
+        pokemon_favori.set(pkmn_pref)
+    
+    print(pkmn_pref)
+    filepkmn.close
     
     version_favorite.bind("<<ComboboxSelected>>", vers_prefere)
     
