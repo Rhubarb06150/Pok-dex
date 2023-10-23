@@ -7,6 +7,7 @@ import tkinter
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
+from tkinter import ttk
 import random
 import keyboard
 from pokedex2proto import listepokemon
@@ -353,6 +354,8 @@ def shiny_on_hold():
         tempo_shiny()
     
     
+def action_combobox_numpokemon(event):
+    afficher_pokemon()
 
 root=Tk()
 
@@ -369,9 +372,16 @@ bg2 = PhotoImage(file = 'images/fonds/fondsprites.png')
 label2 = Label( root, image = bg2) 
 label2.place(x = -2, y = -2)
 root.iconbitmap('images/icones/icone.ico')
-numpokemon=Spinbox(root, from_=1, to=251 , values = listenompokemon, textvariable=numspinbox, command=afficher_pokemon, state = 'readonly')
-choixversion=Spinbox(root, from_=1, to=4 , values = listeversion, textvariable=versionpokemon, command=afficher_pokemon, state = 'readonly')
+
+
+numpokemon=ttk.Combobox(root, values = listenompokemon, textvariable=numspinbox, state = 'readonly',width=15)
+numpokemon.bind("<<ComboboxSelected>>", action_combobox_numpokemon)
+
+choixversion=ttk.Combobox(root, values = listeversion, textvariable=versionpokemon, state = 'readonly',width=7)
+choixversion.bind("<<ComboboxSelected>>", action_combobox_numpokemon)
+
 shiny=tk.Checkbutton(root, text='Shiny',variable=isshiny, onvalue=1, offvalue=0, command=afficher_pokemon)
+
 nomdupokemon=Label(root,text=('Nom: '+numpokemon.get()))
 types=Label(root,text=(get_types(numpokemon.get())))
 
@@ -424,7 +434,7 @@ afficher_pre_evolution=Button(root,text="Afficher la pré-évolution",command=af
 numpokemon.place(x=160,y=20)
 choixversion.place(x=160,y=40)
 shiny.place(x=300,y=28)
-nomdupokemon.place(x=160,y=60)
+nomdupokemon.place(x=160,y=61)
 types.place(x=160,y=80)
 statistiques.place(x=30,y=208)
 
@@ -452,13 +462,24 @@ recherche_avancee.place(x=576,y=399)
 afficher_evolution.place(x=30,y=348)
 afficher_pre_evolution.place(x=30,y=392)
 
+
+if vers != 'Aucune':
+    versionpokemon.set(vers)
+else:
+    versionpokemon.set('Or')
+    
+if pkmn_pref != 'Aucun':
+    numspinbox.set(pkmn_pref)
+else:
+    numspinbox.set('Bulbizarre')
 afficher_pokemon()
+
 
 #sprites=Button(menupokemon, text = "Pokédex",bd=2,padx=30,command=changergen)
 #sprites.place(x=5,y=485)
 
-nb=(int(len(listenompokemon)*100)/251)
-print((nb),'% des Pokémons implémantés')
+nb=(int((len(listenompokemon)*100)/251))
+print((nb),'% des Pokémons implémantés ('+str(len(listenompokemon))+')')
 
 print("Merci d'utiliser mon Pokédex :)")
 
@@ -488,4 +509,6 @@ root.mainloop()
 #le sprite du pas
 #son cri
 #son icône
+
+
 

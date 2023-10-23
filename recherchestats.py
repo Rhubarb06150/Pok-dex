@@ -1,6 +1,8 @@
 import tkinter as tk, threading
 from tkinter import *
+from tkinter import ttk
 from tkinter import messagebox
+from tkinter import ttk
 from fenetrecontroles import *
 from listepokemon import *
 from pokedex2proto import *
@@ -10,6 +12,8 @@ from PIL import Image,ImageTk
        
 def fenetre_recherche_stats():
         
+    global listenompokemon
+    global listepokemon
     def demarrer_recherche():
         
         listepkmnaretirer=[]
@@ -244,7 +248,7 @@ def fenetre_recherche_stats():
                         if i == i2.nom:
                             if i2.specialgen1 == 0:
                                 listepkmnaretirer.append(i2.nom)
-                            if i2.specialgen1 > varspecial.get():
+                            elif i2.specialgen1 > varspecial.get():
                                 break
                             else:
                                 listepkmnaretirer.append(i2.nom)
@@ -256,7 +260,7 @@ def fenetre_recherche_stats():
                         if i == i2.nom:
                             if i2.specialgen1 == 0:
                                 listepkmnaretirer.append(i2.nom)
-                            if i2.specialgen1 >= varspecial.get():
+                            elif i2.specialgen1 >= varspecial.get():
                                 break
                             else:
                                 listepkmnaretirer.append(i2.nom)
@@ -267,7 +271,7 @@ def fenetre_recherche_stats():
                         if i == i2.nom:
                             if i2.specialgen1 == 0:
                                 listepkmnaretirer.append(i2.nom)
-                            if i2.specialgen1 == varspecial.get():
+                            elif i2.specialgen1 == varspecial.get():
                                 break
                             else:
                                 listepkmnaretirer.append(i2.nom)
@@ -278,7 +282,7 @@ def fenetre_recherche_stats():
                         if i == i2.nom:
                             if i2.specialgen1 == 0:
                                 listepkmnaretirer.append(i2.nom)
-                            if i2.specialgen1 <= varspecial.get():
+                            elif i2.specialgen1 <= varspecial.get():
                                 break
                             else:
                                 listepkmnaretirer.append(i2.nom)
@@ -289,7 +293,7 @@ def fenetre_recherche_stats():
                         if i == i2.nom:
                             if i2.specialgen1 == 0:
                                 listepkmnaretirer.append(i2.nom)
-                            if i2.specialgen1 < varspecial.get():
+                            elif i2.specialgen1 < varspecial.get():
                                 break
                             else:
                                 listepkmnaretirer.append(i2.nom)
@@ -367,8 +371,8 @@ def fenetre_recherche_stats():
     varpvcompa=StringVar()
 
     pv = Spinbox(master2, from_=0, to=250,width=4,textvariable=varpv)
-    pv.place(x=130,y=170)
-    pvcompa = Spinbox(master2, values=listecompa, state='readonly',width=3,textvariable=varpvcompa)
+    pv.place(x=135,y=170)
+    pvcompa = ttk.Combobox(master2, values=listecompa, state='readonly',width=3,textvariable=varpvcompa)
     pvcompa.place(x=90,y=170)
     pvlb=Label(master2,text='PV:')
     pvlb.place(x=30,y=170)
@@ -380,8 +384,8 @@ def fenetre_recherche_stats():
     varforcecompa=StringVar()
 
     force = Spinbox(master2, from_=0, to=250,width=4,textvariable=varforce)
-    force.place(x=130,y=200)
-    forcecompa = Spinbox(master2, values=listecompa, state='readonly',width=3,textvariable=varforcecompa)
+    force.place(x=135,y=200)
+    forcecompa = ttk.Combobox(master2, values=listecompa, state='readonly',width=3,textvariable=varforcecompa)
     forcecompa.place(x=90,y=200)
     forcelb=Label(master2,text='Force:')
     forcelb.place(x=30,y=200)
@@ -393,8 +397,8 @@ def fenetre_recherche_stats():
     vardefensecompa=StringVar()
 
     defense = Spinbox(master2, from_=0, to=250,width=4,textvariable=vardefense)
-    defense.place(x=130,y=230)
-    defensecompa = Spinbox(master2, values=listecompa, state='readonly',width=3,textvariable=vardefensecompa)
+    defense.place(x=135,y=230)
+    defensecompa = ttk.Combobox(master2, values=listecompa, state='readonly',width=3,textvariable=vardefensecompa)
     defensecompa.place(x=90,y=230)
     defenselb=Label(master2,text='Défense:')
     defenselb.place(x=30,y=230)
@@ -406,8 +410,8 @@ def fenetre_recherche_stats():
     varvitessecompa=StringVar()
 
     vitesse = Spinbox(master2, from_=0, to=250,width=4,textvariable=varvitesse)
-    vitesse.place(x=130,y=260)
-    vitessecompa = Spinbox(master2, values=listecompa, state='readonly',width=3,textvariable=varvitessecompa)
+    vitesse.place(x=135,y=260)
+    vitessecompa = ttk.Combobox(master2, values=listecompa, state='readonly',width=3,textvariable=varvitessecompa)
     vitessecompa.place(x=90,y=260)
     vitesselb=Label(master2,text='Vitesse:')
     vitesselb.place(x=30,y=260)
@@ -419,27 +423,27 @@ def fenetre_recherche_stats():
     varspecialcompa=StringVar()
 
     special = Spinbox(master2, from_=0, to=250,width=4,textvariable=varspecial)
-    special.place(x=130,y=290)
-    specialcompa = Spinbox(master2, values=listecompa, state='readonly',width=3,textvariable=varspecialcompa)
+    special.place(x=135,y=290)
+    specialcompa = ttk.Combobox(master2, values=listecompa, state='readonly',width=3,textvariable=varspecialcompa)
     specialcompa.place(x=90,y=290)
     speciallb=Label(master2,text='Spécial:')
     speciallb.place(x=30,y=290)
     speciallb2=Label(master2,text="(N'inclut pas les Pokémons de Jotho)")
-    speciallb2.place(x=170,y=290)
+    speciallb2.place(x=175,y=290)
             
     #types
     
     vartype1=StringVar()
-    listetypes=['','Acier','Dragon','Élektrik','Feu','Insecte','Plante','Psy','Sol','Ténèbres','Combat','Eau','Glace','Normal','Poison','Roche','Spectre','Vol']
+    listetypes=['','Acier','Dragon','Électrik','Feu','Insecte','Plante','Psy','Sol','Ténèbres','Combat','Eau','Glace','Normal','Poison','Roche','Spectre','Vol']
     
-    type1 = Spinbox(master2, from_=0, to=17,width=8,textvariable=vartype1, values=listetypes)
+    type1 = ttk.Combobox(master2, textvariable=vartype1, values=listetypes, width=8)
     type1.place(x=90,y=320)
     type1lb=Label(master2,text='Type:')
     type1lb.place(x=30,y=320)
     
     vartype2=StringVar()
     
-    type2= Spinbox(master2, from_=0, to=17,width=8,textvariable=vartype2, values=listetypes)
+    type2= ttk.Combobox(master2, textvariable=vartype2, values=listetypes, width=8)
     type2.place(x=90,y=350)
     type2lb=Label(master2,text='2nd type:')
     type2lb.place(x=30,y=350)
