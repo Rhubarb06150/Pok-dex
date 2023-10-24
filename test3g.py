@@ -7,6 +7,7 @@ from pokedex2proto import listenompokemon
 from pokedex2proto import *
 from threading import Thread
 import winsound
+from fenetre_equipes import *
 
 root=Tk()
 root.geometry('700x500+50+50')
@@ -113,7 +114,7 @@ def stats_num():
     etiquettenum.photo=etiquettenumimg
     
     global posx
-    posx=26
+    posx=28
     place=0
     
     def lettre(label,img,i,y):
@@ -132,7 +133,7 @@ def stats_num():
         place+=1
         lettre(('label'+str(place)),('img'+str(place)),i,264)
         
-    posx=84
+    posx=88
         
     force = str(get_force(str(nom_du_pokemon.get())))
         
@@ -140,7 +141,7 @@ def stats_num():
         place+=1
         lettre(('label'+str(place)),('img'+str(place)),i,290)
         
-    posx=84
+    posx=88
         
     defense = str(get_defense(str(nom_du_pokemon.get())))
         
@@ -148,7 +149,7 @@ def stats_num():
         place+=1
         lettre(('label'+str(place)),('img'+str(place)),i,314)
         
-    posx=84
+    posx=88
         
     vitesse = str(get_vitesse(str(nom_du_pokemon.get())))
         
@@ -156,7 +157,7 @@ def stats_num():
         place+=1
         lettre(('label'+str(place)),('img'+str(place)),i,340)
         
-    posx=84
+    posx=88
         
     special = str(get_specialgen1(str(nom_du_pokemon.get())))
         
@@ -164,7 +165,7 @@ def stats_num():
         place+=1
         lettre(('label'+str(place)),('img'+str(place)),i,366)
         
-    posx=124
+    posx=128
         
     attspecial = str(get_attspec(str(nom_du_pokemon.get())))
         
@@ -172,7 +173,7 @@ def stats_num():
         place+=1
         lettre(('label'+str(place)),('img'+str(place)),i,394)
         
-    posx=124
+    posx=128
         
     defspecial = str(get_defspec(str(nom_du_pokemon.get())))
         
@@ -208,6 +209,9 @@ def afficher_pokemon():
     pokemonback.config(image=imgpokemonback)
     pokemonback.im=imgpokemonback
     pokemonback.place(x=0,y=74)
+    
+    pokemonback.bind("<Button-1>", lambda event:cri_pokemon())
+    pokemon.bind("<Button-1>", lambda event:cri_pokemon())
 
 def pokemon_suivant():
     if get_num(nom_du_pokemon.get()) != 251:
@@ -280,7 +284,7 @@ root.bind('<KeyRelease-s>',lambda event:desactiver_shiny())
     
 combobox_nom('root')
 nompokemon=ttk.Combobox(values=listenompokemon,textvariable=nom_du_pokemon,state='readlonly')
-root.iconbitmap('images/sprites3g/icones/icone.ico')
+root.iconbitmap('images/sprites3g/icones/pokeball.ico')
 
 root.bind('<Right>',lambda event:pokemon_suivant())
 root.bind('<Left>',lambda event:pokemon_precedent())
@@ -299,6 +303,24 @@ def cri_pokemon():
 
     thread = Thread(target=thread_cri)
     thread.start()
+    
+
+etiquette_equipesimg = Image.open('images/fonds/etiquetteequipes.png')
+etiquette_equipesimg = ImageTk.PhotoImage(etiquette_equipesimg)
+etiquette_equipes=Label(root, image=etiquette_equipesimg ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+etiquette_equipes.config(image=etiquette_equipesimg)
+etiquette_equipes.im=etiquette_equipesimg
+etiquette_equipes.place(x=548,y=354)
+etiquette_equipes.bind('<Button-1>',lambda event:fenetre_equipe('équipe','equipe1'))
+
+etiquette_creer_equipesimg = Image.open('images/fonds/etiquettecreerequipe.png')
+etiquette_creer_equipesimg = ImageTk.PhotoImage(etiquette_creer_equipesimg)
+etiquette_creer_equipe=Label(root, image=etiquette_creer_equipesimg ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+etiquette_creer_equipe.config(image=etiquette_creer_equipesimg)
+etiquette_creer_equipe.im=etiquette_creer_equipesimg
+etiquette_creer_equipe.place(x=548,y=406)
+etiquette_creer_equipe.bind('<Button-1>',lambda event:fenetre_equipe('équipe','equipe1'))
+    
     
 root.bind('<Control-s>',lambda event:cri_pokemon())
 root.bind('<Control-S>',lambda event:cri_pokemon())
