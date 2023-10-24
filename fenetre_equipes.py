@@ -8,7 +8,7 @@ from pokedex2proto import *
 from threading import Thread
 import winsound
 
-def fenetre_equipe(master,equipechoisie):
+def fenetre_equipe(master,equipechoisie,nom):
     
     equipe=[]
 
@@ -22,7 +22,7 @@ def fenetre_equipe(master,equipechoisie):
     background=PhotoImage(file='images/fonds/fondequipes.png')
     bg=Label(master, image=background)
     bg.place(x=-2,y=-2)
-    master.title('Équipe')
+    master.title(nom)
     master.iconbitmap('images/sprites3g/icones/hyperball.ico')
     
     
@@ -312,3 +312,24 @@ def fenetre_equipe(master,equipechoisie):
             
     afficher_equipe()
     master.mainloop()
+    
+def choix_equipe(master):
+    
+    master=tk.Toplevel()
+    master.title("Choix de l'équipe")
+    master.geometry('224x232+100+100')
+    background=PhotoImage(file='images/fonds/fondchoixequipes.png')
+    bg=Label(master, image=background)
+    bg.place(x=-2,y=-2)
+    master.iconbitmap('images/sprites3g/icones/hyperball.ico')
+    
+    equipe1img = Image.open('images/fonds/equipe1.png')
+    equipe1img = ImageTk.PhotoImage(equipe1img)
+    equipe1=Label(master, image=equipe1img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    equipe1.config(image=equipe1img)
+    equipe1.im=equipe1img
+    equipe1.place(x=4,y=4)
+    equipe1.bind('<Button-1>',lambda event:fenetre_equipe('equipe1','equipe1','Équipe 1'))
+    
+    master.mainloop()
+    

@@ -311,7 +311,7 @@ etiquette_equipes=Label(root, image=etiquette_equipesimg ,bg='#f8b0a0',borderwid
 etiquette_equipes.config(image=etiquette_equipesimg)
 etiquette_equipes.im=etiquette_equipesimg
 etiquette_equipes.place(x=548,y=354)
-etiquette_equipes.bind('<Button-1>',lambda event:fenetre_equipe('équipe','equipe1'))
+etiquette_equipes.bind('<Button-1>',lambda event:choix_equipe('choix_equipe'))
 
 etiquette_creer_equipesimg = Image.open('images/fonds/etiquettecreerequipe.png')
 etiquette_creer_equipesimg = ImageTk.PhotoImage(etiquette_creer_equipesimg)
@@ -319,7 +319,7 @@ etiquette_creer_equipe=Label(root, image=etiquette_creer_equipesimg ,bg='#f8b0a0
 etiquette_creer_equipe.config(image=etiquette_creer_equipesimg)
 etiquette_creer_equipe.im=etiquette_creer_equipesimg
 etiquette_creer_equipe.place(x=548,y=406)
-etiquette_creer_equipe.bind('<Button-1>',lambda event:fenetre_equipe('équipe','equipe1'))
+etiquette_creer_equipe.bind('<Button-1>',lambda event:choix_equipe('choix_equipe'))
     
     
 root.bind('<Control-s>',lambda event:cri_pokemon())
