@@ -490,11 +490,7 @@ else:
     
     
 if pkmn_pref != 'Aucun':
-    print('Affichage du Pokémon Préféré')
-    print(pkmn_pref)
-    print()
     if pkmn_pref == 'Nidoran Male':
-        print('oui c nidran male')
         numspinbox.set('Nidoran ♂')
         
     elif pkmn_pref == 'Nidoran Femelle':
