@@ -213,9 +213,21 @@ class Attaque:
         self.effethorscombat=effethorscombat
         self.effetsecondaires=effetsecondaires
         
+def get_type1(nom):
+    for i in range(len(listepokemon)):
+        if listepokemon[i].nom == nom:
+            return listepokemon[i].type1
+        
+def get_type2(nom):
+    for i in range(len(listepokemon)):
+        if listepokemon[i].nom == nom:
+            return listepokemon[i].type2
+    
 #listage des pokémons
     
 listepokemon=[]
+
+    #KANTO
 
 listepokemon.append(Pokemon(1,['bulbizarre','bublizarre','Bublizarre','bublizzare','bublizzarre','Bublizzare','Bublizzarre'],'Bulbizarre',45,49,49,45,65,65,65,False,['Herbizarre'],False,False,16,False,False,False,'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrik'],['Plante'],False))
 listepokemon.append(Pokemon(2,['herbizarre','herbizzare','herbizzarre','Herbizzare','Herbizzarre'],'Herbizarre',60,62,63,60,80,80,80,'Bulbizarre',['Florizarre'],False,False,32,False,False,False,'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrik'],['Plante'],False))
@@ -252,31 +264,41 @@ listepokemon.append(Pokemon(32,['nidoran M','nidoran m','Nidoran M'],'Nidoran M'
 listepokemon.append(Pokemon(33,['nidorino'],'Nidorino',61,72,57,65,55,55,55,'Nidoran M',['Nidoking'],False,False,False,False,['Utiliser une Pierre Lune'],False,'Poison',False,5100,100,0,120,['Psy','Sol'],False,['Combat','Insecte','Plante','Poison'],False,False))
 listepokemon.append(Pokemon(34,['nidoking'],'Nidoking',81,102,77,85,75,85,75,'Nidorino',False,False,False,False,False,False,False,'Poison','Sol',5100,100,0,45,['Eau','Glace','Sol','Psy'],False,['Combat','Insecte','Roche'],['Poison'],['Électrik']))
 #listepokemon.append(Pokemon(35,['mélofée','melofee','Mélofée','Melofee',],'Mélofée',70,45,48,35,
-
 listepokemon.append(Pokemon(131,['lokhlass'],'Lokhlass',130,85,80,60,95,85,95,False,False,False,False,False,False,False,False,'Eau','Glace',9945,50,50,90,['Combat','Électrik','Plante','Roche'],False,['Eau'],['Glace'],False))        
 listepokemon.append(Pokemon(133,['evoli','Evoli','évoli'],'Évoli',55,55,50,55,65,45,65,False,['Aquali','Voltali','Pyroli'],['Mentali','Noctali'],False,False,False,['Utiliser une Pierre Eau','Utiliser une Pierre Foudre','Utiliser une Pierre Feu'],['Prendre un niveau avec le bonheur suffisamment élevé, pendant la journée','Prendre un niveau avec le bonheur suffisamment élevé, pendant la nuit'],'Normal',False,8670,87,13,45,['Combat'],False,False,False,['Spectre']))
 listepokemon.append(Pokemon(134,['aquali'],'Aquali',130,65,60,65,110,110,95,'Évoli',False,False,False,False,False,False,False,'Eau',False,8670,87,13,45,['Électrik','Plante'],False,['Acier','Eau','Feu','Glace'],False,False))
 listepokemon.append(Pokemon(135,['voltali'],'Voltali',65,65,60,95,110,110,95,'Évoli',False,False,False,False,False,False,False,'Électrik',False,8670,87,13,45,['Sol'],False,['Acier','Électrik','Vol'],False,False))
 listepokemon.append(Pokemon(136,['pyroli'],'Pyroli',65,130,60,65,110,95,110,'Évoli',False,False,False,False,False,False,False,'Feu',False,8670,87,13,45,['Eau','Roche','Sol'],False,['Acier','Feu','Glace','Insecte','Plante'],False,False))
-#listepokemon.append(Pokemon(137,['artikodin'],'Artikodin',
-
+listepokemon.append(Pokemon(144,['artikodin'],'Artikodin',90,85,100,85,125,95,125,False,False,False,False,False,False,False,False,'Glace','Vol',30345,0,0,3,['Feu','Électrik','Acier'],['Roche'],['Plante'],['Insecte','Plante'],['Sol']))
 listepokemon.append(Pokemon(146,['sulfura'],'Sulfura',90,100,90,90,125,125,85,False,False,False,False,False,False,False,False,'Feu','Vol',30345,0,0,3,['Eau','Électrik'],['Roche'],['Acier','Combat','Feu'],['Insecte','Plante'],['Sol']))
-
-
 listepokemon.append(Pokemon(147,['minidraco'],'Minidraco',41,64,45,50,50,50,50,False,['Draco'],False,False,30,False,False,False,'Dragon',False,9945,50,50,45,['Dragon','Glace'],False,['Eau','Électrik','Feu','Plante'],False,False))
 listepokemon.append(Pokemon(148,['draco'],'Draco',61,84,65,70,70,70,70,'Minidraco',['Dracolosse'],False,False,55,False,False,False,'Dragon',False,9945,50,50,45,['Dragon','Glace'],False,['Eau','Électrik','Feu','Plante'],False,False))
 listepokemon.append(Pokemon(149,['dracolosse'],'Dracolosse',91,134,95,80,100,100,100,'Draco',False,False,False,False,False,False,False,'Dragon','Vol',9945,50,50,45,['Dragon','Roche'],['Glace'],['Combat','Feu','Eau','Insecte'],['Plante'],['Sol']))
 listepokemon.append(Pokemon(150,['mewtwo'],'Mewtwo',106,110,90,130,154,154,90,False,False,False,False,False,False,False,False,'Psy',False,30345,0,0,3,['Insecte','Spectre','Ténèbres'],False,['Combat','Psy'],False,False))
+
+    #JOHTO
+
 listepokemon.append(Pokemon(151,['mew'],'Mew',100,100,100,100,100,100,100,False,False,False,False,False,False,False,False,'Psy',False,30345,0,0,3,['Insecte','Spectre','Ténèbres'],False,['Combat','Psy'],False,False))
 listepokemon.append(Pokemon(152,['germignon'],'Germignon',48,49,65,45,0,49,65,False,['Macronium'],False,False,16,False,False,False,'Plante',False,5100,87,13,45,['Feu','Glace','Insecte','Poison','Vol'],False,['Eau','Électrik','Plante','Sol'],False,False))
 listepokemon.append(Pokemon(155,['hericendre','héricendre','Hericendre'],'Héricendre',39,52,43,65,0,60,50,False,['Feurisson'],False,False,14,False,False,False,'Feu',False,5100,87,13,45,['Eau','Roche','Sol'],False,['Acier','Feu','Glace','Insecte','Plante'],False,False))
+listepokemon.append(Pokemon(179,['wattouat'],'Wattouat',55,50,50,35,0,65,45,False,['Lainergie'],False,False,15,False,False,False,'Électrik',False,5120,50,50,235,['Sol'],False,['Acier','Électrik','Vol'],False,False))
+listepokemon.append(Pokemon(180,['lainergie'],'Lainergie',70,55,55,45,0,80,60,'Wattouat',['Pharamp'],False,False,30,False,False,False,'Électrik',False,5120,50,50,120,['Sol'],False,['Acier','Électrik','Vol'],False,False))
+listepokemon.append(Pokemon(181,['pharamp'],'Pharamp',90,75,75,55,0,115,90,'Lainergie',False,False,False,False,False,False,False,'Électrik',False,5120,50,50,45,['Sol'],False,['Acier','Électrik','Vol'],False,False))
 listepokemon.append(Pokemon(243,['raiku','raikou','Raiku'],'Raikou',90,85,75,115,0,115,100,False,False,False,False,False,False,False,False,'Électrik',False,30345,0,0,3,['Sol'],False,['Acier','Électrik','Vol'],False,False))
 listepokemon.append(Pokemon(244,['entei'],'Entei',115,115,85,100,0,90,75,False,False,False,False,False,False,False,False,'Feu',False,30345,0,0,3,['Eau','Roche','Sol'],False,['Acier','Feu','Glace','Insecte','Plante'],False,False))
-listepokemon.append(Pokemon(245,['suicune'],'Suicune',100,75,115,85,0,90,115,False,False,False,False,False,False,False,False,'Eau',False,30345,0,0,3,['Électrik','Plante'],False,['Acier','Eau','Feu','Glace'],False,False))
+listepokemon.append(Pokemon(245,['suicune'],'Suicune',100,75,115,85,0,,90,115,False,False,False,False,False,False,False,False,'Eau',False,30345,0,0,3,['Électrik','Plante'],False,['Acier','Eau','Feu','Glace'],False,False))
+listepokemon.append(Pokemon(246,['embrylex'],'Embrylex',50,64,50,41,0,45,50,False,['Ymphect'],False,False,30,False,False,False,'Roche','Ténèbres'
+
+
 listepokemon.append(Pokemon(249,['lugia'],'Lugia',106,90,130,110,0,90,154,False,False,False,False,False,False,False,False,'Psy','Vol',30345,0,0,3,['Électrik','Glace','Roche','Spectre','Ténèbres'],False,['Plante','Psy'],['Combat'],['Sol']))
 listepokemon.append(Pokemon(250,['hooh','ho-oh'],'Ho-Oh',106,130,90,90,0,110,154,False,False,False,False,False,False,False,False,'Feu','Vol',30345,0,0,3,['Eau','Électrik'],['Roche'],['Acier','Combat','Feu'],['Insecte','Plante'],['Sol']))
 listepokemon.append(Pokemon(251,['celebi','célébi','Célébi'],'Celebi',100,100,100,100,0,100,100,False,False,False,False,False,False,False,False,'Psy','Plante',30345,0,0,3,['Feu','Glace','Poison','Spectre','Ténèbres','Vol'],['Insecte'],['Combat','Eau','Électrik','Plante','Psy','Sol'],False,False))
 
+    #HOENN
+
+listepokemon.append(Pokemon(382,['kyogre'],'Kyogre',100,100,90,90,0,150,140,False,False,False,False,False,False,False,False,'Eau',False,30345,0,0,3,['Plante','Électrik'],False,['Feu','Eau','Glace','Acier'],False,False))
+listepokemon.append(Pokemon(383,['groudon'],'Groudon',100,150,140,90,0,100,90,False,False,False,False,False,False,False,False,'Feu',False,30345,0,0,3,['Eau','Roche','Sol'],False,['Acier','Feu','Glace','Insecte','Plante'],False,False))
+listepokemon.append(Pokemon(384,['rayquaza'],'Rayquaza',105,150,90,95,0,150,90,False,False,False,False,False,False,False,False,'Dragon','Vol',30345,0,0,3,['Dragon','Roche'],['Glace'],['Combat','Feu','Eau','Insecte'],['Plante'],['Sol']))
 for i in listepokemon:
     i.rawnom.append(str(i.num))
 

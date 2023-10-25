@@ -70,6 +70,7 @@ def combobox_nom(event):
     afficher_pokemon()
     #afficher_icone()
     stats_num()
+    afficher_types()
     
 def combobox_num():
     
@@ -215,7 +216,7 @@ def afficher_pokemon():
 
 def pokemon_suivant():
     
-    if get_num(nom_du_pokemon.get()) < 251:
+    if get_num(nom_du_pokemon.get()) < 386:
         for i in range(len(listenompokemon)):
             if listenompokemon[i] == nom_du_pokemon.get():
                 nom_du_pokemon.set(listenompokemon[i+1])
@@ -266,6 +267,31 @@ def shiny_on_hold():
     global shinynb
     if shinynb == 0:
         tempo_shiny()
+
+def afficher_types():
+    etiquette_typesimg = Image.open('images/fonds/etiquettetypes.png')
+    etiquette_typesimg = ImageTk.PhotoImage(etiquette_typesimg)
+    etiquette_types=Label(root, image=etiquette_typesimg ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    etiquette_types.config(image=etiquette_typesimg)
+    etiquette_types.im=etiquette_typesimg
+    etiquette_types.place(x=70,y=210)
+    
+    if get_type1(nom_du_pokemon.get()) != False:
+        etiquette_type1img = Image.open('images/types/'+str(get_type1(nom_du_pokemon.get()))+'.png')
+        etiquette_type1img = ImageTk.PhotoImage(etiquette_type1img)
+        etiquette_type1=Label(root, image=etiquette_type1img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+        etiquette_type1.config(image=etiquette_type1img)
+        etiquette_type1.im=etiquette_type1img
+        etiquette_type1.place(x=76,y=216)
+        
+    if get_type2(nom_du_pokemon.get()) != False:
+        etiquette_type2img = Image.open('images/types/'+str(get_type2(nom_du_pokemon.get()))+'.png')
+        etiquette_type2img = ImageTk.PhotoImage(etiquette_type2img)
+        etiquette_type2=Label(root, image=etiquette_type2img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+        etiquette_type2.config(image=etiquette_type2img)
+        etiquette_type2.im=etiquette_type2img
+        etiquette_type2.place(x=142,y=216)
+    
     
 nom_du_pokemon.set('Bulbizarre')
     
