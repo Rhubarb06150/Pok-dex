@@ -7,6 +7,7 @@ from liste_pokemon import listenompokemon
 from liste_pokemon import *
 from threading import Thread
 import winsound
+import random
 
 def fenetre_equipe(master,equipechoisie,nom):
     
@@ -44,6 +45,7 @@ def fenetre_equipe(master,equipechoisie,nom):
             label.pack()
             label.place(x=posx,y=y)
             label.photo=img
+            
         else:
             
             path = ('images/font3g/'+i+'.png')
@@ -118,6 +120,13 @@ def fenetre_equipe(master,equipechoisie,nom):
                     elif shiny == False and i != '1':
                         place+=1
                         lettre(('label'+str(place)),('img'+str(place)),i,y)
+                        
+            else:
+                
+                for i in 'vide':
+                    
+                    place+=1
+                    lettre(('label'+str(place)),('img'+str(place)),i,y)
                     
                     
             if membre[1] != '':
@@ -156,6 +165,13 @@ def fenetre_equipe(master,equipechoisie,nom):
                     elif shiny == False and i != '1':
                         place+=1
                         lettre(('label'+str(place)),('img'+str(place)),i,y)
+                        
+            else:
+                
+                for i in 'vide':
+                    
+                    place+=1
+                    lettre(('label'+str(place)),('img'+str(place)),i,y)
                     
             if membre[2] != '':
                 
@@ -193,6 +209,13 @@ def fenetre_equipe(master,equipechoisie,nom):
                     elif shiny == False and i != '1':
                         place+=1
                         lettre(('label'+str(place)),('img'+str(place)),i,y)
+                        
+            else:
+                
+                for i in 'vide':
+                    
+                    place+=1
+                    lettre(('label'+str(place)),('img'+str(place)),i,y)
                     
             if membre[3] != '':
                 
@@ -230,6 +253,13 @@ def fenetre_equipe(master,equipechoisie,nom):
                     elif shiny == False and i != '1':
                         place+=1
                         lettre(('label'+str(place)),('img'+str(place)),i,y)
+                        
+            else:
+                
+                for i in 'vide':
+                    
+                    place+=1
+                    lettre(('label'+str(place)),('img'+str(place)),i,y)
                     
             if membre[4] != '':
                 
@@ -267,6 +297,14 @@ def fenetre_equipe(master,equipechoisie,nom):
                     elif shiny == False and i != '1':
                         place+=1
                         lettre(('label'+str(place)),('img'+str(place)),i,y)
+                        
+            else:
+                
+                for i in 'vide':
+                    
+                    place+=1
+                    lettre(('label'+str(place)),('img'+str(place)),i,y)
+                
                     
             if membre[5] != '':
                 
@@ -304,6 +342,14 @@ def fenetre_equipe(master,equipechoisie,nom):
                     elif shiny == False and i != '1':
                         place+=1
                         lettre(('label'+str(place)),('img'+str(place)),i,y)
+                        
+            else:
+                
+                print('rrrr')
+                for i in 'vide':
+                    
+                    place+=1
+                    lettre(('label'+str(place)),('img'+str(place)),i,y)
                     
             break
     
@@ -344,6 +390,160 @@ def choix_equipe(master):
     equipe2.im=equipe2img
     equipe2.place(x=114,y=4)
     equipe2.bind('<Button-1>',lambda event:fenetre_equipe('equipe2','equipe2','Équipe 2'))
+    
+    #Équipe 3
+    
+    equipe3img = Image.open('images/fonds/equipe3.png')
+    equipe3img = ImageTk.PhotoImage(equipe3img)
+    equipe3=Label(master, image=equipe3img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    equipe3.config(image=equipe3img)
+    equipe3.im=equipe3img
+    equipe3.place(x=4,y=54)
+    equipe3.bind('<Button-1>',lambda event:fenetre_equipe('equipe3','equipe3','Équipe 3'))
+    
+    #Équipe 4
+    
+    equipe4img = Image.open('images/fonds/equipe4.png')
+    equipe4img = ImageTk.PhotoImage(equipe4img)
+    equipe4=Label(master, image=equipe4img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    equipe4.config(image=equipe4img)
+    equipe4.im=equipe2img
+    equipe4.place(x=114,y=54)
+    equipe4.bind('<Button-1>',lambda event:fenetre_equipe('equipe4','equipe4','Équipe 4'))
+    
+    #Équipe 5
+    
+    equipe5img = Image.open('images/fonds/equipe5.png')
+    equipe5img = ImageTk.PhotoImage(equipe5img)
+    equipe5=Label(master, image=equipe5img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    equipe5.config(image=equipe5img)
+    equipe5.im=equipe5img
+    equipe5.place(x=4,y=102)
+    equipe5.bind('<Button-1>',lambda event:fenetre_equipe('equipe5','equipe5','Équipe 5'))
+    
+    #Équipe 6
+    
+    equipe6img = Image.open('images/fonds/equipe6.png')
+    equipe6img = ImageTk.PhotoImage(equipe6img)
+    equipe6=Label(master, image=equipe6img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    equipe6.config(image=equipe6img)
+    equipe6.im=equipe6img
+    equipe6.place(x=114,y=102)
+    equipe6.bind('<Button-1>',lambda event:fenetre_equipe('equipe6','equipe6','Équipe '))
+    
+    #Équipe 7
+    
+    equipe7img = Image.open('images/fonds/equipe7.png')
+    equipe7img = ImageTk.PhotoImage(equipe7img)
+    equipe7=Label(master, image=equipe7img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    equipe7.config(image=equipe7img)
+    equipe7im=equipe7img
+    equipe7.place(x=4,y=152)
+    equipe7.bind('<Button-1>',lambda event:fenetre_equipe('equipe7','equipe7','Équipe 7'))
+    
+    #Équipe 8
+    
+    equipe8img = Image.open('images/fonds/equipe8.png')
+    equipe8img = ImageTk.PhotoImage(equipe8img)
+    equipe8=Label(master, image=equipe8img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    equipe8.config(image=equipe8img)
+    equipe8.im=equipe8img
+    equipe8.place(x=114,y=152)
+    equipe8.bind('<Button-1>',lambda event:fenetre_equipe('equipe8','equipe8','Équipe 8'))
+    
+
+    master.mainloop()
+    
+def choix_creation_equipe(master):
+    
+    master=tk.Toplevel()
+    master.title("Choix de l'équipe")
+    master.geometry('224x232+100+100')
+    master.resizable(False,False)
+    background=PhotoImage(file='images/fonds/fondchoixequipes.png')
+    bg=Label(master, image=background)
+    bg.place(x=-2,y=-2)
+    master.iconbitmap('images/sprites3g/icones/hyperball.ico')
+    
+    #Équipe 1
+    
+    equipe1img = Image.open('images/fonds/equipe1.png')
+    equipe1img = ImageTk.PhotoImage(equipe1img)
+    equipe1=Label(master, image=equipe1img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    equipe1.config(image=equipe1img)
+    equipe1.im=equipe1img
+    equipe1.place(x=4,y=4)
+    equipe1.bind('<Button-1>',lambda event:creation_equipe('master',1))
+    
+    #Équipe 2
+    
+    equipe2img = Image.open('images/fonds/equipe2.png')
+    equipe2img = ImageTk.PhotoImage(equipe2img)
+    equipe2=Label(master, image=equipe2img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    equipe2.config(image=equipe2img)
+    equipe2.im=equipe2img
+    equipe2.place(x=114,y=4)
+    equipe2.bind('<Button-1>',lambda event:creation_equipe('master',2))
+    
+    #Équipe 3
+    
+    equipe3img = Image.open('images/fonds/equipe3.png')
+    equipe3img = ImageTk.PhotoImage(equipe3img)
+    equipe3=Label(master, image=equipe3img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    equipe3.config(image=equipe3img)
+    equipe3.im=equipe3img
+    equipe3.place(x=4,y=54)
+    equipe3.bind('<Button-1>',lambda event:creation_equipe('master',3))
+    
+    #Équipe 4
+    
+    equipe4img = Image.open('images/fonds/equipe4.png')
+    equipe4img = ImageTk.PhotoImage(equipe4img)
+    equipe4=Label(master, image=equipe4img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    equipe4.config(image=equipe4img)
+    equipe4.im=equipe2img
+    equipe4.place(x=114,y=54)
+    equipe4.bind('<Button-1>',lambda event:creation_equipe('master',4))
+    
+    #Équipe 5
+    
+    equipe5img = Image.open('images/fonds/equipe5.png')
+    equipe5img = ImageTk.PhotoImage(equipe5img)
+    equipe5=Label(master, image=equipe5img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    equipe5.config(image=equipe5img)
+    equipe5.im=equipe5img
+    equipe5.place(x=4,y=102)
+    equipe5.bind('<Button-1>',lambda event:creation_equipe('master',5))
+    
+    #Équipe 6
+    
+    equipe6img = Image.open('images/fonds/equipe6.png')
+    equipe6img = ImageTk.PhotoImage(equipe6img)
+    equipe6=Label(master, image=equipe6img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    equipe6.config(image=equipe6img)
+    equipe6.im=equipe6img
+    equipe6.place(x=114,y=102)
+    equipe6.bind('<Button-1>',lambda event:creation_equipe('master',6))
+    
+    #Équipe 7
+    
+    equipe7img = Image.open('images/fonds/equipe7.png')
+    equipe7img = ImageTk.PhotoImage(equipe7img)
+    equipe7=Label(master, image=equipe7img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    equipe7.config(image=equipe7img)
+    equipe7im=equipe7img
+    equipe7.place(x=4,y=152)
+    equipe7.bind('<Button-1>',lambda event:creation_equipe('master',7))
+    
+    #Équipe 8
+    
+    equipe8img = Image.open('images/fonds/equipe8.png')
+    equipe8img = ImageTk.PhotoImage(equipe8img)
+    equipe8=Label(master, image=equipe8img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    equipe8.config(image=equipe8img)
+    equipe8.im=equipe8img
+    equipe8.place(x=114,y=152)
+    equipe8.bind('<Button-1>',lambda event:creation_equipe('master',8))
     
 
     master.mainloop()
@@ -479,6 +679,7 @@ def creation_equipe(master,equipechoisie):
         afficher_pokemon()
         #afficher_icone()
         stats_num()
+        chromatique()
     
     def stats_num():
     
@@ -566,25 +767,49 @@ def creation_equipe(master,equipechoisie):
         
         def icone_membre(membre,posx,posy,nb_membre):
             
-            path = ('images/sprites3g/icones/'+str((membre).replace('1',''))+'1.png')
-            membreequipeimg = ImageTk.PhotoImage(Image.open(path))
-            membrequipe=Label(master,image=membreequipeimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
-            membrequipe.place(x=posx,y=posy)
-            membrequipe.photo=membreequipeimg
-            membrequipe.bind('<Button-1>',lambda event:choisir_pokemon())
-            nbmembre=Label(master,text=str(nb_membre))
+            if membre !='':
+            
+                path = ('images/sprites3g/icones/'+str((membre).replace('1',''))+'1.png')
+                membreequipeimg = ImageTk.PhotoImage(Image.open(path))
+                membrequipe=Label(master,image=membreequipeimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
+                membrequipe.place(x=posx,y=posy)
+                membrequipe.photo=membreequipeimg
+                membrequipe.bind('<Button-1>',lambda event:choisir_pokemon())
+                nbmembre=Label(master,text=str(nb_membre))
+                
+            else:
+                
+                path = ('images/sprites3g/icones/empty.png')
+                membreequipeimg = ImageTk.PhotoImage(Image.open(path))
+                membrequipe=Label(master,image=membreequipeimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
+                membrequipe.place(x=posx,y=posy)
+                membrequipe.photo=membreequipeimg
+                membrequipe.bind('<Button-1>',lambda event:choisir_pokemon())
+                nbmembre=Label(master,text=str(nb_membre))
             
             def choisir_pokemon():
                 
                 global numero_membre_choisi
                 
-                if membre[-1] == '1':
-                    isshiny.set(1)
+                if membre!='':
+                
+                    if membre[-1] == '1':
+                        isshiny.set(1)
+                    else:
+                        isshiny.set(0)
+                        
+                    nom_du_pokemon.set(str(membre).replace('1',''))
+                    numero_membre_choisi=(nbmembre.cget('text'))
+                    combobox_nom('e')
+                    titre()
+                    chromatique()
+                        
                 else:
-                    isshiny.set(0)
-                nom_du_pokemon.set(str(membre).replace('1',''))
-                numero_membre_choisi=(nbmembre.cget('text'))
-                combobox_nom('e')
+                    
+                    nom_du_pokemon.set('Bulbizarre')
+                    numero_membre_choisi=(nbmembre.cget('text'))
+                    titre()
+                    chromatique()
             
             
         
@@ -594,8 +819,15 @@ def creation_equipe(master,equipechoisie):
                 
                 icone_membre(equipe[0],14,14,1)
                 
+            else:
+                
+                icone_membre(equipe[0],14,14,1)
                 
             if equipe[1] != '':
+                
+                icone_membre(equipe[1],96,14,2)
+                
+            else:
                 
                 icone_membre(equipe[1],96,14,2)
                 
@@ -604,13 +836,25 @@ def creation_equipe(master,equipechoisie):
                 
                 icone_membre(equipe[2],178,14,3)
                 
+            else:
+                
+                icone_membre(equipe[2],178,14,3)
+                
                 
             if equipe[3] != '':
                 
                 icone_membre(equipe[3],14,94,4)
                 
+            else:
+                
+                icone_membre(equipe[3],14,94,4)
+                
                 
             if equipe[4] != '':
+                
+                icone_membre(equipe[4],96,94,5)
+                
+            else:
                 
                 icone_membre(equipe[4],96,94,5)
 
@@ -619,7 +863,36 @@ def creation_equipe(master,equipechoisie):
                 
                 icone_membre(equipe[5],178,94,6)
                 
+            else:
+                
+                icone_membre(equipe[5],178,94,6)
+                
             break
+        titre()
+        chromatique()
+        
+    def supprimer_pokemon():
+        
+        global numero_membre_choisi
+        
+        if numero_membre_choisi == 0:
+            
+            tkinter.messagebox.showinfo(title='Action Impossible', message="Vous n'avez aucun Pokémon sélectionné!",)
+            
+        else:
+            
+            remplacer = tkinter.messagebox.askquestion(title='Attention!', message=("Êtes-vous sur de vouloir supprimer "+str(equipe[int(numero_membre_choisi)-1]).replace('1',''))+" du Slot "+str(numero_membre_choisi)+"?")
+            
+            if remplacer == 'yes':
+                
+                file=open('txts/equipe'+str(equipechoisie)+'/membre'+str(numero_membre_choisi)+'.txt','w')
+                file.write('')
+                file.close()
+                
+        afficher_equipe()
+        titre()
+        chromatique()
+        refresh_equipe()
         
     def inclure_pokemon():
         
@@ -631,13 +904,20 @@ def creation_equipe(master,equipechoisie):
             
         else:
             
-            file=open('txts/equipe'+str(equipechoisie)+'/membre'+str(numero_membre_choisi)+'.txt','w')
-            if isshiny.get() == 1:
-                file.write(nom_du_pokemon.get()+'1')
-            else:
-                file.write(nom_du_pokemon.get())
-            file.close()
+            remplacer = tkinter.messagebox.askquestion(title='Attention!', message=("Êtes-vous sur de vouloir remplacer "+str(equipe[int(numero_membre_choisi)-1]).replace('1','')+" par "+str(nom_du_pokemon.get())+"?"),)
+            
+            if remplacer == 'yes':
+                
+                file=open('txts/equipe'+str(equipechoisie)+'/membre'+str(numero_membre_choisi)+'.txt','w')
+                if isshiny.get() == 1:
+                    file.write(nom_du_pokemon.get()+'1')
+                else:
+                    file.write(nom_du_pokemon.get())
+                file.close()
         afficher_equipe()
+        titre()
+        chromatique()
+        refresh_equipe()
             
     
     def pokemon_suivant():
@@ -658,7 +938,71 @@ def creation_equipe(master,equipechoisie):
                     nom_du_pokemon.set(listenompokemon[i-1])
                     combobox_nom('event')
                     break
+                
+    def titre():
+        if str(equipe[int(numero_membre_choisi)-1]) == '':
+            master.title("Création de l'équipe (Aucun Pokémon selectionné) Slot: "+str(numero_membre_choisi))
+        else:
+            master.title("Création de l'équipe ("+str(equipe[int(numero_membre_choisi)-1]).replace('1','')+") Slot: "+str(numero_membre_choisi))
             
+            
+    def chroma_switch():
+        
+        if isshiny.get()==0:
+            isshiny.set(1)
+        else:
+            isshiny.set(0)
+        chromatique()
+        combobox_nom('shiny')
+        file=open('txts/equipe'+str(equipechoisie)+'/membre'+str(numero_membre_choisi)+'.txt','w')
+        if isshiny.get() == 1:
+            file.write(nom_du_pokemon.get()+'1')
+        else:
+            file.write(nom_du_pokemon.get())
+        file.close()
+        refresh_equipe()
+    
+            
+    def chromatique():
+        
+        if isshiny.get() == 0:
+            
+            path = ('images/fonds/chromatiqueoff.png')
+            chromatiqueimg = ImageTk.PhotoImage(Image.open(path))
+            chromatique=Label(master,image=chromatiqueimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
+            chromatique.place(x=146,y=274)
+            chromatique.photo=chromatiqueimg
+            
+            chromatique.bind('<Button-1>',lambda event:chroma_switch())
+            
+        else:
+            
+            path = ('images/fonds/chromatiqueon.png')
+            chromatiqueimg = ImageTk.PhotoImage(Image.open(path))
+            chromatique=Label(master,image=chromatiqueimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
+            chromatique.place(x=146,y=274)
+            chromatique.photo=chromatiqueimg
+            
+            chromatique.bind('<Button-1>',lambda event:chroma_switch())
+            
+            
+    def refresh_equipe():
+    
+        equipe=[]
+
+        for i in range(6):
+            file=open('txts/equipe'+str(equipechoisie)+'/membre'+str(i+1)+'.txt')
+            equipe.append(file.read())
+            file.close
+    
+        afficher_equipe()
+        combobox_nom('refresh')
+        combobox_num()
+        afficher_pokemon()
+        #afficher_icone()
+        stats_num()
+        chromatique()
+        
     #bouttons
     
     nompokemon=ttk.Combobox(values=listenompokemon,textvariable=nom_du_pokemon,state='readlonly',command=combobox_num())
@@ -672,6 +1016,15 @@ def creation_equipe(master,equipechoisie):
     inclure.place(x=146,y=322)
     inclure.photo=inclureimg
     inclure.bind('<Button-1>',lambda event:inclure_pokemon())
+    
+    path = ('images/fonds/etiquettesupprimer.png')
+    supprimerimg = ImageTk.PhotoImage(Image.open(path))
+    supprimer=Label(master,image=supprimerimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
+    supprimer.place(x=260,y=322)
+    supprimer.photo=supprimerimg
+    supprimer.bind('<Button-1>',lambda event:supprimer_pokemon())
+    
+    
 
     #fonctions du début
     

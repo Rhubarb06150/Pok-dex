@@ -214,6 +214,7 @@ def afficher_pokemon():
     pokemon.bind("<Button-1>", lambda event:cri_pokemon())
 
 def pokemon_suivant():
+    
     if get_num(nom_du_pokemon.get()) < 251:
         for i in range(len(listenompokemon)):
             if listenompokemon[i] == nom_du_pokemon.get():
@@ -222,6 +223,7 @@ def pokemon_suivant():
                 break
         
 def pokemon_precedent():
+    
     if get_num(nom_du_pokemon.get()) != 1:
         for i in range(len(listenompokemon)):
             if listenompokemon[i] == nom_du_pokemon.get():
@@ -301,7 +303,6 @@ def thread_cri():
     
 def cri_pokemon():
 
-
     thread = Thread(target=thread_cri)
     thread.start()
     
@@ -320,7 +321,7 @@ etiquette_creer_equipe=Label(root, image=etiquette_creer_equipesimg ,bg='#f8b0a0
 etiquette_creer_equipe.config(image=etiquette_creer_equipesimg)
 etiquette_creer_equipe.im=etiquette_creer_equipesimg
 etiquette_creer_equipe.place(x=548,y=406)
-etiquette_creer_equipe.bind('<Button-1>',lambda event:creation_equipe('master',1))
+etiquette_creer_equipe.bind('<Button-1>',lambda event:choix_creation_equipe('master'))
     
     
 root.bind('<Control-s>',lambda event:cri_pokemon())
