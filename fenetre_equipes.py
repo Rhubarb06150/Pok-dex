@@ -556,7 +556,7 @@ def creation_equipe(master,equipechoisie):
     numero_membre_choisi=0
     
     master=tk.Toplevel()
-    master.title("Création de l'équipe")
+    master.title("Gestion de l'équipe")
     master.geometry('500x400+100+100')
     master.resizable(False,False)
     background=PhotoImage(file='images/fonds/fondcreationequipe.png')
@@ -941,9 +941,9 @@ def creation_equipe(master,equipechoisie):
                 
     def titre():
         if str(equipe[int(numero_membre_choisi)-1]) == '':
-            master.title("Création de l'équipe (Aucun Pokémon selectionné) Slot: "+str(numero_membre_choisi))
+            master.title("Gestion de l'équipe (Aucun Pokémon selectionné) Slot: "+str(numero_membre_choisi))
         else:
-            master.title("Création de l'équipe ("+str(equipe[int(numero_membre_choisi)-1]).replace('1','')+") Slot: "+str(numero_membre_choisi))
+            master.title("Gestion de l'équipe ("+str(equipe[int(numero_membre_choisi)-1]).replace('1','')+") Slot: "+str(numero_membre_choisi))
             
             
     def chroma_switch():

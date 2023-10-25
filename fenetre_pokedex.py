@@ -320,7 +320,7 @@ etiquette_creer_equipesimg = ImageTk.PhotoImage(etiquette_creer_equipesimg)
 etiquette_creer_equipe=Label(root, image=etiquette_creer_equipesimg ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
 etiquette_creer_equipe.config(image=etiquette_creer_equipesimg)
 etiquette_creer_equipe.im=etiquette_creer_equipesimg
-etiquette_creer_equipe.place(x=548,y=406)
+etiquette_creer_equipe.place(x=536,y=406)
 etiquette_creer_equipe.bind('<Button-1>',lambda event:choix_creation_equipe('master'))
     
     
