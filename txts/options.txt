@@ -1,8 +1,0 @@
-False
-collection
-True
-mdr
-
-ligne 1 > Fond aléatoire
-ligne 2 > Fond préféré
-ligne 3 > Sons
