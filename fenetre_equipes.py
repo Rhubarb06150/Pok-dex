@@ -370,12 +370,28 @@ def fenetre_equipe(master,equipechoisie,nom):
                     
             break
     
-
-                
+    def voir_vers_gerer():
         
+        xmaster=master.winfo_x()
+        ymaster=master.winfo_y()
+        master.destroy()
+        creation_equipe('equipe',equipechoisie,xmaster,ymaster)
+        
+    
+    gererimg = Image.open('images/fonds/gererlequipe.png')
+    gererimg = ImageTk.PhotoImage(gererimg)
+    gerer=Label(master, image=gererimg ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    gerer.config(image=gererimg)
+    gerer.im=gererimg
+    gerer.place(x=10,y=424)
+    gerer.bind('<Button-1>',lambda event:voir_vers_gerer())
+                
+    
             
     afficher_equipe()
     master.mainloop()
+    
+    
     
 def choix_equipe(master):
     
@@ -575,6 +591,10 @@ def choix_creation_equipe(master):
     master.mainloop()
     
 numero_membre_choisi=0
+    
+frames=0
+frameicone=0
+
     
 def creation_equipe(master,equipechoisie,x,y):
     
@@ -800,6 +820,12 @@ def creation_equipe(master,equipechoisie,x,y):
     pokemon=Label(master, image=path,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
     pokemon.place(x=6,y=230)
     
+    path = ('images/fonds/etiquetteequipe1.png')
+    etiquetteequipeimg = ImageTk.PhotoImage(Image.open(path))
+    etiquetteequipe=Label(master,image=etiquetteequipeimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
+    etiquetteequipe.place(x=398,y=4)
+    etiquetteequipe.photo=etiquetteequipeimg
+           
     
     def lettre(mot,liste):
     
@@ -869,6 +895,8 @@ def creation_equipe(master,equipechoisie,x,y):
         lettre(spec,listelabelspec)
         lettre(attspec,listelabelattspec)
         lettre(defspec,listelabeldefspec)
+        
+        
     
     #variables
     
@@ -940,9 +968,11 @@ def creation_equipe(master,equipechoisie,x,y):
         else:
                     
             nom_du_pokemon.set('Bulbizarre')
-            numero_membre_choisi=(nbmembre.cget('text'))
+            numero_membre_choisi=(num)
             titre()
-            chromatique()      
+            chromatique()
+    
+    
     
     #ICONES
         
@@ -982,77 +1012,39 @@ def creation_equipe(master,equipechoisie,x,y):
     icone6text=Label(master, text='6')
     icone6.bind('<Button-1>',lambda event:choisir_pokemon(6))
     
+    
+        
+    def icone_membre(label,membre,num):
+            
+        if membre !='':
+            
+            path = ('images/sprites3g/icones/'+str((membre).replace('1',''))+str(num)+'.png')
+            membreequipeimg = ImageTk.PhotoImage(Image.open(path))
+            label.config(image=membreequipeimg)
+            label.photo=membreequipeimg
+                
+        else:
+                
+            path = ('images/sprites3g/icones/empty.png')
+            membreequipeimg = ImageTk.PhotoImage(Image.open(path))
+            label.config(image=membreequipeimg)
+            label.photo=membreequipeimg
+            
     def afficher_equipe():
         
-        def icone_membre(label,membre):
-            
-            if membre !='':
-            
-                path = ('images/sprites3g/icones/'+str((membre).replace('1',''))+'1.png')
-                membreequipeimg = ImageTk.PhotoImage(Image.open(path))
-                label.config(image=membreequipeimg)
-                label.photo=membreequipeimg
-                
-            else:
-                
-                path = ('images/sprites3g/icones/empty.png')
-                membreequipeimg = ImageTk.PhotoImage(Image.open(path))
-                label.config(image=membreequipeimg)
-                label.photo=membreequipeimg
-            
         for membre in equipe:
             
-            if equipe[0] != '':
+            icone_membre(icone1,equipe[0],1)
                 
-                icone_membre(icone1,equipe[0])
+            icone_membre(icone2,equipe[1],1)
                 
-            else:
+            icone_membre(icone3,equipe[2],1)
                 
-                icone_membre(icone1,equipe[0])
+            icone_membre(icone4,equipe[3],1)
                 
-            if equipe[1] != '':
-                
-                icone_membre(icone2,equipe[1])
-                
-            else:
-                
-                icone_membre(icone2,equipe[1])
-                
-                
-            if equipe[2] != '':
-                
-                icone_membre(icone3,equipe[2])
-                
-            else:
-                
-                icone_membre(icone3,equipe[2])
-                
-                
-            if equipe[3] != '':
-                
-                icone_membre(icone4,equipe[3])
-                
-            else:
-                
-                icone_membre(icone4,equipe[3])
-                
-                
-            if equipe[4] != '':
-                
-                icone_membre(icone5,equipe[4])
-                
-            else:
-                
-                icone_membre(icone5,equipe[4])
+            icone_membre(icone5,equipe[4],1)
 
-                
-            if equipe[5] != '':
-                
-                icone_membre(icone6,equipe[5])
-                
-            else:
-                
-                icone_membre(icone6,equipe[5])
+            icone_membre(icone6,equipe[5],1)
                 
             break
         titre()
@@ -1082,6 +1074,25 @@ def creation_equipe(master,equipechoisie,x,y):
                 master.destroy()
                 creation_equipe('equipe',equipechoisie,xmaster,ymaster)
         
+    def rien():
+        a=None
+        
+    def icones_animation():
+        
+        if numero_membre_choisi != 0:
+            
+            membre=equipe[(numero_membre_choisi)-1]
+            
+            if numero_membre_choisi == 1:
+            
+                    icone_membre(icone1,membre,2)
+                    master.after(500,rien())
+                    icone_membre(icone1,membre,1)
+                    master.after(500,rien())
+                    icone_membre(icone1,membre,2)
+                    master.after(500,rien())
+                    icone_membre(icone1,membre,1)
+            
     def inclure_pokemon():
         
         global numero_membre_choisi
@@ -1093,9 +1104,10 @@ def creation_equipe(master,equipechoisie,x,y):
         else:
             
             file=open('txts/equipe'+str(equipechoisie)+'/membre'+str(numero_membre_choisi)+'.txt','r')
-            if file.read() == '':
+            
+            if file.read() != '':
                 
-                remplacer = tkinter.messagebox.askquestion(title='Inclure le Pokémon', message=("Voulez vous inclure "+str(nom_du_pokemon.get())+" dans le Slot "+str(numero_membre_choisi)+"?"))
+                remplacer = tkinter.messagebox.askquestion(title='Remplacer le Pokémon', message=("Voulez vous remplacer "+str(equipe[(numero_membre_choisi)-1])+" par "+str(nom_du_pokemon.get()+" dans le Slot "+str(numero_membre_choisi)+"?")))
             
                 if remplacer == 'yes':
                     
@@ -1113,7 +1125,7 @@ def creation_equipe(master,equipechoisie,x,y):
                     
             else:
             
-                remplacer = tkinter.messagebox.askquestion(title='Attention!', message=("Êtes-vous sur de vouloir remplacer "+str(equipe[int(numero_membre_choisi)-1]).replace('1','')+" par "+str(nom_du_pokemon.get())+"?"),)
+                remplacer = tkinter.messagebox.askquestion(title='Inclure le Pokémon', message=("Voulez vous inclure "+str(nom_du_pokemon.get())+" dans le Slot "+str(numero_membre_choisi)+"?"),)
                 
                 if remplacer == 'yes':
                     
@@ -1136,7 +1148,7 @@ def creation_equipe(master,equipechoisie,x,y):
                 if listenompokemon[i] == nom_du_pokemon.get():
                     nom_du_pokemon.set(listenompokemon[i+1])
                     combobox_nom('event')
-                    print(len(master.winfo_children()))
+                    
                     break
                     
                     
@@ -1147,7 +1159,7 @@ def creation_equipe(master,equipechoisie,x,y):
                 if listenompokemon[i] == nom_du_pokemon.get():
                     nom_du_pokemon.set(listenompokemon[i-1])
                     combobox_nom('event')
-                    print(len(master.winfo_children()))
+                    
                     break
                 
     def titre():
@@ -1243,6 +1255,89 @@ def creation_equipe(master,equipechoisie,x,y):
     
     afficher_equipe()
     
-    print(len(equipe))
+    master.mainloop()
+    
+def choix_equipe_plus(master):
+    
+    master=tk.Toplevel()
+    master.title("Plus d'Équipes")
+    master.geometry('300x200+800+342')
+    master.resizable(False,False)
+    background=PhotoImage(file='images/fonds/fondplusequipe.png')
+    bg=Label(master, image=background)
+    bg.place(x=-2,y=-2)
+    master.iconbitmap('images/sprites3g/icones/hyperball.ico')
+    
+    listelabel=[]
+    
+    path=PhotoImage(file='images/font3g/underscore.png')
+    
+    label1=Label(master,image=path,borderwidth=0, highlightthickness=0)
+    listelabel.append(label1)
+    label1.place(x=188,y=12)
+            
+    label2=Label(master,image=path,borderwidth=0, highlightthickness=0)
+    listelabel.append(label2)
+    label2.place(x=200,y=12)   
+    
+    cherche=Entry(master)
+    cherche.place(x=-50,y=-50)
+    cherche.focus_set()
+    bg.place(x=-2,y=-2)
+    
+    def lettre(mot,liste):
+        str(mot)
+        for i in range(len(mot)):
+                
+                    
+            if mot[i] == ' ':
+                        
+                path = ('images/font3g/underscore.png')
+                img = ImageTk.PhotoImage(Image.open(path))
+                        
+                liste[i].configure(image=img)
+                liste[i].im=img
+
+            elif mot[i] == '':
+                        
+                path = ('images/font3g/underscore.png')
+                img = ImageTk.PhotoImage(Image.open(path))
+                        
+                liste[i].configure(image=img)
+                liste[i].im=img
+                
+            else:
+                        
+                path = ('images/font3g/'+mot[i]+'.png')
+                img = ImageTk.PhotoImage(Image.open(path))
+                        
+                liste[i].configure(image=img)
+                liste[i].im=img
+
+    print(cherche.get())
+    
+    def effacer():
+        cherche.delete(0,2)
+        lettre('  ',listelabel)
+    
+    def aller():
+        print(cherche.get())
+        cherchetri=(cherche.get().sub(r'[^a-zA-Z0-9]', '',cherchetri))
+        creation_equipe('equipe',int(cherchetri),550,500)
+        
+    
+    master.bind('<Key-1>',lambda event:lettre(cherche.get(),listelabel))
+    master.bind('<Key-2>',lambda event:lettre(cherche.get(),listelabel))
+    master.bind('<Key-3>',lambda event:lettre(cherche.get(),listelabel))
+    master.bind('<Key-4>',lambda event:lettre(cherche.get(),listelabel))
+    master.bind('<Key-5>',lambda event:lettre(cherche.get(),listelabel))
+    master.bind('<Key-6>',lambda event:lettre(cherche.get(),listelabel))
+    master.bind('<Key-7>',lambda event:lettre(cherche.get(),listelabel))
+    master.bind('<Key-8>',lambda event:lettre(cherche.get(),listelabel))
+    master.bind('<Key-9>',lambda event:lettre(cherche.get(),listelabel))
+    master.bind('<Key-0>',lambda event:lettre(cherche.get(),listelabel))
+    master.bind('<BackSpace>',lambda event:effacer())
+    
+    master.bind('<Return>',lambda event:aller())
     
     master.mainloop()

@@ -2,6 +2,12 @@
 #4/10/23
 #Rhubarb
 
+import tkinter
+import tkinter as tk
+from tkinter import *
+from tkinter import messagebox,ttk, Tk, Frame, Canvas
+from PIL import ImageTk, Image
+
 #classes
 class Pokemon:
     def __init__(self,num,rawnom,nom,pv,force,defense,vitesse,specialgen1,attaquespeciale,defensespeciale,pre_evolution,evolution,evolution2,pre_evolution2,niveau_evolution,niveau_evolution2,condition_evolution,condition_evolution2,type1,type2,pasoeuf,male,femelle,taux_capture,faiblesses,dbfaiblesses,resistances,dbresistances,immunites):
@@ -430,3 +436,11 @@ def checktypes(typeachercher):
     for i in listepokemon:
         if i.type1 == typeachercher or i.type2 == typeachercher:
             print(i.nom+'    '+str(i.type1)+'   '+str(i.type2))
+
+for i in listepokemon:
+    gererimg = Image.open('images/sprites3g/'+i.nom+'.png')
+    gererimg = Image.open('images/sprites3g/shiny/'+i.nom+'.png')
+    gererimg = Image.open('images/sprites3g/back/'+i.nom+'.png')
+    gererimg = Image.open('images/sprites3g/shiny/back/'+i.nom+'.png')
+    gererimg = Image.open('images/sprites3g/icones/'+i.nom+'1.png')
+    gererimg = Image.open('images/sprites3g/icones/'+i.nom+'2.png')
