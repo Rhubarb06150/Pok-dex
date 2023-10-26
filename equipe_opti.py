@@ -930,7 +930,16 @@ def creation_equipe(master,equipechoisie,x,y):
         
         
 #___________________________________________________________________________________
-          
+
+    #ICONES MEMBRES
+        
+    path = ('images/fonds/etiquetteequipe'+str(equipechoisie)+'.png')
+    labelmembre1=Label(master)
+
+
+
+
+
     def afficher_equipe():
         
         path = ('images/fonds/etiquetteequipe'+str(equipechoisie)+'.png')
@@ -939,26 +948,24 @@ def creation_equipe(master,equipechoisie,x,y):
         labeequipe.place(x=398,y=4)
         labeequipe.photo=equipeimg
         
-        def icone_membre(membre,posx,posy,nb_membre):
+        def icone_membre(membre,label,nb_membre):
             
             if membre !='':
             
                 path = ('images/sprites3g/icones/'+str((membre).replace('1',''))+'1.png')
                 membreequipeimg = ImageTk.PhotoImage(Image.open(path))
-                membrequipe=Label(master,image=membreequipeimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
-                membrequipe.place(x=posx,y=posy)
-                membrequipe.photo=membreequipeimg
-                membrequipe.bind('<Button-1>',lambda event:choisir_pokemon())
+                label.config(image=membreequipeimg)
+                label.photo=membreequipeimg
+                label.bind('<Button-1>',lambda event:choisir_pokemon())
                 nbmembre=Label(master,text=str(nb_membre))
                 
             else:
                 
                 path = ('images/sprites3g/icones/empty.png')
                 membreequipeimg = ImageTk.PhotoImage(Image.open(path))
-                membrequipe=Label(master,image=membreequipeimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
-                membrequipe.place(x=posx,y=posy)
-                membrequipe.photo=membreequipeimg
-                membrequipe.bind('<Button-1>',lambda event:choisir_pokemon())
+                label.config(image=membreequipeimg)
+                label.photo=membreequipeimg
+                label.bind('<Button-1>',lambda event:choisir_pokemon())
                 nbmembre=Label(master,text=str(nb_membre))
             
             def choisir_pokemon():
@@ -972,7 +979,7 @@ def creation_equipe(master,equipechoisie,x,y):
                     else:
                         isshiny.set(0)
                         
-                    numero_membre_choisi=(nbmembre.cget('text'))
+                    numero_membre_choisi=(label.cget('text'))
                     nom_du_pokemon.set(str(equipe[(int(numero_membre_choisi)-1)]).replace('1',''))
                     combobox_nom('e')
                     titre()

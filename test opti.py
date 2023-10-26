@@ -31,6 +31,11 @@ pokemonback.config(image=imgpokemonback)
 pokemonback.im=imgpokemonback
 pokemonback.place(x=0,y=74)
 
+etiquetteimg=PhotoImage(file='images/fonds/etiquette3g.png')
+etiquette=Label(root,image=etiquetteimg,borderwidth=0, highlightthickness=0)
+etiquette.place(x=0,y=10)
+etiquette.photo=etiquetteimg
+
 etiquette_type1img = Image.open('images/types/empty.png')
 etiquette_type1img = ImageTk.PhotoImage(etiquette_type1img)
 etiquette_type1=Label(root, image=etiquette_type1img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
@@ -322,7 +327,7 @@ def combobox_nom(event):
     root.title(nom_du_pokemon.get())
     afficher_pokemon()
     afficher_types()
-    print(len(root.winfo_children()))
+    #print(len(root.winfo_children()))
 
 #_________________________________ACTION_____________________________________________
 
@@ -526,4 +531,3 @@ nompokemon.bind("<<ComboboxSelected>>", combobox_nom)
 print(str((int(len(listenompokemon))/251)*100)+'% des Pokémons implémantés')
 
 root.mainloop()
-
