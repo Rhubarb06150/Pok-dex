@@ -71,6 +71,7 @@ def combobox_nom(event):
     #afficher_icone()
     stats_num()
     afficher_types()
+    print(get_faiblesses(nom_du_pokemon.get()))
     
 def combobox_num():
     

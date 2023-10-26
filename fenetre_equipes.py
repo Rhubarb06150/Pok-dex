@@ -798,7 +798,7 @@ def creation_equipe(master,equipechoisie):
                     else:
                         isshiny.set(0)
                         
-                    nom_du_pokemon.set(str(membre).replace('1',''))
+                    nom_du_pokemon.set(str(membre[0]).replace('1',''))
                     numero_membre_choisi=(nbmembre.cget('text'))
                     combobox_nom('e')
                     titre()
@@ -922,7 +922,7 @@ def creation_equipe(master,equipechoisie):
     
     def pokemon_suivant():
         
-        if get_num(nom_du_pokemon.get()) < 251:
+        if get_num(nom_du_pokemon.get()) < 386:
             for i in range(len(listenompokemon)):
                 if listenompokemon[i] == nom_du_pokemon.get():
                     nom_du_pokemon.set(listenompokemon[i+1])
@@ -941,9 +941,9 @@ def creation_equipe(master,equipechoisie):
                 
     def titre():
         if str(equipe[int(numero_membre_choisi)-1]) == '':
-            master.title("Gestion de l'équipe (Aucun Pokémon selectionné) Slot: "+str(numero_membre_choisi))
+            master.title("Gestion de l'équipe "+str(equipechoisie)+" (Aucun Pokémon selectionné) Slot: "+str(numero_membre_choisi))
         else:
-            master.title("Gestion de l'équipe ("+str(equipe[int(numero_membre_choisi)-1]).replace('1','')+") Slot: "+str(numero_membre_choisi))
+            master.title("Gestion de l'équipe "+str(equipechoisie)+" ("+str(equipe[int(numero_membre_choisi)-1]).replace('1','')+") Slot: "+str(numero_membre_choisi))
             
             
     def chroma_switch():

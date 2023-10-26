@@ -199,19 +199,18 @@ def get_femelle(nom):
             return listepokemon[i].femelle
 
 class Attaque:
-    def __init__(self,nom,typeattaque,statutattaque,puissance,precision,ppmin,ppmax,tauxcritique,priorite,attaquedirecte,effethorscombat,effetsecondaires):
+    def __init__(self,nom,typeattaque,puissance,precision,ppmax,effetsecondaires):
         self.nom=nom
         self.typeattaque=typeattaque
-        self.statutattaque=statutattaque
         self.puissance=puissance
         self.precision=precision
-        self.ppmin=ppmin
         self.ppmax=ppmax
-        self.tauxcritique=tauxcritique
-        self.priorite=priorite
-        self.attaquedirecte=attaquedirecte
-        self.effethorscombat=effethorscombat
         self.effetsecondaires=effetsecondaires
+        
+        
+listeattaque=[]
+
+listeattaque.append(Attaque('Griffe Acier','Physique',50,95,35,False))
         
 def get_type1(nom):
     for i in range(len(listepokemon)):
@@ -222,6 +221,96 @@ def get_type2(nom):
     for i in range(len(listepokemon)):
         if listepokemon[i].nom == nom:
             return listepokemon[i].type2
+        
+def get_faiblesses(nom):
+    
+    
+    if get_type2(nom) == False:
+        
+        
+        if get_type1(nom) == 'Normal':
+            
+            return ['Combat']
+        
+        elif get_type1(nom) == 'Feu':
+            
+            return ['Eau','Sol','Roche'] 
+        
+        elif get_type1(nom) == 'Eau':
+            
+            return ['Plante','Électrik']
+        
+        elif get_type1(nom) == 'Plante':
+            
+            return ['Feu','Glace','Poison','Vol','Insecte']
+        
+        elif get_type1(nom) == 'Électrik':
+            
+            return ['Sol']
+        
+        elif get_type1(nom) == 'Glace':
+            
+            return ['Feu','Combat','Roche','Acier']
+        
+        elif get_type1(nom) == 'Combat':
+            
+            return ['Vol','Psy']
+        
+        elif get_type1(nom) == 'Poison':
+            
+            return ['Sol','Psy']
+        
+        elif get_type1(nom) == 'Sol':
+            
+            return ['Eau','Plante','Glace']
+        
+        elif get_type1(nom) == 'Vol':
+            
+            return ['Électrik','Glace','Roche']
+        
+        elif get_type1(nom) == 'Psy':
+            
+            return ['Insecte','Spectre','Ténèbres']
+        
+        elif get_type1(nom) == 'Insecte':
+            
+            return ['Feu','Vol','Roche']
+        
+        elif get_type1(nom) == 'Roche':
+            
+            return ['Eau','Plante','Combat','Sol','Acier']
+        
+        elif get_type1(nom) == 'Spectre':
+            
+            return ['Spectre','Ténèbres']
+        
+        elif get_type1(nom) == 'Dragon':
+            
+            return ['Glace','Dragon']
+        
+        elif get_type1(nom) == 'Ténèbres':
+            
+            return ['Combat','Insecte']
+        
+        elif get_type1(nom) == 'Acier':
+            
+            return ['Feu','Combat','Sol']
+        
+        
+    else:
+        
+        if get_type1(nom) == 'Feu':
+            if get_type2(nom) == 'Vol':
+                return ['Eau','Électrik']
+            
+        if get_type1(nom) == 'Eau':
+            if get_type2(nom) == 'Glace':
+                return ['Plante','Électrik','Combat','Roche']
+            elif get_type2(nom) == 'Vol':
+                return ['Roche']
+                
+                
+            
     
 #listage des pokémons
     
@@ -264,6 +353,9 @@ listepokemon.append(Pokemon(32,['nidoran M','nidoran m','Nidoran M'],'Nidoran M'
 listepokemon.append(Pokemon(33,['nidorino'],'Nidorino',61,72,57,65,55,55,55,'Nidoran M',['Nidoking'],False,False,False,False,['Utiliser une Pierre Lune'],False,'Poison',False,5100,100,0,120,['Psy','Sol'],False,['Combat','Insecte','Plante','Poison'],False,False))
 listepokemon.append(Pokemon(34,['nidoking'],'Nidoking',81,102,77,85,75,85,75,'Nidorino',False,False,False,False,False,False,False,'Poison','Sol',5100,100,0,45,['Eau','Glace','Sol','Psy'],False,['Combat','Insecte','Roche'],['Poison'],['Électrik']))
 #listepokemon.append(Pokemon(35,['mélofée','melofee','Mélofée','Melofee',],'Mélofée',70,45,48,35,
+#listepokemon.append(Pokemon(35,['ectoplasma'],'Ectoplasma',30,35,30,80,100,100,35,False,['Spectrum'],False,False
+
+
 listepokemon.append(Pokemon(131,['lokhlass'],'Lokhlass',130,85,80,60,95,85,95,False,False,False,False,False,False,False,False,'Eau','Glace',9945,50,50,90,['Combat','Électrik','Plante','Roche'],False,['Eau'],['Glace'],False))        
 listepokemon.append(Pokemon(133,['evoli','Evoli','évoli'],'Évoli',55,55,50,55,65,45,65,False,['Aquali','Voltali','Pyroli'],['Mentali','Noctali'],False,False,False,['Utiliser une Pierre Eau','Utiliser une Pierre Foudre','Utiliser une Pierre Feu'],['Prendre un niveau avec le bonheur suffisamment élevé, pendant la journée','Prendre un niveau avec le bonheur suffisamment élevé, pendant la nuit'],'Normal',False,8670,87,13,45,['Combat'],False,False,False,['Spectre']))
 listepokemon.append(Pokemon(134,['aquali'],'Aquali',130,65,60,65,110,110,95,'Évoli',False,False,False,False,False,False,False,'Eau',False,8670,87,13,45,['Électrik','Plante'],False,['Acier','Eau','Feu','Glace'],False,False))
@@ -284,12 +376,14 @@ listepokemon.append(Pokemon(155,['hericendre','héricendre','Hericendre'],'Héri
 listepokemon.append(Pokemon(179,['wattouat'],'Wattouat',55,50,50,35,0,65,45,False,['Lainergie'],False,False,15,False,False,False,'Électrik',False,5120,50,50,235,['Sol'],False,['Acier','Électrik','Vol'],False,False))
 listepokemon.append(Pokemon(180,['lainergie'],'Lainergie',70,55,55,45,0,80,60,'Wattouat',['Pharamp'],False,False,30,False,False,False,'Électrik',False,5120,50,50,120,['Sol'],False,['Acier','Électrik','Vol'],False,False))
 listepokemon.append(Pokemon(181,['pharamp'],'Pharamp',90,75,75,55,0,115,90,'Lainergie',False,False,False,False,False,False,False,'Électrik',False,5120,50,50,45,['Sol'],False,['Acier','Électrik','Vol'],False,False))
+listepokemon.append(Pokemon(196,['mentali'],'Mentali',65,65,60,110,0,130,95,'Évoli',False,False,False,False,False,False,False,'Psy',False,8670,87,13,45,['Insecte','Spectre','Ténèbres'],False,['Combat','Psy'],False,False))
+listepokemon.append(Pokemon(197,['noctali'],'Noctali',95,64,110,65,0,60,130,'Évoli',False,False,False,False,False,False,False,'Ténèbres',False,8670,87,13,45,['Combat','Insecte'],False,['Spectre','Ténèbres'],False,['Psy']))
 listepokemon.append(Pokemon(243,['raiku','raikou','Raiku'],'Raikou',90,85,75,115,0,115,100,False,False,False,False,False,False,False,False,'Électrik',False,30345,0,0,3,['Sol'],False,['Acier','Électrik','Vol'],False,False))
 listepokemon.append(Pokemon(244,['entei'],'Entei',115,115,85,100,0,90,75,False,False,False,False,False,False,False,False,'Feu',False,30345,0,0,3,['Eau','Roche','Sol'],False,['Acier','Feu','Glace','Insecte','Plante'],False,False))
-listepokemon.append(Pokemon(245,['suicune'],'Suicune',100,75,115,85,0,,90,115,False,False,False,False,False,False,False,False,'Eau',False,30345,0,0,3,['Électrik','Plante'],False,['Acier','Eau','Feu','Glace'],False,False))
-listepokemon.append(Pokemon(246,['embrylex'],'Embrylex',50,64,50,41,0,45,50,False,['Ymphect'],False,False,30,False,False,False,'Roche','Ténèbres'
-
-
+listepokemon.append(Pokemon(245,['suicune'],'Suicune',100,75,115,85,0,90,115,False,False,False,False,False,False,False,False,'Eau',False,30345,0,0,3,['Électrik','Plante'],False,['Acier','Eau','Feu','Glace'],False,False))
+listepokemon.append(Pokemon(246,['embrylex'],'Embrylex',50,64,50,41,0,45,50,False,['Ymphect'],False,False,30,False,False,False,'Roche','Ténèbres',10240,50,50,45,['Normal','Feu','Vol','Roche'],['Poison'],['Glace','Combat','Sol','Acier'],['Plante','Eau'],['Électrik']))
+listepokemon.append(Pokemon(247,['ymphect'],'Ymphect',70,84,70,51,0,65,70,'Embrylex',['Tyranocif'],False,False,55,False,False,False,'Roche','Ténèbres',10240,50,50,45,['Normal','Feu','Vol','Roche'],['Poison'],['Glace','Combat','Sol','Acier'],['Plante','Eau'],['Électrik']))
+listepokemon.append(Pokemon(248,['tyranocif'],'Tyranocif',100,134,100,61,0,65,100,'Ymphect',False,False,False,False,False,False,False,'Roche','Ténèbres',10240,50,50,45,['Normal','Feu','Vol','Roche'],['Poison'],['Glace','Combat','Sol','Acier'],['Plante','Eau'],['Électrik']))
 listepokemon.append(Pokemon(249,['lugia'],'Lugia',106,90,130,110,0,90,154,False,False,False,False,False,False,False,False,'Psy','Vol',30345,0,0,3,['Électrik','Glace','Roche','Spectre','Ténèbres'],False,['Plante','Psy'],['Combat'],['Sol']))
 listepokemon.append(Pokemon(250,['hooh','ho-oh'],'Ho-Oh',106,130,90,90,0,110,154,False,False,False,False,False,False,False,False,'Feu','Vol',30345,0,0,3,['Eau','Électrik'],['Roche'],['Acier','Combat','Feu'],['Insecte','Plante'],['Sol']))
 listepokemon.append(Pokemon(251,['celebi','célébi','Célébi'],'Celebi',100,100,100,100,0,100,100,False,False,False,False,False,False,False,False,'Psy','Plante',30345,0,0,3,['Feu','Glace','Poison','Spectre','Ténèbres','Vol'],['Insecte'],['Combat','Eau','Électrik','Plante','Psy','Sol'],False,False))
@@ -299,6 +393,9 @@ listepokemon.append(Pokemon(251,['celebi','célébi','Célébi'],'Celebi',100,10
 listepokemon.append(Pokemon(382,['kyogre'],'Kyogre',100,100,90,90,0,150,140,False,False,False,False,False,False,False,False,'Eau',False,30345,0,0,3,['Plante','Électrik'],False,['Feu','Eau','Glace','Acier'],False,False))
 listepokemon.append(Pokemon(383,['groudon'],'Groudon',100,150,140,90,0,100,90,False,False,False,False,False,False,False,False,'Feu',False,30345,0,0,3,['Eau','Roche','Sol'],False,['Acier','Feu','Glace','Insecte','Plante'],False,False))
 listepokemon.append(Pokemon(384,['rayquaza'],'Rayquaza',105,150,90,95,0,150,90,False,False,False,False,False,False,False,False,'Dragon','Vol',30345,0,0,3,['Dragon','Roche'],['Glace'],['Combat','Feu','Eau','Insecte'],['Plante'],['Sol']))
+
+#FONCTIONS
+
 for i in listepokemon:
     i.rawnom.append(str(i.num))
 
@@ -312,3 +409,8 @@ def positionlistepokemon(nom):
         if i == nom:
             return get_num(i)
 listeversion=['Or','Argent']
+
+def checktypes(typeachercher):
+    for i in listepokemon:
+        if i.type1 == typeachercher or i.type2 == typeachercher:
+            print(i.nom+'    '+str(i.type1)+'   '+str(i.type2))
