@@ -656,15 +656,15 @@ def creation_equipe(master,equipechoisie,x,y):
 
     labelnum1=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabelnum.append(labelnum1)
-    labelnum1.place(x=140,y=232)
+    labelnum1.place(x=152,y=232)
 
     labelnum2=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabelnum.append(labelnum2)
-    labelnum2.place(x=152,y=232)
+    labelnum2.place(x=164,y=232)
 
     labelnum3=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabelnum.append(labelnum3)
-    labelnum3.place(x=164,y=232)
+    labelnum3.place(x=178,y=232)
 
     #________________________________________________________________
     #LETTRES STATS
@@ -709,15 +709,15 @@ def creation_equipe(master,equipechoisie,x,y):
 
     labeldef1=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabeldef.append(labeldef1)
-    labeldef1.place(x=414,y=316)
+    labeldef1.place(x=414,y=232)
 
     labeldef2=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabeldef.append(labeldef2)
-    labeldef2.place(x=426,y=316)
+    labeldef2.place(x=426,y=232)
 
     labeldef3=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabeldef.append(labeldef3)
-    labeldef3.place(x=438,y=316)
+    labeldef3.place(x=438,y=232)
 
         #VITESSE
 
@@ -725,15 +725,15 @@ def creation_equipe(master,equipechoisie,x,y):
 
     labelvit1=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabelvit.append(labelvit1)
-    labelvit1.place(x=414,y=342)
+    labelvit1.place(x=414,y=258)
 
     labelvit2=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabelvit.append(labelvit2)
-    labelvit2.place(x=426,y=342)
+    labelvit2.place(x=426,y=258)
 
     labelvit3=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabelvit.append(labelvit3)
-    labelvit3.place(x=438,y=342)
+    labelvit3.place(x=438,y=258)
 
         #SPECIAL
 
@@ -741,15 +741,15 @@ def creation_equipe(master,equipechoisie,x,y):
 
     labelspec1=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabelspec.append(labelspec1)
-    labelspec1.place(x=414,y=368)
+    labelspec1.place(x=414,y=284)
 
     labelspec2=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabelspec.append(labelspec2)
-    labelspec2.place(x=426,y=368)
+    labelspec2.place(x=426,y=284)
 
     labelspec3=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabelspec.append(labelspec3)
-    labelspec3.place(x=438,y=368)
+    labelspec3.place(x=438,y=284)
 
         #ATTAQUE SPECIALE
 
@@ -757,15 +757,15 @@ def creation_equipe(master,equipechoisie,x,y):
 
     labelattspec1=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabelattspec.append(labelattspec1)
-    labelattspec1.place(x=138,y=394)
+    labelattspec1.place(x=454,y=310)
 
     labelattspec2=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabelattspec.append(labelattspec2)
-    labelattspec2.place(x=150,y=394)
+    labelattspec2.place(x=466,y=310)
 
     labelattspec3=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabelattspec.append(labelattspec3)
-    labelattspec3.place(x=162,y=394)
+    labelattspec3.place(x=478,y=310)
 
         #DEFENSE SPECIALE
 
@@ -773,15 +773,15 @@ def creation_equipe(master,equipechoisie,x,y):
 
     labeldefspec1=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabeldefspec.append(labeldefspec1)
-    labeldefspec1.place(x=138,y=420)
+    labeldefspec1.place(x=454,y=336)
 
     labeldefspec2=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabeldefspec.append(labeldefspec2)
-    labeldefspec2.place(x=150,y=420)
+    labeldefspec2.place(x=466,y=336)
 
     labeldefspec3=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabeldefspec.append(labeldefspec3)
-    labeldefspec3.place(x=162,y=420)
+    labeldefspec3.place(x=478,y=336)
 
     
     
@@ -796,6 +796,9 @@ def creation_equipe(master,equipechoisie,x,y):
     chromatiquelb.place(x=146,y=274)
     chromatiquelb.photo=chromatiqueimg
     
+    path = PhotoImage('images/sprites3g/icones/empty.png')
+    pokemon=Label(master, image=path,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    pokemon.place(x=6,y=230)
     
     
     def lettre(mot,liste):
@@ -831,19 +834,7 @@ def creation_equipe(master,equipechoisie,x,y):
            numpkmn=str(numpkmn)
         
         for i in range(len(numpkmn)):
-                
-                    
-            if numpkmn[i] == ' ':
-                        
-                path = ('images/font3g/espace.png')
-                img = ImageTk.PhotoImage(Image.open(path))
-                        
-                listelabelnum[i].configure(image=img)
-                listelabelnum[i].im=img
-
-                    
-            else:
-                        
+      
                 path = ('images/font3g/'+numpkmn[i]+'.png')
                 img = ImageTk.PhotoImage(Image.open(path))
                         
@@ -852,6 +843,7 @@ def creation_equipe(master,equipechoisie,x,y):
                 
     def affichage():
         
+        lettre_num()
         lettre('           ',listelabel)
         lettre('   ',listelabelpv)
         lettre('   ',listelabelatt)
@@ -909,12 +901,9 @@ def creation_equipe(master,equipechoisie,x,y):
             imgpokemon = Image.open('images/sprites3g/'+nom_du_pokemon.get()+'.png')
             imgpokemon = ImageTk.PhotoImage(imgpokemon)
         
-        pokemon=Label(master, image=imgpokemon,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
         pokemon.config(image=imgpokemon)
         pokemon.im=imgpokemon
-        pokemon.place(x=2,y=230)
-        
-        
+
         pokemon.bind("<Button-1>", lambda event:cri_pokemon())
 
 
@@ -931,115 +920,139 @@ def creation_equipe(master,equipechoisie,x,y):
         
 #___________________________________________________________________________________
           
+    def choisir_pokemon(num):
+                
+        global numero_membre_choisi
+                
+        if equipe[num-1]!='':
+                
+            if (equipe[num-1])[-1] == '1':
+                isshiny.set(1)
+            else:
+                isshiny.set(0)
+                        
+            numero_membre_choisi=num
+            nom_du_pokemon.set(str(equipe[(int(numero_membre_choisi)-1)]).replace('1',''))
+            combobox_nom('e')
+            titre()
+            chromatique()
+                        
+        else:
+                    
+            nom_du_pokemon.set('Bulbizarre')
+            numero_membre_choisi=(nbmembre.cget('text'))
+            titre()
+            chromatique()      
+    
+    #ICONES
+        
+    path=PhotoImage(file='images/sprites3g/icones/empty.png')
+    icone1=Label(master, image=path, borderwidth=0, highlightthickness=0, bg='#f8b0a0')
+    icone1.place(x=14,y=14)
+    icone1text=Label(master, text='1')
+    icone1.bind('<Button-1>',lambda event:choisir_pokemon(1))
+    
+    path=PhotoImage(file='images/sprites3g/icones/empty.png')
+    icone2=Label(master, image=path, borderwidth=0, highlightthickness=0, bg='#f8b0a0')
+    icone2.place(x=96,y=14)
+    icone2text=Label(master, text='2')
+    icone2.bind('<Button-1>',lambda event:choisir_pokemon(2))
+    
+    path=PhotoImage(file='images/sprites3g/icones/empty.png')
+    icone3=Label(master, image=path, borderwidth=0, highlightthickness=0, bg='#f8b0a0')
+    icone3.place(x=178,y=14)
+    icone3text=Label(master, text='3')
+    icone3.bind('<Button-1>',lambda event:choisir_pokemon(3))
+    
+    path=PhotoImage(file='images/sprites3g/icones/empty.png')
+    icone4=Label(master, image=path, borderwidth=0, highlightthickness=0, bg='#f8b0a0')
+    icone4.place(x=14,y=94)
+    icone4text=Label(master, text='4')
+    icone4.bind('<Button-1>',lambda event:choisir_pokemon(4))
+    
+    path=PhotoImage(file='images/sprites3g/icones/empty.png')
+    icone5=Label(master, image=path, borderwidth=0, highlightthickness=0, bg='#f8b0a0')
+    icone5.place(x=96,y=94)
+    icone5text=Label(master, text='5')
+    icone5.bind('<Button-1>',lambda event:choisir_pokemon(5))
+    
+    path=PhotoImage(file='images/sprites3g/icones/empty.png')
+    icone6=Label(master, image=path, borderwidth=0, highlightthickness=0, bg='#f8b0a0')
+    icone6.place(x=178,y=94)
+    icone6text=Label(master, text='6')
+    icone6.bind('<Button-1>',lambda event:choisir_pokemon(6))
+    
     def afficher_equipe():
         
-        path = ('images/fonds/etiquetteequipe'+str(equipechoisie)+'.png')
-        equipeimg = ImageTk.PhotoImage(Image.open(path))
-        labeequipe=Label(master,image=equipeimg,borderwidth=0, highlightthickness=0)
-        labeequipe.place(x=398,y=4)
-        labeequipe.photo=equipeimg
-        
-        def icone_membre(membre,posx,posy,nb_membre):
+        def icone_membre(label,membre):
             
             if membre !='':
             
                 path = ('images/sprites3g/icones/'+str((membre).replace('1',''))+'1.png')
                 membreequipeimg = ImageTk.PhotoImage(Image.open(path))
-                membrequipe=Label(master,image=membreequipeimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
-                membrequipe.place(x=posx,y=posy)
-                membrequipe.photo=membreequipeimg
-                membrequipe.bind('<Button-1>',lambda event:choisir_pokemon())
-                nbmembre=Label(master,text=str(nb_membre))
+                label.config(image=membreequipeimg)
+                label.photo=membreequipeimg
                 
             else:
                 
                 path = ('images/sprites3g/icones/empty.png')
                 membreequipeimg = ImageTk.PhotoImage(Image.open(path))
-                membrequipe=Label(master,image=membreequipeimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
-                membrequipe.place(x=posx,y=posy)
-                membrequipe.photo=membreequipeimg
-                membrequipe.bind('<Button-1>',lambda event:choisir_pokemon())
-                nbmembre=Label(master,text=str(nb_membre))
+                label.config(image=membreequipeimg)
+                label.photo=membreequipeimg
             
-            def choisir_pokemon():
-                
-                global numero_membre_choisi
-                
-                if membre!='':
-                
-                    if membre[-1] == '1':
-                        isshiny.set(1)
-                    else:
-                        isshiny.set(0)
-                        
-                    numero_membre_choisi=(nbmembre.cget('text'))
-                    nom_du_pokemon.set(str(equipe[(int(numero_membre_choisi)-1)]).replace('1',''))
-                    combobox_nom('e')
-                    titre()
-                    chromatique()
-                        
-                else:
-                    
-                    nom_du_pokemon.set('Bulbizarre')
-                    numero_membre_choisi=(nbmembre.cget('text'))
-                    titre()
-                    chromatique()
-            
-            
-        
         for membre in equipe:
             
             if equipe[0] != '':
                 
-                icone_membre(equipe[0],14,14,1)
+                icone_membre(icone1,equipe[0])
                 
             else:
                 
-                icone_membre(equipe[0],14,14,1)
+                icone_membre(icone1,equipe[0])
                 
             if equipe[1] != '':
                 
-                icone_membre(equipe[1],96,14,2)
+                icone_membre(icone2,equipe[1])
                 
             else:
                 
-                icone_membre(equipe[1],96,14,2)
+                icone_membre(icone2,equipe[1])
                 
                 
             if equipe[2] != '':
                 
-                icone_membre(equipe[2],178,14,3)
+                icone_membre(icone3,equipe[2])
                 
             else:
                 
-                icone_membre(equipe[2],178,14,3)
+                icone_membre(icone3,equipe[2])
                 
                 
             if equipe[3] != '':
                 
-                icone_membre(equipe[3],14,94,4)
+                icone_membre(icone4,equipe[3])
                 
             else:
                 
-                icone_membre(equipe[3],14,94,4)
+                icone_membre(icone4,equipe[3])
                 
                 
             if equipe[4] != '':
                 
-                icone_membre(equipe[4],96,94,5)
+                icone_membre(icone5,equipe[4])
                 
             else:
                 
-                icone_membre(equipe[4],96,94,5)
+                icone_membre(icone5,equipe[4])
 
                 
             if equipe[5] != '':
                 
-                icone_membre(equipe[5],178,94,6)
+                icone_membre(icone6,equipe[5])
                 
             else:
                 
-                icone_membre(equipe[5],178,94,6)
+                icone_membre(icone6,equipe[5])
                 
             break
         titre()
@@ -1233,5 +1246,3 @@ def creation_equipe(master,equipechoisie,x,y):
     print(len(equipe))
     
     master.mainloop()
-    
-creation_equipe('root',1,500,500)

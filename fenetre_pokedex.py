@@ -322,7 +322,6 @@ def combobox_nom(event):
     root.title(nom_du_pokemon.get())
     afficher_pokemon()
     afficher_types()
-    print(len(root.winfo_children()))
 
 #_________________________________ACTION_____________________________________________
 
