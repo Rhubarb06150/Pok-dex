@@ -14,12 +14,12 @@ def fenetre_equipe(master,equipechoisie,nom):
     equipe=[]
 
     for i in range(6):
-        file=open('txts/'+str(equipechoisie)+'/membre'+str(i+1)+'.txt')
+        file=open('txts/equipe'+str(equipechoisie)+'/membre'+str(i+1)+'.txt')
         equipe.append(file.read())
         file.close
     
     master=tk.Toplevel()
-    master.geometry('500x450+1000+500')
+    master.geometry('500x450+1074+50')
     master.resizable(False,False)
     background=PhotoImage(file='images/fonds/fondequipes.png')
     bg=Label(master, image=background)
@@ -87,7 +87,7 @@ def fenetre_equipe(master,equipechoisie,nom):
         for membre in equipe:
             
 
-            if membre[0] != '':
+            if equipe[0] != '':
                 
                 y=156
                 posx=6
@@ -123,13 +123,16 @@ def fenetre_equipe(master,equipechoisie,nom):
                         
             else:
                 
-                for i in 'vide':
+                y=156
+                posx=6
+                
+                for i in '   vide':
                     
                     place+=1
                     lettre(('label'+str(place)),('img'+str(place)),i,y)
                     
                     
-            if membre[1] != '':
+            if equipe[1] != '':
                 
                 shiny=False
                 
@@ -168,12 +171,15 @@ def fenetre_equipe(master,equipechoisie,nom):
                         
             else:
                 
-                for i in 'vide':
+                y=156
+                posx=176
+                
+                for i in '   vide':
                     
                     place+=1
                     lettre(('label'+str(place)),('img'+str(place)),i,y)
                     
-            if membre[2] != '':
+            if equipe[2] != '':
                 
                 shiny=False
                 
@@ -212,12 +218,15 @@ def fenetre_equipe(master,equipechoisie,nom):
                         
             else:
                 
-                for i in 'vide':
+                y=156
+                posx=346
+                
+                for i in '   vide':
                     
                     place+=1
                     lettre(('label'+str(place)),('img'+str(place)),i,y)
                     
-            if membre[3] != '':
+            if equipe[3] != '':
                 
                 shiny=False
                 
@@ -256,12 +265,15 @@ def fenetre_equipe(master,equipechoisie,nom):
                         
             else:
                 
-                for i in 'vide':
+                y=340
+                posx=6
+                
+                for i in '   vide':
                     
                     place+=1
                     lettre(('label'+str(place)),('img'+str(place)),i,y)
                     
-            if membre[4] != '':
+            if equipe[4] != '':
                 
                 shiny=False
                 
@@ -300,13 +312,16 @@ def fenetre_equipe(master,equipechoisie,nom):
                         
             else:
                 
-                for i in 'vide':
+                y=340
+                posx=176
+                
+                for i in '   vide':
                     
                     place+=1
                     lettre(('label'+str(place)),('img'+str(place)),i,y)
                 
                     
-            if membre[5] != '':
+            if equipe[5] != '':
                 
                 shiny=False
                 
@@ -345,8 +360,10 @@ def fenetre_equipe(master,equipechoisie,nom):
                         
             else:
                 
-                print('rrrr')
-                for i in 'vide':
+                y=340
+                posx=346
+                
+                for i in '   vide':
                     
                     place+=1
                     lettre(('label'+str(place)),('img'+str(place)),i,y)
@@ -364,7 +381,7 @@ def choix_equipe(master):
     
     master=tk.Toplevel()
     master.title("Choix de l'équipe")
-    master.geometry('224x232+100+100')
+    master.geometry('224x232+800+50')
     master.resizable(False,False)
     background=PhotoImage(file='images/fonds/fondchoixequipes.png')
     bg=Label(master, image=background)
@@ -379,7 +396,7 @@ def choix_equipe(master):
     equipe1.config(image=equipe1img)
     equipe1.im=equipe1img
     equipe1.place(x=4,y=4)
-    equipe1.bind('<Button-1>',lambda event:fenetre_equipe('equipe1','equipe1','Équipe 1'))
+    equipe1.bind('<Button-1>',lambda event:choix_voir(1))
     
     #Équipe 2
     
@@ -389,7 +406,7 @@ def choix_equipe(master):
     equipe2.config(image=equipe2img)
     equipe2.im=equipe2img
     equipe2.place(x=114,y=4)
-    equipe2.bind('<Button-1>',lambda event:fenetre_equipe('equipe2','equipe2','Équipe 2'))
+    equipe2.bind('<Button-1>',lambda event:choix_voir(2))
     
     #Équipe 3
     
@@ -399,7 +416,7 @@ def choix_equipe(master):
     equipe3.config(image=equipe3img)
     equipe3.im=equipe3img
     equipe3.place(x=4,y=54)
-    equipe3.bind('<Button-1>',lambda event:fenetre_equipe('equipe3','equipe3','Équipe 3'))
+    equipe3.bind('<Button-1>',lambda event:choix_voir(3))
     
     #Équipe 4
     
@@ -409,7 +426,7 @@ def choix_equipe(master):
     equipe4.config(image=equipe4img)
     equipe4.im=equipe2img
     equipe4.place(x=114,y=54)
-    equipe4.bind('<Button-1>',lambda event:fenetre_equipe('equipe4','equipe4','Équipe 4'))
+    equipe4.bind('<Button-1>',lambda event:choix_voir(4))
     
     #Équipe 5
     
@@ -419,7 +436,7 @@ def choix_equipe(master):
     equipe5.config(image=equipe5img)
     equipe5.im=equipe5img
     equipe5.place(x=4,y=102)
-    equipe5.bind('<Button-1>',lambda event:fenetre_equipe('equipe5','equipe5','Équipe 5'))
+    equipe5.bind('<Button-1>',lambda event:choix_voir(5))
     
     #Équipe 6
     
@@ -429,7 +446,7 @@ def choix_equipe(master):
     equipe6.config(image=equipe6img)
     equipe6.im=equipe6img
     equipe6.place(x=114,y=102)
-    equipe6.bind('<Button-1>',lambda event:fenetre_equipe('equipe6','equipe6','Équipe '))
+    equipe6.bind('<Button-1>',lambda event:choix_voir(6))
     
     #Équipe 7
     
@@ -439,7 +456,7 @@ def choix_equipe(master):
     equipe7.config(image=equipe7img)
     equipe7im=equipe7img
     equipe7.place(x=4,y=152)
-    equipe7.bind('<Button-1>',lambda event:fenetre_equipe('equipe7','equipe7','Équipe 7'))
+    equipe7.bind('<Button-1>',lambda event:choix_voir(7))
     
     #Équipe 8
     
@@ -449,18 +466,23 @@ def choix_equipe(master):
     equipe8.config(image=equipe8img)
     equipe8.im=equipe8img
     equipe8.place(x=114,y=152)
-    equipe8.bind('<Button-1>',lambda event:fenetre_equipe('equipe8','equipe8','Équipe 8'))
+    equipe8.bind('<Button-1>',lambda event:choix_voir(8))
     
-
+    
+    def choix_voir(equipe):
+        master.destroy()
+        fenetre_equipe('equipe',equipe,('Équipe '+str(equipe)))
+    
+    
     master.mainloop()
     
 def choix_creation_equipe(master):
     
     master=tk.Toplevel()
     master.title("Choix de l'équipe")
-    master.geometry('224x232+100+100')
+    master.geometry('224x232+800+342')
     master.resizable(False,False)
-    background=PhotoImage(file='images/fonds/fondchoixequipes.png')
+    background=PhotoImage(file='images/fonds/fondgererequipes.png')
     bg=Label(master, image=background)
     bg.place(x=-2,y=-2)
     master.iconbitmap('images/sprites3g/icones/hyperball.ico')
@@ -473,7 +495,7 @@ def choix_creation_equipe(master):
     equipe1.config(image=equipe1img)
     equipe1.im=equipe1img
     equipe1.place(x=4,y=4)
-    equipe1.bind('<Button-1>',lambda event:creation_equipe('master',1))
+    equipe1.bind('<Button-1>',lambda event:choix_gerer(1))
     
     #Équipe 2
     
@@ -483,7 +505,7 @@ def choix_creation_equipe(master):
     equipe2.config(image=equipe2img)
     equipe2.im=equipe2img
     equipe2.place(x=114,y=4)
-    equipe2.bind('<Button-1>',lambda event:creation_equipe('master',2))
+    equipe2.bind('<Button-1>',lambda event:choix_gerer(2))
     
     #Équipe 3
     
@@ -493,7 +515,7 @@ def choix_creation_equipe(master):
     equipe3.config(image=equipe3img)
     equipe3.im=equipe3img
     equipe3.place(x=4,y=54)
-    equipe3.bind('<Button-1>',lambda event:creation_equipe('master',3))
+    equipe3.bind('<Button-1>',lambda event:choix_gerer(3))
     
     #Équipe 4
     
@@ -503,7 +525,7 @@ def choix_creation_equipe(master):
     equipe4.config(image=equipe4img)
     equipe4.im=equipe2img
     equipe4.place(x=114,y=54)
-    equipe4.bind('<Button-1>',lambda event:creation_equipe('master',4))
+    equipe4.bind('<Button-1>',lambda event:choix_gerer(4))
     
     #Équipe 5
     
@@ -513,7 +535,7 @@ def choix_creation_equipe(master):
     equipe5.config(image=equipe5img)
     equipe5.im=equipe5img
     equipe5.place(x=4,y=102)
-    equipe5.bind('<Button-1>',lambda event:creation_equipe('master',5))
+    equipe5.bind('<Button-1>',lambda event:choix_gerer(5))
     
     #Équipe 6
     
@@ -523,7 +545,7 @@ def choix_creation_equipe(master):
     equipe6.config(image=equipe6img)
     equipe6.im=equipe6img
     equipe6.place(x=114,y=102)
-    equipe6.bind('<Button-1>',lambda event:creation_equipe('master',6))
+    equipe6.bind('<Button-1>',lambda event:choix_gerer(6))
     
     #Équipe 7
     
@@ -533,7 +555,7 @@ def choix_creation_equipe(master):
     equipe7.config(image=equipe7img)
     equipe7im=equipe7img
     equipe7.place(x=4,y=152)
-    equipe7.bind('<Button-1>',lambda event:creation_equipe('master',7))
+    equipe7.bind('<Button-1>',lambda event:choix_gerer(7))
     
     #Équipe 8
     
@@ -543,21 +565,25 @@ def choix_creation_equipe(master):
     equipe8.config(image=equipe8img)
     equipe8.im=equipe8img
     equipe8.place(x=114,y=152)
-    equipe8.bind('<Button-1>',lambda event:creation_equipe('master',8))
+    equipe8.bind('<Button-1>',lambda event:choix_gerer(8))
     
+
+    def choix_gerer(equipe):
+        master.destroy()
+        creation_equipe('equipe',equipe,50,600)
 
     master.mainloop()
     
 numero_membre_choisi=0
     
-def creation_equipe(master,equipechoisie):
+def creation_equipe(master,equipechoisie,x,y):
     
     global numero_membre_choisi
     numero_membre_choisi=0
     
     master=tk.Toplevel()
     master.title("Gestion de l'équipe")
-    master.geometry('500x400+100+100')
+    master.geometry('500x400+'+str(x)+'+'+str(y))
     master.resizable(False,False)
     background=PhotoImage(file='images/fonds/fondcreationequipe.png')
     bg=Label(master, image=background)
@@ -625,13 +651,15 @@ def creation_equipe(master,equipechoisie):
             label.photo=img
             
         
-        numpkmn=int(get_num(nom_du_pokemon.get()))
+        numpkmn=get_num(nom_du_pokemon.get())
+        
         if numpkmn < 10:
             numpkmn=str('00'+str((get_num(nom_du_pokemon.get()))))
         elif numpkmn < 100:
             numpkmn=str('0'+str((get_num(nom_du_pokemon.get()))))
         else:
             numpkmn=str(numpkmn)
+            
         for i in ('#'+numpkmn):
             
             place+=1
@@ -798,8 +826,8 @@ def creation_equipe(master,equipechoisie):
                     else:
                         isshiny.set(0)
                         
-                    nom_du_pokemon.set(str(membre[0]).replace('1',''))
                     numero_membre_choisi=(nbmembre.cget('text'))
+                    nom_du_pokemon.set(str(equipe[(int(numero_membre_choisi)-1)]).replace('1',''))
                     combobox_nom('e')
                     titre()
                     chromatique()
@@ -889,10 +917,13 @@ def creation_equipe(master,equipechoisie):
                 file.write('')
                 file.close()
                 
-        afficher_equipe()
-        titre()
-        chromatique()
-        refresh_equipe()
+                
+                xmaster=master.winfo_x()
+                ymaster=master.winfo_y()
+                master.destroy()
+                creation_equipe('equipe',equipechoisie,xmaster,ymaster)
+       
+        
         
     def inclure_pokemon():
         
@@ -900,25 +931,64 @@ def creation_equipe(master,equipechoisie):
         
         if numero_membre_choisi == 0:
             
-            tkinter.messagebox.showinfo(title='Action Impossible', message="Vous n'avez aucun Pokémon sélectionné!",)
+            tkinter.messagebox.showinfo(title='Action Impossible', message="Vous n'avez aucun Slot sélectionné!",)
             
         else:
             
-            remplacer = tkinter.messagebox.askquestion(title='Attention!', message=("Êtes-vous sur de vouloir remplacer "+str(equipe[int(numero_membre_choisi)-1]).replace('1','')+" par "+str(nom_du_pokemon.get())+"?"),)
-            
-            if remplacer == 'yes':
+            file=open('txts/equipe'+str(equipechoisie)+'/membre'+str(numero_membre_choisi)+'.txt','r')
+            if file.read() == '':
                 
-                file=open('txts/equipe'+str(equipechoisie)+'/membre'+str(numero_membre_choisi)+'.txt','w')
-                if isshiny.get() == 1:
-                    file.write(nom_du_pokemon.get()+'1')
-                else:
-                    file.write(nom_du_pokemon.get())
-                file.close()
-        afficher_equipe()
-        titre()
-        chromatique()
-        refresh_equipe()
+                remplacer = tkinter.messagebox.askquestion(title='Inclure le Pokémon', message=("Voulez vous inclure "+str(nom_du_pokemon.get())+" dans le Slot "+str(numero_membre_choisi)+"?"))
             
+                if remplacer == 'yes':
+                    
+                    file=open('txts/equipe'+str(equipechoisie)+'/membre'+str(numero_membre_choisi)+'.txt','w')
+                    if isshiny.get() == 1:
+                        file.write(nom_du_pokemon.get()+'1')
+                    else:
+                        file.write(nom_du_pokemon.get())
+                    file.close()
+                    
+                    xmaster=master.winfo_x()
+                    ymaster=master.winfo_y()
+                    master.destroy()
+                    creation_equipe('equipe',equipechoisie,xmaster,ymaster)
+                    
+            else:
+            
+                remplacer = tkinter.messagebox.askquestion(title='Attention!', message=("Êtes-vous sur de vouloir remplacer "+str(equipe[int(numero_membre_choisi)-1]).replace('1','')+" par "+str(nom_du_pokemon.get())+"?"),)
+                
+                if remplacer == 'yes':
+                    
+                    file=open('txts/equipe'+str(equipechoisie)+'/membre'+str(numero_membre_choisi)+'.txt','w')
+                    if isshiny.get() == 1:
+                        file.write(nom_du_pokemon.get()+'1')
+                    else:
+                        file.write(nom_du_pokemon.get())
+                    file.close()
+                    
+                    xmaster=master.winfo_x()
+                    ymaster=master.winfo_y()
+                    master.destroy()
+                    creation_equipe('equipe',equipechoisie,xmaster,ymaster)
+            
+    
+    def effacer_equipe():
+        
+        effacermsg = tkinter.messagebox.askquestion(title='Attention!', message="Voulez-vous vraiment effacer l'équipe?")
+        
+        if effacermsg == 'yes':
+            
+            for i in range(6):
+                
+                file=open('txts/equipe'+str(equipechoisie)+'/membre'+str(i+1)+'.txt','w')
+                file.write('')
+                file.close
+                
+            xmaster=master.winfo_x()
+            ymaster=master.winfo_y()
+            master.destroy()
+            creation_equipe('equipe',equipechoisie,xmaster,ymaster)
     
     def pokemon_suivant():
         
@@ -1023,6 +1093,13 @@ def creation_equipe(master,equipechoisie):
     supprimer.place(x=260,y=322)
     supprimer.photo=supprimerimg
     supprimer.bind('<Button-1>',lambda event:supprimer_pokemon())
+    
+    path = ('images/fonds/effacerlequipe.png')
+    effacerimg = ImageTk.PhotoImage(Image.open(path))
+    effacer=Label(master,image=effacerimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
+    effacer.place(x=4,y=374)
+    effacer.photo=effacerimg
+    effacer.bind('<Button-1>',lambda event:effacer_equipe())
     
     
 

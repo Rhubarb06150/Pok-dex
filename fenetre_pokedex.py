@@ -8,6 +8,7 @@ from liste_pokemon import *
 from threading import Thread
 import winsound
 from fenetre_equipes import *
+import webbrowser
 
 root=Tk()
 root.geometry('700x500+50+50')
@@ -71,7 +72,6 @@ def combobox_nom(event):
     #afficher_icone()
     stats_num()
     afficher_types()
-    print(get_faiblesses(nom_du_pokemon.get()))
     
 def combobox_num():
     
@@ -294,7 +294,7 @@ def afficher_types():
         etiquette_type2.place(x=142,y=216)
     
     
-nom_du_pokemon.set('Bulbizarre')
+nom_du_pokemon.set('Germignon')
     
 isshiny = tk.IntVar()
 shiny=tk.Checkbutton(root, text='Shiny',variable=isshiny, onvalue=1, offvalue=0, command=afficher_pokemon)
@@ -333,6 +333,13 @@ def cri_pokemon():
     thread = Thread(target=thread_cri)
     thread.start()
     
+def ouvrir_pokepedia():
+    
+    ouvrir = tkinter.messagebox.askquestion(title='Aller sur Poképédia',message=('Voulez vous ouvrir la page Poképédia de '+str(nom_du_pokemon.get())+'?'))
+    
+    if ouvrir == 'yes':
+        
+        webbrowser.open('https://www.pokepedia.fr/'+(nom_du_pokemon.get()))
 
 etiquette_equipesimg = Image.open('images/fonds/etiquetteequipes.png')
 etiquette_equipesimg = ImageTk.PhotoImage(etiquette_equipesimg)
@@ -340,7 +347,7 @@ etiquette_equipes=Label(root, image=etiquette_equipesimg ,bg='#f8b0a0',borderwid
 etiquette_equipes.config(image=etiquette_equipesimg)
 etiquette_equipes.im=etiquette_equipesimg
 etiquette_equipes.place(x=548,y=354)
-etiquette_equipes.bind('<Button-1>',lambda event:choix_equipe('choix_equipe'))
+etiquette_equipes.bind('<Button-1>',lambda event:choix_equipe('choix_equipe_fenetre'))
 
 etiquette_creer_equipesimg = Image.open('images/fonds/etiquettecreerequipe.png')
 etiquette_creer_equipesimg = ImageTk.PhotoImage(etiquette_creer_equipesimg)
@@ -349,6 +356,14 @@ etiquette_creer_equipe.config(image=etiquette_creer_equipesimg)
 etiquette_creer_equipe.im=etiquette_creer_equipesimg
 etiquette_creer_equipe.place(x=536,y=406)
 etiquette_creer_equipe.bind('<Button-1>',lambda event:choix_creation_equipe('master'))
+
+plusdinfosimg = Image.open('images/fonds/plusdinfos.png')
+plusdinfosimg = ImageTk.PhotoImage(plusdinfosimg)
+plusdinfos=Label(root, image=plusdinfosimg ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+plusdinfos.config(image=plusdinfosimg)
+plusdinfos.im=plusdinfosimg
+plusdinfos.place(x=4,y=474)
+plusdinfos.bind('<Button-1>',lambda event:ouvrir_pokepedia())
     
     
 root.bind('<Control-s>',lambda event:cri_pokemon())
@@ -357,6 +372,5 @@ root.bind('<Control-S>',lambda event:cri_pokemon())
 
 
 nompokemon.bind("<<ComboboxSelected>>", combobox_nom)
-
+print(str((int(len(listenompokemon))/251)*100)+'% des Pokémons implémantés')
 root.mainloop()
-print(len(listenompokemon))
