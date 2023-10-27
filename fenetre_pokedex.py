@@ -584,4 +584,3 @@ nompokemon.bind("<<ComboboxSelected>>", combobox_nom)
 print(str((int(len(listenompokemon))/251)*100)+'% des Pokémons implémantés')
 
 root.mainloop()
-

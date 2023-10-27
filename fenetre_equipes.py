@@ -1,7 +1,7 @@
 import tkinter
 import tkinter as tk
 from tkinter import *
-from tkinter import messagebox,ttk, Tk, Frame, Canvas
+from tkinter import messagebox,ttk, Tk, Frame, Canvas, NW
 from PIL import ImageTk, Image
 from liste_pokemon import listenompokemon
 from liste_pokemon import *
@@ -600,9 +600,11 @@ numero_membre_choisi=0
 frames=0
 frameicone=0
 
-    
+file=open('txts/dernier.txt')
+dernier_pokemon=file.read()
+file.close()
+
 def creation_equipe(master,equipechoisie,x,y):
-    
     
     
     global numero_membre_choisi
@@ -834,7 +836,9 @@ def creation_equipe(master,equipechoisie,x,y):
     #variables
     
     nom_du_pokemon = tk.StringVar()
-    nom_du_pokemon.set('Bulbizarre')
+    file=open('txts/dernier.txt','r')
+    nom_du_pokemon.set(file.read())
+    file.close
     isshiny = tk.IntVar()
     
     def lettre(mot,liste,verifshiny):
@@ -1002,6 +1006,8 @@ def creation_equipe(master,equipechoisie,x,y):
 #___________________________________________________________________________________
           
     def choisir_pokemon(num):
+        
+        global dernier_pokemon
                 
         global numero_membre_choisi
                 
@@ -1014,13 +1020,54 @@ def creation_equipe(master,equipechoisie,x,y):
                         
             numero_membre_choisi=num
             nom_du_pokemon.set(str(equipe[(int(numero_membre_choisi)-1)]).replace('1',''))
+            
+            file=open('txts/dernier.txt','w')
+            file.write((str(equipe[(int(numero_membre_choisi)-1)]).replace('1','')))
+            file.close()
+            
+            file=open('txts/dernier.txt','r')
+            dernier_pokemon=file.read()
+            file.close()
+            
+            for i in range(6):
+                
+                cheminicone = Image.open('images/fonds/icone.png')
+                cheminicone = ImageTk.PhotoImage(cheminicone)
+                listelabeliconefond[i-1].config(image=cheminicone)
+                
+                listelabelicone[i-1].config(bg='#f8b0a0')
+                listelabelicone[i-1].im=cheminicone
+                
+            cheminiconechoisi = Image.open('images/fonds/iconechoisi.png')
+            cheminiconechoisi = ImageTk.PhotoImage(cheminiconechoisi)
+            listelabeliconefond[num-1].config(image=cheminiconechoisi)
+            
+            listelabelicone[num-1].config(bg='#f04028')
+            listelabelicone[num-1].im=cheminiconechoisi
+            
             combobox_nom('e')
             titre()
             chromatique()
                         
         else:
+            
+            for i in range(6):
+                
+                cheminicone = Image.open('images/fonds/icone.png')
+                cheminicone = ImageTk.PhotoImage(cheminicone)
+                listelabeliconefond[i-1].config(image=cheminicone)
+                
+                listelabelicone[i-1].config(bg='#f8b0a0')
+                listelabelicone[i-1].im=cheminicone
+                
+            cheminiconechoisi = Image.open('images/fonds/iconechoisi.png')
+            cheminiconechoisi = ImageTk.PhotoImage(cheminiconechoisi)
+            listelabeliconefond[num-1].config(image=cheminiconechoisi)
+            
+            listelabelicone[num-1].config(bg='#f04028')
+            listelabelicone[num-1].im=cheminiconechoisi
                     
-            nom_du_pokemon.set('Bulbizarre')
+            nom_du_pokemon.set(dernier_pokemon)
             numero_membre_choisi=(num)
             titre()
             chromatique()
@@ -1029,43 +1076,91 @@ def creation_equipe(master,equipechoisie,x,y):
     
     #ICONES
         
+    listelabeliconefond=[]
+        
+    path=PhotoImage(file='images/fonds/icone.png')
+    icone1fond=Label(master, image=path, borderwidth=0, highlightthickness=0, bg ='#b88898')
+    icone1fond.place(x=10,y=10)
+    icone1fond.im=path
+    listelabeliconefond.append(icone1fond)
+    
+    path=PhotoImage(file='images/fonds/icone.png')
+    icone2fond=Label(master, image=path, borderwidth=0, highlightthickness=0, bg ='#b88898')
+    icone2fond.place(x=92,y=10)
+    icone2fond.im=path
+    listelabeliconefond.append(icone2fond)
+    
+    path=PhotoImage(file='images/fonds/icone.png')
+    icone3fond=Label(master, image=path, borderwidth=0, highlightthickness=0, bg ='#b88898')
+    icone3fond.place(x=174,y=10)
+    icone3fond.im=path
+    listelabeliconefond.append(icone3fond)
+    
+    path=PhotoImage(file='images/fonds/icone.png')
+    icone4fond=Label(master, image=path, borderwidth=0, highlightthickness=0, bg ='#b88898')
+    icone4fond.place(x=10,y=90)
+    icone4fond.im=path
+    listelabeliconefond.append(icone4fond)
+    
+    path=PhotoImage(file='images/fonds/icone.png')
+    icone5fond=Label(master, image=path, borderwidth=0, highlightthickness=0, bg ='#b88898')
+    icone5fond.place(x=92,y=90)
+    icone5fond.im=path
+    listelabeliconefond.append(icone5fond)
+    
+    path=PhotoImage(file='images/fonds/icone.png')
+    icone6fond=Label(master, image=path, borderwidth=0, highlightthickness=0, bg ='#b88898')
+    icone6fond.place(x=174,y=90)
+    icone6fond.im=path
+    listelabeliconefond.append(icone6fond)
+    
+    
+    listelabelicone=[]
+        
     path=PhotoImage(file='images/sprites3g/icones/empty.png')
     icone1=Label(master, image=path, borderwidth=0, highlightthickness=0, bg='#f8b0a0')
     icone1.place(x=14,y=14)
     icone1text=Label(master, text='1')
     icone1.bind('<Button-1>',lambda event:choisir_pokemon(1))
+    listelabelicone.append(icone1)
     
     path=PhotoImage(file='images/sprites3g/icones/empty.png')
     icone2=Label(master, image=path, borderwidth=0, highlightthickness=0, bg='#f8b0a0')
     icone2.place(x=96,y=14)
     icone2text=Label(master, text='2')
     icone2.bind('<Button-1>',lambda event:choisir_pokemon(2))
+    listelabelicone.append(icone2)
     
     path=PhotoImage(file='images/sprites3g/icones/empty.png')
     icone3=Label(master, image=path, borderwidth=0, highlightthickness=0, bg='#f8b0a0')
     icone3.place(x=178,y=14)
     icone3text=Label(master, text='3')
     icone3.bind('<Button-1>',lambda event:choisir_pokemon(3))
+    listelabelicone.append(icone3)
     
     path=PhotoImage(file='images/sprites3g/icones/empty.png')
     icone4=Label(master, image=path, borderwidth=0, highlightthickness=0, bg='#f8b0a0')
     icone4.place(x=14,y=94)
     icone4text=Label(master, text='4')
     icone4.bind('<Button-1>',lambda event:choisir_pokemon(4))
+    listelabelicone.append(icone4)
     
     path=PhotoImage(file='images/sprites3g/icones/empty.png')
     icone5=Label(master, image=path, borderwidth=0, highlightthickness=0, bg='#f8b0a0')
     icone5.place(x=96,y=94)
     icone5text=Label(master, text='5')
     icone5.bind('<Button-1>',lambda event:choisir_pokemon(5))
+    listelabelicone.append(icone5)
     
     path=PhotoImage(file='images/sprites3g/icones/empty.png')
     icone6=Label(master, image=path, borderwidth=0, highlightthickness=0, bg='#f8b0a0')
     icone6.place(x=178,y=94)
     icone6text=Label(master, text='6')
     icone6.bind('<Button-1>',lambda event:choisir_pokemon(6))
+    listelabelicone.append(icone6)
     
     
+        #ÉTOILES SHINY
         
     def icone_membre(label,membre,num):
             
@@ -1126,25 +1221,6 @@ def creation_equipe(master,equipechoisie,x,y):
                 ymaster=master.winfo_y()
                 master.destroy()
                 creation_equipe('equipe',equipechoisie,xmaster,ymaster)
-        
-    def rien():
-        a=None
-        
-    def icones_animation():
-        
-        if numero_membre_choisi != 0:
-            
-            membre=equipe[(numero_membre_choisi)-1]
-            
-            if numero_membre_choisi == 1:
-            
-                    icone_membre(icone1,membre,2)
-                    master.after(500,rien())
-                    icone_membre(icone1,membre,1)
-                    master.after(500,rien())
-                    icone_membre(icone1,membre,2)
-                    master.after(500,rien())
-                    icone_membre(icone1,membre,1)
             
     def inclure_pokemon():
         
@@ -1193,8 +1269,16 @@ def creation_equipe(master,equipechoisie,x,y):
                     ymaster=master.winfo_y()
                     master.destroy()
                     creation_equipe('equipe',equipechoisie,xmaster,ymaster)
+                    
+    master.bind('<Return>',lambda event:inclure_pokemon())
+    master.bind('<Delete>',lambda event:inclure_pokemon())
+    master.bind('<BackSpace>',lambda event:inclure_pokemon())
             
     def pokemon_suivant():
+        
+        file=open('txts/dernier.txt','r')
+        nom_du_pokemon.set(file.read())
+        file.close()
         
         if get_num(nom_du_pokemon.get()) < 386:
             for i in range(len(listenompokemon)):
@@ -1202,16 +1286,36 @@ def creation_equipe(master,equipechoisie,x,y):
                     nom_du_pokemon.set(listenompokemon[i+1])
                     combobox_nom('event')
                     
+                    file=open('txts/dernier.txt','w')
+                    file.write((str(nom_du_pokemon.get()).replace('1','')))
+                    file.close()
+                    
+                    file=open('txts/dernier.txt','r')
+                    dernier_pokemon=file.read()
+                    file.close()
+                    
                     break
                     
                     
     def pokemon_precedent():
+        
+        file=open('txts/dernier.txt','r')
+        nom_du_pokemon.set(file.read())
+        file.close()
         
         if get_num(nom_du_pokemon.get()) > 1:
             for i in range(len(listenompokemon)):
                 if listenompokemon[i] == nom_du_pokemon.get():
                     nom_du_pokemon.set(listenompokemon[i-1])
                     combobox_nom('event')
+                    
+                    file=open('txts/dernier.txt','w')
+                    file.write((str(nom_du_pokemon.get()).replace('1','')))
+                    file.close()
+                    
+                    file=open('txts/dernier.txt','r')
+                    dernier_pokemon=file.read()
+                    file.close()
                     
                     break
                 
@@ -1368,7 +1472,6 @@ def choix_equipe_plus(master,pos):
                 liste[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
                 liste[i].im=img
 
-    print(cherche.get())
     
     def effacer_fonction(liste):
         cherche.delete(0,2)
