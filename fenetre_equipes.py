@@ -8,6 +8,7 @@ from liste_pokemon import *
 from threading import Thread
 import winsound
 import random
+import os
 
 def fenetre_equipe(master,equipechoisie,nom):
     
@@ -489,7 +490,8 @@ def choix_equipe(master):
         master.destroy()
         fenetre_equipe('equipe',equipe,('Équipe '+str(equipe)))
     
-    
+    master.bind('<p>',lambda event:choix_equipe_plus('choix_plus_equipes','voir'))
+    master.bind('<P>',lambda event:choix_equipe_plus('choix_plus_equipes','voir'))
     master.mainloop()
     
 def choix_creation_equipe(master):
@@ -587,6 +589,9 @@ def choix_creation_equipe(master):
     def choix_gerer(equipe):
         master.destroy()
         creation_equipe('equipe',equipe,50,600)
+
+    master.bind('<p>',lambda event:choix_equipe_plus('choix_plus_equipes','gerer'))
+    master.bind('<P>',lambda event:choix_equipe_plus('choix_plus_equipes','gerer'))
 
     master.mainloop()
     
@@ -1257,11 +1262,11 @@ def creation_equipe(master,equipechoisie,x,y):
     
     master.mainloop()
     
-def choix_equipe_plus(master):
+def choix_equipe_plus(master,pos):
     
     master=tk.Toplevel()
     master.title("Plus d'Équipes")
-    master.geometry('300x200+800+342')
+    master.geometry('200x100+800+342')
     master.resizable(False,False)
     background=PhotoImage(file='images/fonds/fondplusequipe.png')
     bg=Label(master, image=background)
@@ -1274,36 +1279,37 @@ def choix_equipe_plus(master):
     
     label1=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabel.append(label1)
-    label1.place(x=188,y=12)
+    label1.place(x=90,y=22)
             
     label2=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabel.append(label2)
-    label2.place(x=200,y=12)   
+    label2.place(x=102,y=22)   
     
     cherche=Entry(master)
     cherche.place(x=-50,y=-50)
     cherche.focus_set()
     bg.place(x=-2,y=-2)
     
-    def lettre(mot,liste):
-        str(mot)
+    def lettre(effacer,liste):
+    
+        cherche.delete(2,10)
+        if effacer!='':
+            mot=''
+        else:
+            mot=cherche.get()
         for i in range(len(mot)):
                 
                     
             if mot[i] == ' ':
                         
-                path = ('images/font3g/underscore.png')
-                img = ImageTk.PhotoImage(Image.open(path))
-                        
-                liste[i].configure(image=img)
-                liste[i].im=img
-
+                effacer_fonction(listelabel)
+                
             elif mot[i] == '':
                         
-                path = ('images/font3g/underscore.png')
+                path = ('images/font3g/nombres/underscore.png')
                 img = ImageTk.PhotoImage(Image.open(path))
                         
-                liste[i].configure(image=img)
+                liste[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
                 liste[i].im=img
                 
             else:
@@ -1311,32 +1317,136 @@ def choix_equipe_plus(master):
                 path = ('images/font3g/'+mot[i]+'.png')
                 img = ImageTk.PhotoImage(Image.open(path))
                         
-                liste[i].configure(image=img)
+                liste[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
                 liste[i].im=img
 
     print(cherche.get())
     
-    def effacer():
+    def effacer_fonction(liste):
         cherche.delete(0,2)
-        lettre('  ',listelabel)
+        lettre('e',listelabel)
+        
+        path = ('images/font3g/underscore.png')
+        img = ImageTk.PhotoImage(Image.open(path))
+                        
+        liste[0].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
+        liste[0].im=img
+        liste[1].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
+        liste[1].im=img
+
     
-    def aller():
-        print(cherche.get())
-        cherchetri=(cherche.get().sub(r'[^a-zA-Z0-9]', '',cherchetri))
-        creation_equipe('equipe',int(cherchetri),550,500)
+    def creer_dossier(equipe_choix):
+        
+        os.mkdir('txts/equipe'+equipe_choix)
+        
+        membre1=open('txts/equipe'+equipe_choix+'/membre1.txt','x')
+        membre2=open('txts/equipe'+equipe_choix+'/membre2.txt','x')
+        membre3=open('txts/equipe'+equipe_choix+'/membre3.txt','x')
+        membre4=open('txts/equipe'+equipe_choix+'/membre4.txt','x')
+        membre5=open('txts/equipe'+equipe_choix+'/membre5.txt','x')
+        membre6=open('txts/equipe'+equipe_choix+'/membre6.txt','x')
+        
         
     
-    master.bind('<Key-1>',lambda event:lettre(cherche.get(),listelabel))
-    master.bind('<Key-2>',lambda event:lettre(cherche.get(),listelabel))
-    master.bind('<Key-3>',lambda event:lettre(cherche.get(),listelabel))
-    master.bind('<Key-4>',lambda event:lettre(cherche.get(),listelabel))
-    master.bind('<Key-5>',lambda event:lettre(cherche.get(),listelabel))
-    master.bind('<Key-6>',lambda event:lettre(cherche.get(),listelabel))
-    master.bind('<Key-7>',lambda event:lettre(cherche.get(),listelabel))
-    master.bind('<Key-8>',lambda event:lettre(cherche.get(),listelabel))
-    master.bind('<Key-9>',lambda event:lettre(cherche.get(),listelabel))
-    master.bind('<Key-0>',lambda event:lettre(cherche.get(),listelabel))
-    master.bind('<BackSpace>',lambda event:effacer())
+    def aller():
+        
+        if pos == 'gerer':
+            
+            if cherche.get()== '' or cherche.get()==  ' ' or cherche.get()==  '  ':
+                erreur_msg = tkinter.messagebox.showinfo(title='Erreur!', message=("Veuillez entrer un nom d'équipe valide"))
+                
+            else:
+                cherchetri=(cherche.get())
+                path=('txts/equipe'+cherchetri)
+                if not os.path.exists(path):
+                    creer_dossier_msg = tkinter.messagebox.askquestion(title='Aucune équipe trouvée!', message=("Il n'y aucune équipe nommée equipe"+cherchetri+", souhaitez vous en créer une?"))
+                    if creer_dossier_msg == 'yes':
+                        creer_dossier(cherchetri)
+                        acceder_msg = tkinter.messagebox.askquestion(title='Équipe créée!', message=("L'équipe equipe"+cherchetri+" à été créée souhaitez vous y accéder?"))
+                        if acceder_msg == 'yes':
+                            master.destroy()
+                            creation_equipe('equipe',cherchetri,500,500)
+                else:
+                    master.destroy()
+                    creation_equipe('equipe',cherchetri,500,500)
+                    
+        elif pos == 'voir':
+            cherchetri=(cherche.get())
+            path=('txts/equipe'+cherchetri)
+            if not os.path.exists(path):
+                creer_dossier_msg = tkinter.messagebox.showinfo(title='Aucune équipe trouvée',message="Il n'y a aucune équipe avec cet identifiant, vous pouvez en créer une via le gestionnaire d'équipes")
+                
+            else:
+                master.destroy()
+                fenetre_equipe('voir_equipe',cherchetri,('Équipe '+str(cherchetri)))
+    
+    master.bind('<Key-1>',lambda event:lettre('',listelabel))
+    master.bind('<Key-2>',lambda event:lettre('',listelabel))
+    master.bind('<Key-3>',lambda event:lettre('',listelabel))
+    master.bind('<Key-4>',lambda event:lettre('',listelabel))
+    master.bind('<Key-5>',lambda event:lettre('',listelabel))
+    master.bind('<Key-6>',lambda event:lettre('',listelabel))
+    master.bind('<Key-7>',lambda event:lettre('',listelabel))
+    master.bind('<Key-8>',lambda event:lettre('',listelabel))
+    master.bind('<Key-9>',lambda event:lettre('',listelabel))
+    master.bind('<Key-0>',lambda event:lettre('',listelabel))
+    master.bind('<space>',lambda event:effacer_fonction(listelabel))
+    master.bind('<A>',lambda event:lettre('',listelabel))
+    master.bind('<a>',lambda event:lettre('',listelabel))
+    master.bind('<B>',lambda event:lettre('',listelabel))
+    master.bind('<b>',lambda event:lettre('',listelabel))
+    master.bind('<C>',lambda event:lettre('',listelabel))
+    master.bind('<c>',lambda event:lettre('',listelabel))
+    master.bind('<D>',lambda event:lettre('',listelabel))
+    master.bind('<d>',lambda event:lettre('',listelabel))
+    master.bind('<E>',lambda event:lettre('',listelabel))
+    master.bind('<e>',lambda event:lettre('',listelabel))
+    master.bind('<E>',lambda event:lettre('',listelabel))
+    master.bind('<e>',lambda event:lettre('',listelabel))
+    master.bind('<F>',lambda event:lettre('',listelabel))
+    master.bind('<f>',lambda event:lettre('',listelabel))
+    master.bind('<G>',lambda event:lettre('',listelabel))
+    master.bind('<g>',lambda event:lettre('',listelabel))
+    master.bind('<H>',lambda event:lettre('',listelabel))
+    master.bind('<h>',lambda event:lettre('',listelabel))
+    master.bind('<I>',lambda event:lettre('',listelabel))
+    master.bind('<i>',lambda event:lettre('',listelabel))
+    master.bind('<J>',lambda event:lettre('',listelabel))
+    master.bind('<j>',lambda event:lettre('',listelabel))
+    master.bind('<K>',lambda event:lettre('',listelabel))
+    master.bind('<k>',lambda event:lettre('',listelabel))
+    master.bind('<L>',lambda event:lettre('',listelabel))
+    master.bind('<l>',lambda event:lettre('',listelabel))
+    master.bind('<M>',lambda event:lettre('',listelabel))
+    master.bind('<m>',lambda event:lettre('',listelabel))
+    master.bind('<N>',lambda event:lettre('',listelabel))
+    master.bind('<n>',lambda event:lettre('',listelabel))
+    master.bind('<O>',lambda event:lettre('',listelabel))
+    master.bind('<o>',lambda event:lettre('',listelabel))
+    master.bind('<P>',lambda event:lettre('',listelabel))
+    master.bind('<p>',lambda event:lettre('',listelabel))
+    master.bind('<Q>',lambda event:lettre('',listelabel))
+    master.bind('<q>',lambda event:lettre('',listelabel))
+    master.bind('<R>',lambda event:lettre('',listelabel))
+    master.bind('<r>',lambda event:lettre('',listelabel))
+    master.bind('<S>',lambda event:lettre('',listelabel))
+    master.bind('<s>',lambda event:lettre('',listelabel))
+    master.bind('<T>',lambda event:lettre('',listelabel))
+    master.bind('<t>',lambda event:lettre('',listelabel))
+    master.bind('<U>',lambda event:lettre('',listelabel))
+    master.bind('<u>',lambda event:lettre('',listelabel))
+    master.bind('<V>',lambda event:lettre('',listelabel))
+    master.bind('<v>',lambda event:lettre('',listelabel))
+    master.bind('<W>',lambda event:lettre('',listelabel))
+    master.bind('<w>',lambda event:lettre('',listelabel))
+    master.bind('<X>',lambda event:lettre('',listelabel))
+    master.bind('<x>',lambda event:lettre('',listelabel))
+    master.bind('<Y>',lambda event:lettre('',listelabel))
+    master.bind('<y>',lambda event:lettre('',listelabel))
+    master.bind('<Z>',lambda event:lettre('',listelabel))
+    master.bind('<y>',lambda event:lettre('',listelabel))
+
+    master.bind('<BackSpace>',lambda event:effacer_fonction(listelabel))
     
     master.bind('<Return>',lambda event:aller())
     

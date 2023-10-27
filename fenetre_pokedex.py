@@ -19,6 +19,8 @@ bglabel.place(x=-2,y=-2)
 
 #IMAGES MISES DE BASE
 
+
+
 imgpokemon = PhotoImage(file='images/sprites3g/Bulbizarre.png')
 pokemon=Label(root, image=imgpokemon,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
 pokemon.config(image=imgpokemon)
@@ -42,6 +44,14 @@ etiquette_type2img = ImageTk.PhotoImage(etiquette_type2img)
 etiquette_type2=Label(root, image=etiquette_type2img ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
 etiquette_type2.im=etiquette_type2img
 etiquette_type2.place(x=142,y=216)
+
+path = ('images/fonds/chromatiqueoff.png')
+chromatiqueimg = ImageTk.PhotoImage(Image.open(path))
+chromatiquelb=Label(root,image=chromatiqueimg,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+chromatiquelb.photo=chromatiqueimg
+chromatiquelb.place(x=216,y=210)
+chromatiquelb.bind("<Button-1>", lambda event:chroma_switch())
+
 
 #_________________________________________
 
@@ -233,6 +243,13 @@ labeldefspec3.place(x=162,y=420)
 #__________________________________
 
 nom_du_pokemon=StringVar()
+nom_du_pokemon.set('Germignon')
+
+path = ('images/sprites3g/icones/'+nom_du_pokemon.get()+'1.png')
+imageiconeimg = ImageTk.PhotoImage(Image.open(path))
+imageicone=Label(image=imageiconeimg,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+imageicone.photo=imageiconeimg
+imageicone.place(x=298,y=138)
 
 def lettre(mot,liste):
     
@@ -286,6 +303,12 @@ def lettre_num():
             listelabelnum[i].configure(image=img)
             listelabelnum[i].im=img
 
+def icone_switch():
+    
+    path = ('images/sprites3g/icones/'+nom_du_pokemon.get()+'1.png')
+    imageiconeimg = ImageTk.PhotoImage(Image.open(path))
+    imageicone.config(image=imageiconeimg,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    imageicone.photo=imageiconeimg
 
 def combobox_nom(event):
     
@@ -322,6 +345,7 @@ def combobox_nom(event):
     root.title(nom_du_pokemon.get())
     afficher_pokemon()
     afficher_types()
+    icone_switch()
 
 #_________________________________ACTION_____________________________________________
 
@@ -389,6 +413,7 @@ def tempo_shiny():
     afficher_pokemon()
     
     afficher_pokemon()
+    chromatique()
     
 def desactiver_shiny():
     global shinytempo
@@ -402,6 +427,7 @@ def desactiver_shiny():
             isshiny.set(1)
         shinytempo=False
         afficher_pokemon()
+        chromatique()
     
 def shiny_on_hold():
     global shinynb
@@ -484,6 +510,33 @@ def ouvrir_pokepedia():
     if ouvrir == 'yes':
         
         webbrowser.open('https://www.pokepedia.fr/'+(nom_du_pokemon.get()))
+        
+def chroma_switch():
+        
+    if isshiny.get()==0:
+        isshiny.set(1)
+    else:
+        isshiny.set(0)
+        
+    combobox_nom('r')
+    chromatique()
+        
+def chromatique():
+        
+    if isshiny.get() == 0:
+            
+        path = ('images/fonds/chromatiqueoff.png')
+        chromatiqueimg = ImageTk.PhotoImage(Image.open(path))
+        chromatiquelb.config(image=chromatiqueimg)
+        chromatiquelb.photo=chromatiqueimg
+            
+    else:
+            
+        path = ('images/fonds/chromatiqueon.png')
+        chromatiqueimg = ImageTk.PhotoImage(Image.open(path))
+        chromatiquelb.config(image=chromatiqueimg)
+        chromatiquelb.photo=chromatiqueimg
+            
 
 #BOUTTONS EQUIPES _____________________________________________
 
@@ -510,6 +563,12 @@ plusdinfos.config(image=plusdinfosimg)
 plusdinfos.im=plusdinfosimg
 plusdinfos.place(x=4,y=474)
 plusdinfos.bind('<Button-1>',lambda event:ouvrir_pokepedia())
+
+path = ('images/sprites3g/icones/'+nom_du_pokemon.get()+'1.png')
+imageiconeimg = ImageTk.PhotoImage(Image.open(path))
+imageicone=Label(root,image=imageiconeimg,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+imageicone.photo=imageiconeimg
+imageicone.place(x=298,y=138)
 
 #________________________________________________________________________
     
