@@ -2,7 +2,7 @@ import tkinter
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox,ttk, Tk, Frame, Canvas, NW
-#from PIL import ImageTk, Image
+from PIL import ImageTk, Image
 from liste_pokemon import listenompokemon
 from liste_pokemon import *
 from threading import Thread
@@ -376,7 +376,7 @@ def fenetre_equipe(master,equipechoisie,nom):
         xmaster=master.winfo_x()
         ymaster=master.winfo_y()
         master.destroy()
-        creation_equipe('equipe',equipechoisie,xmaster,ymaster)
+        creation_equipe('equipe',equipechoisie,xmaster,ymaster,None)
         
     
     gererimg = Image.open('images/fonds/gererlequipe.png')
@@ -588,7 +588,7 @@ def choix_creation_equipe(master):
 
     def choix_gerer(equipe):
         master.destroy()
-        creation_equipe('equipe',equipe,50,600)
+        creation_equipe('equipe',equipe,50,600,None)
 
     master.bind('<p>',lambda event:choix_equipe_plus('choix_plus_equipes','gerer'))
     master.bind('<P>',lambda event:choix_equipe_plus('choix_plus_equipes','gerer'))
@@ -604,7 +604,7 @@ file=open('txts/dernier.txt')
 dernier_pokemon=file.read()
 file.close()
 
-def creation_equipe(master,equipechoisie,x,y):
+def creation_equipe(master,equipechoisie,x,y,event):
     
     
     global numero_membre_choisi
@@ -840,6 +840,21 @@ def creation_equipe(master,equipechoisie,x,y):
     nom_du_pokemon.set(file.read())
     file.close
     isshiny = tk.IntVar()
+    
+    def thread_cri():
+        numero_pkmn=get_num(nom_du_pokemon.get())
+        if numero_pkmn < 10:
+            chemincri=('sons/cris/00'+str(numero_pkmn)+'.wav')
+        elif numero_pkmn < 100:
+            chemincri=('sons/cris/0'+str(numero_pkmn)+'.wav')
+        else:        
+            chemincri=('sons/cris/'+str(numero_pkmn)+'.wav')
+        winsound.PlaySound(chemincri, winsound.SND_ASYNC)
+    
+    def cri_pokemon():
+
+        thread = Thread(target=thread_cri)
+        thread.start()
     
     def lettre(mot,liste,verifshiny):
     
@@ -1216,11 +1231,20 @@ def creation_equipe(master,equipechoisie,x,y):
                 file.write('')
                 file.close()
                 
+                print('num avant ecriture dans le fichier'+str(numero_membre_choisi))
+                    
+                file=open('txts/num.txt','w+')
+                file.write(str(numero_membre_choisi))
+                file.close
+                    
+                file=open('txts/num.txt','r')
+                print('apres ecriture',str(file.read()))
+                file.close
                 
                 xmaster=master.winfo_x()
                 ymaster=master.winfo_y()
                 master.destroy()
-                creation_equipe('equipe',equipechoisie,xmaster,ymaster)
+                creation_equipe('equipe',equipechoisie,xmaster,ymaster,'select')
             
     def inclure_pokemon():
         
@@ -1249,8 +1273,20 @@ def creation_equipe(master,equipechoisie,x,y):
                     
                     xmaster=master.winfo_x()
                     ymaster=master.winfo_y()
+                    
+                    print('num avant ecriture dans le fichier'+str(numero_membre_choisi))
+                    
+                    file=open('txts/num.txt','w+')
+                    file.write(str(numero_membre_choisi))
+                    file.close
+                    
+                    file=open('txts/num.txt','r')
+                    print('apres ecriture',str(file.read()))
+                    file.close
+                    
                     master.destroy()
-                    creation_equipe('equipe',equipechoisie,xmaster,ymaster)
+                    creation_equipe('equipe',equipechoisie,xmaster,ymaster,'select')
+                    
                     
             else:
             
@@ -1267,8 +1303,19 @@ def creation_equipe(master,equipechoisie,x,y):
                     
                     xmaster=master.winfo_x()
                     ymaster=master.winfo_y()
+                    
+                    print('num avant ecriture dans le fichier'+str(numero_membre_choisi))
+                    
+                    file=open('txts/num.txt','w+')
+                    file.write(str(numero_membre_choisi))
+                    file.close
+                    
+                    file=open('txts/num.txt','r')
+                    print('apres ecriture',str(file.read()))
+                    file.close
+                    
                     master.destroy()
-                    creation_equipe('equipe',equipechoisie,xmaster,ymaster)
+                    creation_equipe('equipe',equipechoisie,xmaster,ymaster,'select')
                     
     master.bind('<Return>',lambda event:inclure_pokemon())
     master.bind('<Delete>',lambda event:inclure_pokemon())
@@ -1411,6 +1458,13 @@ def creation_equipe(master,equipechoisie,x,y):
     #fonctions du début
     
     afficher_equipe()
+    
+    if event == 'select':
+        file=open('txts/num.txt')
+        pokemon_a_choisir=file.read()
+        print('pokemon a choisir '+str(pokemon_a_choisir))
+        choisir_pokemon(int(pokemon_a_choisir))
+        file.close
     
     master.mainloop()
     
