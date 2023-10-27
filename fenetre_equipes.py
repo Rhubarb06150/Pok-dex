@@ -2,7 +2,7 @@ import tkinter
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox,ttk, Tk, Frame, Canvas, NW
-from PIL import ImageTk, Image
+#from PIL import ImageTk, Image
 from liste_pokemon import listenompokemon
 from liste_pokemon import *
 from threading import Thread
