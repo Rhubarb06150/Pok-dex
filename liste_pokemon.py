@@ -438,6 +438,7 @@ def checktypes(typeachercher):
             print(i.nom+'    '+str(i.type1)+'   '+str(i.type2))
 
 for i in listepokemon:
+    
     gererimg = Image.open('images/sprites3g/'+i.nom+'.png')
     gererimg = Image.open('images/sprites3g/shiny/'+i.nom+'.png')
     gererimg = Image.open('images/sprites3g/back/'+i.nom+'.png')

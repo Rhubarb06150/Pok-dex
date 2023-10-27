@@ -831,28 +831,80 @@ def creation_equipe(master,equipechoisie,x,y):
     etiquetteequipe.place(x=398,y=4)
     etiquetteequipe.photo=etiquetteequipeimg
            
+    #variables
     
-    def lettre(mot,liste):
+    nom_du_pokemon = tk.StringVar()
+    nom_du_pokemon.set('Bulbizarre')
+    isshiny = tk.IntVar()
     
-        for i in range(len(mot)):
+    def lettre(mot,liste,verifshiny):
+    
+        if verifshiny == True:
+            
+            for i in range(len(mot)):
                 
-                    
-            if mot[i] == ' ':
+                if isshiny.get() == 0:
                         
-                path = ('images/font3g/espace.png')
-                img = ImageTk.PhotoImage(Image.open(path))
-                        
-                liste[i].configure(image=img)
-                liste[i].im=img
+                    if mot[i] == ' ':
+                                
+                        path = ('images/font3g/espace.png')
+                        img = ImageTk.PhotoImage(Image.open(path))
+                                
+                        liste[i].configure(image=img)
+                        liste[i].im=img
 
-                    
-            else:
+                            
+                    else:
+                                
+                        path = ('images/font3g/'+mot[i]+'.png')
+                        img = ImageTk.PhotoImage(Image.open(path))
+                                
+                        liste[i].configure(image=img)
+                        liste[i].im=img
+
+                
+                else:
                         
-                path = ('images/font3g/'+mot[i]+'.png')
-                img = ImageTk.PhotoImage(Image.open(path))
+                    if mot[i] == ' ':
+                                
+                        path = ('images/font3g/shiny/espace.png')
+                        img = ImageTk.PhotoImage(Image.open(path))
+                                
+                        liste[i].configure(image=img)
+                        liste[i].im=img
+
+                            
+                    else:
+                                
+                        path = ('images/font3g/shiny/'+mot[i]+'.png')
+                        img = ImageTk.PhotoImage(Image.open(path))
+                                
+                        liste[i].configure(image=img)
+                        liste[i].im=img
+        else:
+            
+            for i in range(len(mot)):
                         
-                liste[i].configure(image=img)
-                liste[i].im=img
+                if mot[i] == ' ':
+                                
+                    path = ('images/font3g/espace.png')
+                    img = ImageTk.PhotoImage(Image.open(path))
+                                
+                    liste[i].configure(image=img)
+                    liste[i].im=img
+
+                            
+                else:
+                                
+                    path = ('images/font3g/'+mot[i]+'.png')
+                    img = ImageTk.PhotoImage(Image.open(path))
+                                
+                    liste[i].configure(image=img)
+                    liste[i].im=img
+
+                
+    
+            
             
     def lettre_num():
         
@@ -875,14 +927,14 @@ def creation_equipe(master,equipechoisie,x,y):
     def affichage():
         
         lettre_num()
-        lettre('           ',listelabel)
-        lettre('   ',listelabelpv)
-        lettre('   ',listelabelatt)
-        lettre('   ',listelabeldef)
-        lettre('   ',listelabelvit)
-        lettre('   ',listelabelspec)
-        lettre('   ',listelabelattspec)
-        lettre('   ',listelabeldefspec)
+        lettre('           ',listelabel,False)
+        lettre('   ',listelabelpv,False)
+        lettre('   ',listelabelatt,False)
+        lettre('   ',listelabeldef,False)
+        lettre('   ',listelabelvit,False)
+        lettre('   ',listelabelspec,False)
+        lettre('   ',listelabelattspec,False)
+        lettre('   ',listelabeldefspec,False)
         
         pv=str(get_pv(nom_du_pokemon.get()))
         att=str(get_force(nom_du_pokemon.get()))
@@ -892,22 +944,18 @@ def creation_equipe(master,equipechoisie,x,y):
         attspec=str(get_attspec(nom_du_pokemon.get()))
         defspec=str(get_defspec(nom_du_pokemon.get()))
         
-        lettre(nom_du_pokemon.get(),listelabel)
-        lettre(pv,listelabelpv)
-        lettre(att,listelabelatt)
-        lettre(defense,listelabeldef)
-        lettre(vit,listelabelvit)
-        lettre(spec,listelabelspec)
-        lettre(attspec,listelabelattspec)
-        lettre(defspec,listelabeldefspec)
+        lettre(nom_du_pokemon.get(),listelabel,True)
+        lettre(pv,listelabelpv,False)
+        lettre(att,listelabelatt,False)
+        lettre(defense,listelabeldef,False)
+        lettre(vit,listelabelvit,False)
+        lettre(spec,listelabelspec,False)
+        lettre(attspec,listelabelattspec,False)
+        lettre(defspec,listelabeldefspec,False)
         
         
     
-    #variables
     
-    nom_du_pokemon = tk.StringVar()
-    nom_du_pokemon.set('Bulbizarre')
-    isshiny = tk.IntVar()
     
     equipe=[]
 
