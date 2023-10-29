@@ -827,12 +827,7 @@ def creation_equipe(master,equipechoisie,x,y,event):
     path = PhotoImage('images/sprites3g/icones/empty.png')
     pokemon=Label(master, image=path,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
     pokemon.place(x=6,y=230)
-    
-    path = ('images/fonds/etiquetteequipe1.png')
-    etiquetteequipeimg = ImageTk.PhotoImage(Image.open(path))
-    etiquetteequipe=Label(master,image=etiquetteequipeimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
-    etiquetteequipe.place(x=398,y=4)
-    etiquetteequipe.photo=etiquetteequipeimg
+
     
     path = ('images/types/empty.png')
     type1img = ImageTk.PhotoImage(Image.open(path))
@@ -1482,10 +1477,10 @@ def creation_equipe(master,equipechoisie,x,y,event):
         #_________________________________________________________________________________________________________________
                 
                 
-    path = ('images/fonds/retourgestion.png')
+    path = ('images/fonds/gestionequipe.png')
     retour_gestionimg = ImageTk.PhotoImage(Image.open(path))
     retour_gestion=Label(master,image=retour_gestionimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
-    retour_gestion.place(x=160,y=374)
+    retour_gestion.place(x=282,y=0)
     retour_gestion.photo=retour_gestionimg
     retour_gestion.bind('<Button-1>',lambda event:parametres_vers_gestion())
     retour_gestion.place_forget()
@@ -1551,11 +1546,10 @@ def creation_equipe(master,equipechoisie,x,y,event):
         
         inclure.place_forget()
         supprimer.place_forget()
-        etiquetteequipe.place_forget()
         pokemon.place_forget()
         parametres.place_forget()
         
-        retour_gestion.place(x=160,y=374)
+        retour_gestion.place(x=282,y=0)
         supprimerlesmembres.place(x=34,y=36)
         renommerlequipe.place(x=34,y=84)
         suprrimerlequipe.place(x=34,y=132)
@@ -1595,7 +1589,7 @@ def creation_equipe(master,equipechoisie,x,y,event):
         
         inclure.place(x=146,y=322)
         supprimer.place(x=260,y=322)
-        parametres.place(x=378,y=374)
+        parametres.place(x=376,y=0)
         
         label1.place(x=20,y=180)
         label2.place(x=32,y=180)        
@@ -1643,7 +1637,6 @@ def creation_equipe(master,equipechoisie,x,y,event):
         
         chromatiquelb.place(x=146,y=274)
         pokemon.place(x=6,y=230)
-        etiquetteequipe.place(x=398,y=4)
         type1.place(x=214,y=202)
         type2.place(x=214,y=232)
         
@@ -1681,7 +1674,7 @@ def creation_equipe(master,equipechoisie,x,y,event):
     path = ('images/fonds/parametresequipe.png')
     parametresimg = ImageTk.PhotoImage(Image.open(path))
     parametres=Label(master,image=parametresimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
-    parametres.place(x=378,y=374)
+    parametres.place(x=376,y=0)
     parametres.photo=parametresimg
     parametres.bind('<Button-1>',lambda event:gerer_vers_parametres())
     
@@ -1712,7 +1705,7 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
     master.geometry('200x100+800+342')
     master.resizable(False,False)
     
-    background=PhotoImage(file='images/fonds/fondplusequipe.png')
+    background=PhotoImage(file='images/fonds/nouveaunom.png')
     bg=Label(master, image=background)
     bg.place(x=-2,y=-2)
     
@@ -1720,7 +1713,7 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
     
     listelabel=[]
     
-    path=PhotoImage(file='images/font3g/underscore.png')
+    path=PhotoImage(file='images/font3g/espace.png')
     
     label01=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabel.append(label01)
@@ -1764,59 +1757,70 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
     
     label9=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabel.append(label9)
-    label9.place(x=138,y=22)
+    label9.place(x=150,y=22)
             
     label10=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabel.append(label10)
-    label10.place(x=150,y=22)
+    label10.place(x=162,y=22)
+    
+    print(len(listelabel))
     
     cherche=Entry(master)
     cherche.place(x=-50,y=-50)
     cherche.focus_set()
     bg.place(x=-2,y=-2)
     
-    def bg_renommer():
-        
-        master.title("Renommer l'équipe")
-                
-        background=PhotoImage(file='images/fonds/chercheequipenouveaunom.png')
-        bg.config(image=background)
-        bg.im=background
-    
     def lettre(effacer,liste):
         
         mot=cherche.get()
-        cherche.delete(len(mot),END)
+        cherche.delete(12,END)
         
         if effacer!='':
             
-            mot=''
+            for i in range(len(listelabel)):
+            
+                mot=''
+                path = ('images/font3g/espace.png')
+                img = ImageTk.PhotoImage(Image.open(path))
+                                
+                listelabel[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
+                listelabel[i].im=img
             
         else:
             
-            mot=cherche.get()
+            for i in range((len(mot))):
+                
+                if i == 12:
+                    break
+                    
+                if mot[i] == ' ':
+                            
+                    effacer_fonction(listelabel)
+                    
+                elif mot[i] == '':
+                            
+                    path = ('images/font3g/nombres/espace.png')
+                    img = ImageTk.PhotoImage(Image.open(path))
+                            
+                    liste[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
+                    liste[i].im=img
+                    
+                elif mot[i] == '_':
+                            
+                    path = ('images/font3g/nombres/underscore.png')
+                    img = ImageTk.PhotoImage(Image.open(path))
+                            
+                    liste[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
+                    liste[i].im=img
+                    
+                else:
+                            
+                    path = ('images/font3g/'+mot[i]+'.png')
+                    img = ImageTk.PhotoImage(Image.open(path))
+                            
+                    liste[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
+                    liste[i].im=img
             
-        for i in range(len(mot)):
-                
-            if mot[i] == ' ':
-                        
-                effacer_fonction(listelabel)
-                
-            elif mot[i] == '':
-                        
-                path = ('images/font3g/nombres/underscore.png')
-                img = ImageTk.PhotoImage(Image.open(path))
-                        
-                liste[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
-                liste[i].im=img
-                
-            else:
-                        
-                path = ('images/font3g/'+mot[i]+'.png')
-                img = ImageTk.PhotoImage(Image.open(path))
-                        
-                liste[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
-                liste[i].im=img
 
     def effacer_fonction(liste):
         
@@ -1825,7 +1829,7 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
         
         lettre('e',listelabel)
         
-        path = ('images/font3g/underscore.png')
+        path = ('images/font3g/espace.png')
         img = ImageTk.PhotoImage(Image.open(path))
                 
                 
@@ -1849,12 +1853,22 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
     
     def aller():
         
-        if pos == 'gerer':
+        if pos == None:
+            a=None
+        elif pos == 'gerer':
             
             if cherche.get()== '' or cherche.get()==  ' ' or cherche.get()==  '  ':
                 erreur_msg = tkinter.messagebox.showinfo(title='Erreur!', message=("Veuillez entrer un nom d'équipe valide"))
                 
             else:
+                
+                master.update()
+                background=PhotoImage(file='images/fonds/fondplusequipe.png')
+                bg.config(image=background)
+                bg.place(x=-2,y=-2)
+                bg.im=background
+                master.update()
+                
                 cherchetri=(cherche.get())
                 path=('txts/equipe'+cherchetri)
                 if not os.path.exists(path):
@@ -1871,6 +1885,14 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
                     creation_equipe('equipe',cherchetri,50,600,None)
                     
         elif pos == 'voir':
+            
+            master.update()
+            background=PhotoImage(file='images/fonds/fondplusequipe.png')
+            bg.config(image=background)
+            bg.place(x=-2,y=-2)
+            bg.im=background
+            master.update()
+            
             cherchetri=(cherche.get())
             path=('txts/equipe'+cherchetri)
             if not os.path.exists(path):
@@ -1890,8 +1912,13 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
                 
             else:
                 
-                bg_renommer()
-            
+                background=PhotoImage(file='images/fonds/nouveaunom.png')
+                bg.config(image=background)
+                bg.im=background
+                bg.place(x=-2,y=-2)
+                
+                master.title("Renommer l'équipe")
+                
                 cherchetri=(cherche.get())
                 path=('txts/equipe'+str(cherchetri))
                 
