@@ -13,12 +13,13 @@ import webbrowser
 root=Tk()
 root.geometry('700x500+50+50')
 root.resizable(False,False)
+
 bg=PhotoImage(file='images/fonds/fondsprites3g.png')
 bglabel=Label(image=bg)
 bglabel.place(x=-2,y=-2)
 
-#IMAGES MISES DE BASE
 
+#IMAGES MISES DE BASE
 
 
 imgpokemon = PhotoImage(file='images/sprites3g/Bulbizarre.png')
@@ -56,6 +57,7 @@ chromatiquelb.bind("<Button-1>", lambda event:chroma_switch())
 #_________________________________________
 
 #LETTRES DU NOM
+
 
 listelabel=[]
         
@@ -240,10 +242,36 @@ listelabeldefspec.append(labeldefspec3)
 labeldefspec3.place(x=162,y=420)
 
 
+    #POK2MON PREFERE
+
+listelabelpref=[]
+
+path=PhotoImage(file='images/font3g/violet/0.png')
+
+listelabelpref1=Label(root,image=path,borderwidth=0, highlightthickness=0)
+listelabelpref.append(listelabelpref1)
+listelabelpref1.place(x=202,y=48)
+listelabelpref1.place_forget()
+
+listelabelpref2=Label(root,image=path,borderwidth=0, highlightthickness=0)
+listelabelpref.append(listelabelpref2)
+listelabelpref2.place(x=214,y=48)
+listelabelpref2.place_forget()
+
+listelabelpref3=Label(root,image=path,borderwidth=0, highlightthickness=0)
+listelabelpref.append(listelabelpref3)
+listelabelpref3.place(x=226,y=48)
+listelabelpref3.place_forget()
+
+
 #__________________________________
 
 nom_du_pokemon=StringVar()
-nom_du_pokemon.set('Germignon')
+file=open('txts/pkmn_pref.txt')
+pokemon_prefere_num=str(file.read())
+file.close
+pokemon_nom=get_nom(int(pokemon_prefere_num))
+nom_du_pokemon.set(pokemon_nom)
 
 path = ('images/sprites3g/icones/'+nom_du_pokemon.get()+'1.png')
 imageiconeimg = ImageTk.PhotoImage(Image.open(path))
@@ -254,25 +282,63 @@ imageicone.place(x=298,y=138)
 def lettre(mot,liste):
     
     for i in range(len(mot)):
-            
+        
+        if isshiny.get() == 0 and liste == listelabel:
                 
-        if mot[i] == ' ':
-                    
-            path = ('images/font3g/espace.png')
-            img = ImageTk.PhotoImage(Image.open(path))
-                    
-            liste[i].configure(image=img)
-            liste[i].im=img
+            if mot[i] == ' ':
+                        
+                path = ('images/font3g/espace.png')
+                img = ImageTk.PhotoImage(Image.open(path))
+                        
+                liste[i].configure(image=img)
+                liste[i].im=img
 
+                    
+            else:
+                        
+                path = ('images/font3g/'+mot[i]+'.png')
+                img = ImageTk.PhotoImage(Image.open(path))
+                        
+                liste[i].configure(image=img)
+                liste[i].im=img
                 
-        else:
-                    
-            path = ('images/font3g/'+mot[i]+'.png')
-            img = ImageTk.PhotoImage(Image.open(path))
-                    
-            liste[i].configure(image=img)
-            liste[i].im=img
+        elif isshiny.get() == 1 and liste == listelabel:
             
+            if mot[i] == ' ':
+                        
+                path = ('images/font3g/espace.png')
+                img = ImageTk.PhotoImage(Image.open(path))
+                        
+                liste[i].configure(image=img)
+                liste[i].im=img
+
+                    
+            else:
+                        
+                path = ('images/font3g/shiny/'+mot[i]+'.png')
+                img = ImageTk.PhotoImage(Image.open(path))
+                        
+                liste[i].configure(image=img)
+                liste[i].im=img
+        else:
+            
+            if mot[i] == ' ':
+                        
+                path = ('images/font3g/espace.png')
+                img = ImageTk.PhotoImage(Image.open(path))
+                        
+                liste[i].configure(image=img)
+                liste[i].im=img
+
+                    
+            else:
+                        
+                path = ('images/font3g/'+mot[i]+'.png')
+                img = ImageTk.PhotoImage(Image.open(path))
+                        
+                liste[i].configure(image=img)
+                liste[i].im=img
+                
 def lettre_num():
     
     numpkmn=int(get_num(nom_du_pokemon.get()))
@@ -283,7 +349,7 @@ def lettre_num():
     else:
        numpkmn=str(numpkmn)
     
-    for i in range(len(numpkmn)):
+    for i in range(3):
             
                 
         if numpkmn[i] == ' ':
@@ -342,7 +408,7 @@ def combobox_nom(event):
     lettre(defspec,listelabeldefspec)
     
     lettre_num()
-    root.title(nom_du_pokemon.get())
+    root.title((nom_du_pokemon.get(),':',get_num(nom_du_pokemon.get())))
     afficher_pokemon()
     afficher_types()
     icone_switch()
@@ -396,6 +462,21 @@ def pokemon_precedent():
                 combobox_nom('root')
                 break
 
+def num_pokemon_prefere():
+    
+    file=open('txts/pkmn_pref.txt')
+    num_pref=str(file.read())
+    file.close
+    
+    for i in range(len(num_pref)):
+        
+        path = ('images/font3g/violet/'+str(num_pref[i])+'.png')
+        img = ImageTk.PhotoImage(Image.open(path))
+        
+        listelabelpref[i].config(image=img)
+        listelabelpref[i].photo=img
+        
+
 #SHORTCUT SHINY
     
 shinytempo=False
@@ -415,6 +496,9 @@ def tempo_shiny():
     afficher_pokemon()
     chromatique()
     
+    lettre('           ',listelabel)
+    lettre(nom_du_pokemon.get(),listelabel)
+    
 def desactiver_shiny():
     global shinytempo
     global shinynb
@@ -428,6 +512,8 @@ def desactiver_shiny():
         shinytempo=False
         afficher_pokemon()
         chromatique()
+        lettre('           ',listelabel)
+        lettre(nom_du_pokemon.get(),listelabel)
     
 def shiny_on_hold():
     global shinynb
@@ -462,9 +548,6 @@ def afficher_types():
         etiquette_type2img = ImageTk.PhotoImage(etiquette_type2img)
         etiquette_type2.config(image=etiquette_type2img)
         etiquette_type2.im=etiquette_type2img
-    
-    
-nom_du_pokemon.set('Germignon')
     
 isshiny = tk.IntVar()
 shiny=tk.Checkbutton(root, text='Shiny',variable=isshiny, onvalue=1, offvalue=0, command=afficher_pokemon)
@@ -538,7 +621,7 @@ def chromatique():
         chromatiquelb.photo=chromatiqueimg
             
 
-#BOUTTONS EQUIPES _____________________________________________
+#BOUTTONS _________________________________________________________________________________________________
 
 etiquette_equipesimg = Image.open('images/fonds/etiquetteequipes.png')
 etiquette_equipesimg = ImageTk.PhotoImage(etiquette_equipesimg)
@@ -564,23 +647,194 @@ plusdinfos.im=plusdinfosimg
 plusdinfos.place(x=4,y=474)
 plusdinfos.bind('<Button-1>',lambda event:ouvrir_pokepedia())
 
-path = ('images/sprites3g/icones/'+nom_du_pokemon.get()+'1.png')
-imageiconeimg = ImageTk.PhotoImage(Image.open(path))
-imageicone=Label(root,image=imageiconeimg,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
-imageicone.photo=imageiconeimg
-imageicone.place(x=298,y=138)
+retouraupokedeximg = Image.open('images/fonds/retouraupokedex.png')
+retouraupokedeximg = ImageTk.PhotoImage(retouraupokedeximg)
+retouraupokedex=Label(root, image=retouraupokedeximg ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+retouraupokedex.config(image=retouraupokedeximg)
+retouraupokedex.im=retouraupokedeximg
+retouraupokedex.place(x=484,y=0)
+retouraupokedex.bind('<Button-1>',lambda event:retour_au_pokedex())
+retouraupokedex.place_forget()
+
+parametresimg = Image.open('images/fonds/parametres.png')
+parametresimg = ImageTk.PhotoImage(parametresimg)
+parametres=Label(root, image=parametresimg ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+parametres.config(image=parametresimg)
+parametres.im=parametresimg
+parametres.place(x=576,y=0)
+parametres.bind('<Button-1>',lambda event:parametres_f())
+
+pokemonprefimg = Image.open('images/fonds/definirpref.png')
+pokemonprefimg = ImageTk.PhotoImage(pokemonprefimg)
+pokemonpref=Label(root, image=pokemonprefimg ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+pokemonpref.config(image=pokemonprefimg)
+pokemonpref.im=pokemonprefimg
+pokemonpref.place(x=18,y=76)
+pokemonpref.bind('<Button-1>',lambda event:pokemon_prefere())
+pokemonpref.place_forget()
 
 #________________________________________________________________________
-    
 
+def pokemon_prefere():
+    
+    pokemon_pref = tkinter.messagebox.askquestion(title='Définir le Pokémon préféré',message=('Voulez vous définir '+str(nom_du_pokemon.get())+' en tant que Pokémon préféré?'))
+    
+    if pokemon_pref == 'yes':
+        
+        numpkmn=int(get_num(nom_du_pokemon.get()))
+        
+        res=''
+        if numpkmn < 10:
+            res=('00'+str((get_num(nom_du_pokemon.get()))))
+        elif numpkmn < 100:
+            res=('0'+str((get_num(nom_du_pokemon.get()))))
+        else:
+           res=str(numpkmn)
+        
+        file=open('txts/pkmn_pref.txt', 'w')
+        file.write(str(res))
+        file.close
+        num_pokemon_prefere()
+        pokemon_pref = tkinter.messagebox.showinfo(title='Pokémon préféré défini!',message=(str(nom_du_pokemon.get())+' à été défini en tant que Pokémon préféré'))
+        
+    
+def parametres_f():
+    
+    num_pokemon_prefere()
+    
+    root.title('Paramètres')
+    
+    img = Image.open('images/fonds/fondparametres.png')
+    img = ImageTk.PhotoImage(img)
+    
+    bglabel.config(image=img)
+    bglabel.im=img
+    
+    parametres.place_forget()
+    
+    pokemon.place_forget()
+    pokemonback.place_forget()
+    etiquette_equipes.place_forget()
+    plusdinfos.place_forget()
+    etiquette_type1.place_forget()
+    etiquette_type2.place_forget()
+    etiquette_creer_equipe.place_forget()
+    chromatiquelb.place_forget()
+    imageicone.place_forget()
+    
+    for i in listelabel:
+        i.place_forget()
+    for i in listelabelpv:
+        i.place_forget()
+    for i in listelabelatt:
+        i.place_forget()
+    for i in listelabeldef:
+        i.place_forget()
+    for i in listelabelspec:
+        i.place_forget()
+    for i in listelabelattspec:
+        i.place_forget()
+    for i in listelabeldefspec:
+        i.place_forget()
+    for i in listelabelvit:
+        i.place_forget()
+    for i in listelabelnum:
+        i.place_forget()
+        
+    retouraupokedex.place(x=484,y=0)
+    listelabelpref1.place(x=202,y=48)
+    listelabelpref2.place(x=214,y=48)
+    listelabelpref3.place(x=226,y=48)
+    pokemonpref.place(x=18,y=76)
+    
+    root.bind('<Control-s>',lambda event:None)
+    root.bind('<Control-S>',lambda event:None)
+    root.bind('<Right>',lambda event:None)
+    root.bind('<Left>',lambda event:None)
+    root.bind('<Control-Shift-S>',lambda event:None)
+    root.bind('<Control-Shift-s>',lambda event:None)
+    root.bind('<KeyRelease-S>',lambda event:None)
+    root.bind('<KeyRelease-s>',lambda event:None)
+    
+def retour_au_pokedex():
+    
+    root.title((nom_du_pokemon.get(),':',get_num(nom_du_pokemon.get())))
+    
+    img = Image.open('images/fonds/fondsprites3g.png')
+    img = ImageTk.PhotoImage(img)
+    
+    bglabel.config(image=img)
+    bglabel.im=img
+
+    pokemon.place(x=128,y=74)
+    pokemonback.place(x=0,y=74)
+    etiquette_type1.place(x=76,y=216)
+    etiquette_type2.place(x=142,y=216)
+    chromatiquelb.place(x=216,y=210)
+    
+    xpos=20
+    for label in listelabel:
+        label.place(x=xpos,y=20)
+        xpos+=12
+
+    labelnum1.place(x=16,y=220)
+    labelnum2.place(x=28,y=220)
+    labelnum3.place(x=40,y=220)
+
+    labelpv1.place(x=38,y=264)
+    labelpv2.place(x=50,y=264)
+    labelpv3.place(x=62,y=264)
+
+    labelatt1.place(x=98,y=290)
+    labelatt2.place(x=110,y=290)
+    labelatt3.place(x=122,y=290)
+
+    labeldef1.place(x=98,y=316)
+    labeldef2.place(x=110,y=316)
+    labeldef3.place(x=122,y=316)
+
+    labelvit1.place(x=98,y=342)
+    labelvit2.place(x=110,y=342)
+    labelvit3.place(x=122,y=342)
+
+    labelspec1.place(x=98,y=368)
+    labelspec2.place(x=110,y=368)
+    labelspec3.place(x=122,y=368)
+
+    labelattspec1.place(x=138,y=394)
+    labelattspec2.place(x=150,y=394)
+    labelattspec3.place(x=162,y=394)
+
+    labeldefspec1.place(x=138,y=420)
+    labeldefspec2.place(x=150,y=420)
+    labeldefspec3.place(x=162,y=420)
+
+    etiquette_equipes.place(x=548,y=354)
+    etiquette_creer_equipe.place(x=536,y=406)
+    plusdinfos.place(x=4,y=474)
+    
+    imageicone.place(x=298,y=138)
+    parametres.place(x=576,y=0)
+    
+    listelabelpref1.place_forget()
+    listelabelpref2.place_forget()
+    listelabelpref3.place_forget()
+    pokemonpref.place_forget()
+    
+    retouraupokedex.place_forget()
+    
+    root.bind('<Control-s>',lambda event:cri_pokemon())
+    root.bind('<Control-S>',lambda event:cri_pokemon())
+    root.bind('<Right>',lambda event:pokemon_suivant())
+    root.bind('<Left>',lambda event:pokemon_precedent())
+    root.bind('<Control-Shift-S>',lambda event:shiny_on_hold())
+    root.bind('<Control-Shift-s>',lambda event:shiny_on_hold())
+    root.bind('<KeyRelease-S>',lambda event:desactiver_shiny())
+    root.bind('<KeyRelease-s>',lambda event:desactiver_shiny())
 
 root.bind('<Control-s>',lambda event:cri_pokemon())
 root.bind('<Control-S>',lambda event:cri_pokemon())
 
-
-
 nompokemon.bind("<<ComboboxSelected>>", combobox_nom)
-
-print(str((int(len(listenompokemon))/251)*100)+'% des Pokémons implémantés')
 
 root.mainloop()

@@ -370,11 +370,14 @@ listepokemon.append(Pokemon(102,['noeunoeuf'],'Noeunoeuf',60,40,80,40,60,60,45,F
 listepokemon.append(Pokemon(103,['noadkoko'],'Noadkoko',95,95,85,55,125,125,65,'Noeunoeuf',False,False,False,False,False,False,False,'Plante','Psy',5120,50,50,45,['Feu','Glace','Poison','Vol','Spectre','Ténèbres'],['Insecte'],['Plante','Eau','Électrik','Combat','Sol','Psy'],False,False))
 listepokemon.append(Pokemon(128,['tauros'],'Tauros',75,100,95,110,70,40,70,False,False,False,False,False,False,False,False,'Normal',False,5120,100,0,45,['Combat'],False,False,False,['Spectre']))
 listepokemon.append(Pokemon(127,['scarabrute'],'Scarabrute',65,125,100,85,55,55,70,False,False,False,False,False,False,False,False,'Insecte',False,6400,50,50,45,['Feu','Vol','Roche',],False,['Plante','Combat','Sol'],False,False))
+listepokemon.append(Pokemon(129,['magicarpe'],'Magicarpe',20,10,55,80,20,15,20,False,['Léviator'],False,False,20,False,False,False,'Eau',False,1280,50,50,255,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrik'],['Plante'],False))
+listepokemon.append(Pokemon(130,['leviator','léviathor','leviathor'],'Léviator',95,125,79,81,100,60,100,'Magicarpe',False,False,False,False,False,False,False,'Eau','Vol',1280,50,50,45,['Roche'],['Électrik'],['Feu','Eau','Combat','Insecte','Acier'],False,['Sol']))
 listepokemon.append(Pokemon(131,['lokhlass'],'Lokhlass',130,85,80,60,95,85,95,False,False,False,False,False,False,False,False,'Eau','Glace',9945,50,50,90,['Combat','Électrik','Plante','Roche'],False,['Eau'],['Glace'],False))        
 listepokemon.append(Pokemon(133,['evoli','Evoli','évoli'],'Évoli',55,55,50,55,65,45,65,False,['Aquali','Voltali','Pyroli'],['Mentali','Noctali'],False,False,False,['Utiliser une Pierre Eau','Utiliser une Pierre Foudre','Utiliser une Pierre Feu'],['Prendre un niveau avec le bonheur suffisamment élevé, pendant la journée','Prendre un niveau avec le bonheur suffisamment élevé, pendant la nuit'],'Normal',False,8670,87,13,45,['Combat'],False,False,False,['Spectre']))
 listepokemon.append(Pokemon(134,['aquali'],'Aquali',130,65,60,65,110,110,95,'Évoli',False,False,False,False,False,False,False,'Eau',False,8670,87,13,45,['Électrik','Plante'],False,['Acier','Eau','Feu','Glace'],False,False))
 listepokemon.append(Pokemon(135,['voltali'],'Voltali',65,65,60,95,110,110,95,'Évoli',False,False,False,False,False,False,False,'Électrik',False,8670,87,13,45,['Sol'],False,['Acier','Électrik','Vol'],False,False))
 listepokemon.append(Pokemon(136,['pyroli'],'Pyroli',65,130,60,65,110,95,110,'Évoli',False,False,False,False,False,False,False,'Feu',False,8670,87,13,45,['Eau','Roche','Sol'],False,['Acier','Feu','Glace','Insecte','Plante'],False,False))
+listepokemon.append(Pokemon(143,['ronflex'],'Ronflex',160,110,65,30,65,65,110,False,False,False,False,False,False,False,False,'Normal',False,11240,13,87,25,['Combat'],False,False,False,['Spectre']))
 listepokemon.append(Pokemon(144,['artikodin'],'Artikodin',90,85,100,85,125,95,125,False,False,False,False,False,False,False,False,'Glace','Vol',30345,0,0,3,['Feu','Électrik','Acier'],['Roche'],['Plante'],['Insecte','Plante'],['Sol']))
 listepokemon.append(Pokemon(145,['électhor'],'Électhor',90,90,85,100,125,125,90,False,False,False,False,False,False,False,False,'Électrik','Vol',30345,0,0,3,['Glace','Roche'],False,['Plante','Combat','Vol','Insecte','Acier'],False,['Sol']))
 listepokemon.append(Pokemon(146,['sulfura'],'Sulfura',90,100,90,90,125,125,85,False,False,False,False,False,False,False,False,'Feu','Vol',30345,0,0,3,['Eau','Électrik'],['Roche'],['Acier','Combat','Feu'],['Insecte','Plante'],['Sol']))
@@ -436,6 +439,18 @@ def checktypes(typeachercher):
     for i in listepokemon:
         if i.type1 == typeachercher or i.type2 == typeachercher:
             print(i.nom+'    '+str(i.type1)+'   '+str(i.type2))
+            
+liste1g=[]
+for i in listepokemon:
+    if i.num <= 151:
+        liste1g.append(i)
+print(str(int((int(len(liste1g))/151)*100))+'% des Pokémons 1G implémantés')
+        
+liste2g=[]
+for i in listepokemon:
+    if i.num <= 251 and i.num >=152:
+        liste2g.append(i)
+print(str(int((int(len(liste2g))/100)*100))+'% des Pokémons 2G implémantés')
 
 for i in listepokemon:
     

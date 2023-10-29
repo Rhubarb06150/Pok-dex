@@ -491,8 +491,8 @@ def choix_equipe(master):
         master.destroy()
         fenetre_equipe('equipe',equipe,('Équipe '+str(equipe)))
     
-    master.bind('<p>',lambda event:choix_equipe_plus('choix_plus_equipes','voir',None,None))
-    master.bind('<P>',lambda event:choix_equipe_plus('choix_plus_equipes','voir',None,None))
+    master.bind('<p>',lambda event:choix_equipe_plus('choix_plus_equipes','voir',None,master))
+    master.bind('<P>',lambda event:choix_equipe_plus('choix_plus_equipes','voir',None,master))
     master.mainloop()
     
 def choix_creation_equipe(master):
@@ -591,8 +591,8 @@ def choix_creation_equipe(master):
         master.destroy()
         creation_equipe('equipe',equipe,50,600,None)
 
-    master.bind('<p>',lambda event:choix_equipe_plus('choix_plus_equipes','gerer',None,None))
-    master.bind('<P>',lambda event:choix_equipe_plus('choix_plus_equipes','gerer',None,None))
+    master.bind('<p>',lambda event:choix_equipe_plus('choix_plus_equipes','gerer',None,master))
+    master.bind('<P>',lambda event:choix_equipe_plus('choix_plus_equipes','gerer',None,master))
 
     master.mainloop()
     
@@ -1396,10 +1396,13 @@ def creation_equipe(master,equipechoisie,x,y,event):
                     break
                 
     def titre():
-        if str(equipe[int(numero_membre_choisi)-1]) == '':
-            master.title("Gestion de l'équipe "+str(equipechoisie)+" (Aucun Pokémon selectionné) Slot: "+str(numero_membre_choisi))
+        if str(numero_membre_choisi) != '0':
+            if str(equipe[int(numero_membre_choisi)-1]) == '':
+                master.title("Gestion de l'équipe "+str(equipechoisie)+" : Slot: "+str(numero_membre_choisi)+' (Vide)')
+            else:
+                master.title("Gestion de l'équipe "+str(equipechoisie)+" : Slot: "+str(numero_membre_choisi)+' ('+str(equipe[int(numero_membre_choisi)-1]).replace('1','')+')')
         else:
-            master.title("Gestion de l'équipe "+str(equipechoisie)+" ("+str(equipe[int(numero_membre_choisi)-1]).replace('1','')+") Slot: "+str(numero_membre_choisi))
+            master.title("Gestion de l'équipe "+str(equipechoisie)+" : Aucun slot sélectionné")
             
             
     def chroma_switch():
@@ -1675,7 +1678,7 @@ def creation_equipe(master,equipechoisie,x,y,event):
     supprimer.photo=supprimerimg
     supprimer.bind('<Button-1>',lambda event:supprimer_pokemon())
     
-    path = ('images/fonds/parametres.png')
+    path = ('images/fonds/parametresequipe.png')
     parametresimg = ImageTk.PhotoImage(Image.open(path))
     parametres=Label(master,image=parametresimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
     parametres.place(x=378,y=374)
@@ -1814,10 +1817,11 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
                         acceder_msg = tkinter.messagebox.askquestion(title='Équipe créée!', message=("L'équipe "+cherchetri+" à été créée souhaitez vous y accéder?"))
                         if acceder_msg == 'yes':
                             master.destroy()
-                            creation_equipe('equipe',cherchetri,500,500,'gerer')
+                            creation_equipe('equipe',cherchetri,50,600,'gerer')
                 else:
+                    fenetre.destroy()
                     master.destroy()
-                    creation_equipe('equipe',cherchetri,500,500,None)
+                    creation_equipe('equipe',cherchetri,50,600,None)
                     
         elif pos == 'voir':
             cherchetri=(cherche.get())
@@ -1828,6 +1832,7 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
                 creer_dossier_msg = tkinter.messagebox.showinfo(title='Aucune équipe trouvée',message="Il n'y a aucune équipe avec cet identifiant, vous pouvez en créer une via le gestionnaire d'équipes")
                 
             else:
+                fenetre.destroy()
                 master.destroy()
                 fenetre_equipe('voir_equipe',cherchetri,('Équipe '+str(cherchetri)))
                 
