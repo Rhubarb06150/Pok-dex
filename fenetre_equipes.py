@@ -9,6 +9,7 @@ from threading import Thread
 import winsound
 import random
 import os
+import shutil
 
 def fenetre_equipe(master,equipechoisie,nom):
     
@@ -490,8 +491,8 @@ def choix_equipe(master):
         master.destroy()
         fenetre_equipe('equipe',equipe,('Équipe '+str(equipe)))
     
-    master.bind('<p>',lambda event:choix_equipe_plus('choix_plus_equipes','voir'))
-    master.bind('<P>',lambda event:choix_equipe_plus('choix_plus_equipes','voir'))
+    master.bind('<p>',lambda event:choix_equipe_plus('choix_plus_equipes','voir',None,None))
+    master.bind('<P>',lambda event:choix_equipe_plus('choix_plus_equipes','voir',None,None))
     master.mainloop()
     
 def choix_creation_equipe(master):
@@ -590,8 +591,8 @@ def choix_creation_equipe(master):
         master.destroy()
         creation_equipe('equipe',equipe,50,600,None)
 
-    master.bind('<p>',lambda event:choix_equipe_plus('choix_plus_equipes','gerer'))
-    master.bind('<P>',lambda event:choix_equipe_plus('choix_plus_equipes','gerer'))
+    master.bind('<p>',lambda event:choix_equipe_plus('choix_plus_equipes','gerer',None,None))
+    master.bind('<P>',lambda event:choix_equipe_plus('choix_plus_equipes','gerer',None,None))
 
     master.mainloop()
     
@@ -832,7 +833,21 @@ def creation_equipe(master,equipechoisie,x,y,event):
     etiquetteequipe=Label(master,image=etiquetteequipeimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
     etiquetteequipe.place(x=398,y=4)
     etiquetteequipe.photo=etiquetteequipeimg
-           
+    
+    path = ('images/types/empty.png')
+    type1img = ImageTk.PhotoImage(Image.open(path))
+    type1=Label(master,image=type1img,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
+    type1.place(x=214,y=202)
+    type1.photo=type1img
+    
+    path = ('images/types/empty.png')
+    type2img = ImageTk.PhotoImage(Image.open(path))
+    type2=Label(master,image=type2img,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
+    type2.place(x=214,y=232)
+    type2.photo=type2img
+    
+    
+    
     #variables
     
     nom_du_pokemon = tk.StringVar()
@@ -880,8 +895,6 @@ def creation_equipe(master,equipechoisie,x,y,event):
                                 
                         liste[i].configure(image=img)
                         liste[i].im=img
-
-                
                 else:
                         
                     if mot[i] == ' ':
@@ -921,9 +934,29 @@ def creation_equipe(master,equipechoisie,x,y,event):
                     liste[i].configure(image=img)
                     liste[i].im=img
 
-                
-    
+    def afficher_types():
+        
+        path = ('images/types/'+get_type1(nom_du_pokemon.get())+'.png')
+        type1img = ImageTk.PhotoImage(Image.open(path))
+        type1.config(image=type1img)
+        type1.photo=path
+        type1.im=type1img
+        
+        if get_type2(nom_du_pokemon.get()) != False:
             
+            path = ('images/types/'+get_type2(nom_du_pokemon.get())+'.png')
+            type2img = ImageTk.PhotoImage(Image.open(path))
+            type2.config(image=type2img)
+            type2.photo=path
+            type2.im=type2img
+            
+        else:
+            
+            path = ('images/types/empty.png')
+            type2img = ImageTk.PhotoImage(Image.open(path))
+            type2.config(image=type2img)
+            type2.photo=path
+            type2.im=type2img
             
     def lettre_num():
         
@@ -1016,6 +1049,7 @@ def creation_equipe(master,equipechoisie,x,y,event):
         afficher_pokemon()
         chromatique()
         affichage()
+        afficher_types()
         
         
 #___________________________________________________________________________________
@@ -1134,6 +1168,7 @@ def creation_equipe(master,equipechoisie,x,y,event):
         
     path=PhotoImage(file='images/sprites3g/icones/empty.png')
     icone1=Label(master, image=path, borderwidth=0, highlightthickness=0, bg='#f8b0a0')
+    icone1.pack()
     icone1.place(x=14,y=14)
     icone1text=Label(master, text='1')
     icone1.bind('<Button-1>',lambda event:choisir_pokemon(1))
@@ -1231,14 +1266,12 @@ def creation_equipe(master,equipechoisie,x,y,event):
                 file.write('')
                 file.close()
                 
-                print('num avant ecriture dans le fichier'+str(numero_membre_choisi))
                     
                 file=open('txts/num.txt','w+')
                 file.write(str(numero_membre_choisi))
                 file.close
                     
                 file=open('txts/num.txt','r')
-                print('apres ecriture',str(file.read()))
                 file.close
                 
                 xmaster=master.winfo_x()
@@ -1249,13 +1282,20 @@ def creation_equipe(master,equipechoisie,x,y,event):
     def inclure_pokemon():
         
         global numero_membre_choisi
+                    
+        file=open('txts/num.txt','w+')
+        file.write(str(numero_membre_choisi))
+        file.close
+                    
+        file=open('txts/num.txt','r')
+        file.close         
         
         if numero_membre_choisi == 0:
             
             tkinter.messagebox.showinfo(title='Action Impossible', message="Vous n'avez aucun Slot sélectionné!",)
             
         else:
-            
+             
             file=open('txts/equipe'+str(equipechoisie)+'/membre'+str(numero_membre_choisi)+'.txt','r')
             
             if file.read() != '':
@@ -1274,16 +1314,6 @@ def creation_equipe(master,equipechoisie,x,y,event):
                     xmaster=master.winfo_x()
                     ymaster=master.winfo_y()
                     
-                    print('num avant ecriture dans le fichier'+str(numero_membre_choisi))
-                    
-                    file=open('txts/num.txt','w+')
-                    file.write(str(numero_membre_choisi))
-                    file.close
-                    
-                    file=open('txts/num.txt','r')
-                    print('apres ecriture',str(file.read()))
-                    file.close
-                    
                     master.destroy()
                     creation_equipe('equipe',equipechoisie,xmaster,ymaster,'select')
                     
@@ -1291,6 +1321,13 @@ def creation_equipe(master,equipechoisie,x,y,event):
             else:
             
                 remplacer = tkinter.messagebox.askquestion(title='Inclure le Pokémon', message=("Voulez vous inclure "+str(nom_du_pokemon.get())+" dans le Slot "+str(numero_membre_choisi)+"?"),)
+
+                file=open('txts/num.txt','w+')
+                file.write(str(numero_membre_choisi))
+                file.close
+                    
+                file=open('txts/num.txt','r')
+                file.close
                 
                 if remplacer == 'yes':
                     
@@ -1304,15 +1341,7 @@ def creation_equipe(master,equipechoisie,x,y,event):
                     xmaster=master.winfo_x()
                     ymaster=master.winfo_y()
                     
-                    print('num avant ecriture dans le fichier'+str(numero_membre_choisi))
                     
-                    file=open('txts/num.txt','w+')
-                    file.write(str(numero_membre_choisi))
-                    file.close
-                    
-                    file=open('txts/num.txt','r')
-                    print('apres ecriture',str(file.read()))
-                    file.close
                     
                     master.destroy()
                     creation_equipe('equipe',equipechoisie,xmaster,ymaster,'select')
@@ -1412,7 +1441,7 @@ def creation_equipe(master,equipechoisie,x,y,event):
             
     def effacer_equipe():
         
-        effacermsg = tkinter.messagebox.askquestion(title='Attention!', message="Voulez-vous vraiment effacer l'équipe?")
+        effacermsg = tkinter.messagebox.askquestion(title='Attention!', message="Voulez-vous vraiment supprimer tout les membres de l'équipe?")
         
         if effacermsg == 'yes':
             
@@ -1425,8 +1454,207 @@ def creation_equipe(master,equipechoisie,x,y,event):
             xmaster=master.winfo_x()
             ymaster=master.winfo_y()
             master.destroy()
-            creation_equipe('equipe',equipechoisie,xmaster,ymaster)
+            creation_equipe('equipe',equipechoisie,xmaster,ymaster,'gerer')
+            
+    def renommer_equipe():
+        
+        if str(equipechoisie)=='1' or str(equipechoisie)=='2' or str(equipechoisie)=='3' or str(equipechoisie)=='4' or str(equipechoisie)=='5' or str(equipechoisie)=='6' or str(equipechoisie)=='7' or str(equipechoisie)=='8':
+            renommer_msg = tkinter.messagebox.showinfo(title="Action impossible",message="Vous ne pouvez pas renommer l'équipe "+str(equipechoisie)+", car elle fait partie des 8 équipes par défaut, vous pouvez uniquement renommer les équipes que vous avez  vous-même créées")
+        else:
+            nouveau_nom=choix_equipe_plus('renommer','renommer',equipechoisie,master)
+            
+    def supprimer_equipe():
+        if str(equipechoisie)=='1' or str(equipechoisie)=='2' or str(equipechoisie)=='3' or str(equipechoisie)=='4' or str(equipechoisie)=='5' or str(equipechoisie)=='6' or str(equipechoisie)=='7' or str(equipechoisie)=='8':
+            supprimer_msg = tkinter.messagebox.showinfo(title="Action impossible",message="Vous ne pouvez pas supprimer l'équipe "+str(equipechoisie)+", car elle fait partie des 8 équipes par défaut, vous pouvez uniquement supprimer les équipes que vous avez  vous-même créées")
+        else:
+            supprimer_msg = tkinter.messagebox.askquestion(title="Supprimer l'équipe",message="Êtes-vous sur de vouloir supprimer l'équipe "+str(equipechoisie)+", attention, cette action est irréversible!")
+            if supprimer_msg == 'yes':
+                shutil.rmtree("txts/equipe"+str(equipechoisie)+"/")
+                master.destroy()
+                supprimer_msg = tkinter.messagebox.showinfo(title="Équipe supprimée",message="L'équipe "+str(equipechoisie)+" à bien été supprimée")
+                
+         
+        #_________________________________________________________________________________________________________________
+        #PARAMETRES __________________________________________________________________________________________
+        #_________________________________________________________________________________________________________________
+                
+                
+    path = ('images/fonds/retourgestion.png')
+    retour_gestionimg = ImageTk.PhotoImage(Image.open(path))
+    retour_gestion=Label(master,image=retour_gestionimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
+    retour_gestion.place(x=160,y=374)
+    retour_gestion.photo=retour_gestionimg
+    retour_gestion.bind('<Button-1>',lambda event:parametres_vers_gestion())
+    retour_gestion.place_forget()
+    
+    path = ('images/fonds/supprimerlesmembres.png')
+    supprimerlesmembresimg = ImageTk.PhotoImage(Image.open(path))
+    supprimerlesmembres=Label(master,image=supprimerlesmembresimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
+    supprimerlesmembres.place(x=34,y=36)
+    supprimerlesmembres.photo=supprimerlesmembresimg
+    supprimerlesmembres.bind('<Button-1>',lambda event:effacer_equipe())
+    supprimerlesmembres.place_forget()
+    
+    path = ('images/fonds/renommerlequipe.png')
+    renommerlequipeimg = ImageTk.PhotoImage(Image.open(path))
+    renommerlequipe=Label(master,image=renommerlequipeimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
+    renommerlequipe.place(x=34,y=84)
+    renommerlequipe.photo=renommerlequipeimg
+    renommerlequipe.bind('<Button-1>',lambda event:renommer_equipe())
+    renommerlequipe.place_forget()
+    
+    path = ('images/fonds/supprimerlequipe.png')
+    suprrimerlequipeimg = ImageTk.PhotoImage(Image.open(path))
+    suprrimerlequipe=Label(master,image=suprrimerlequipeimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
+    suprrimerlequipe.place(x=34,y=132)
+    suprrimerlequipe.photo=suprrimerlequipeimg
+    suprrimerlequipe.bind('<Button-1>',lambda event:supprimer_equipe())
+    suprrimerlequipe.place_forget()
+    
+    
+    def gerer_vers_parametres():
+        
+        master.title("Paramètres de l'équipe "+str(equipechoisie))
+        background=PhotoImage(file='images/fonds/fondparametresequipe.png')
+        bg.config(image=background)
+        bg.im=background
+        
+        type1.place_forget()
+        type2.place_forget()
+        chromatiquelb.place_forget()
+        
+        for i in listelabel:
+            i.place_forget()
+        for i in listelabelicone:
+            i.place_forget()
+        for i in listelabeliconefond:
+            i.place_forget()
+        for i in listelabelpv:
+            i.place_forget()
+        for i in listelabelatt:
+            i.place_forget()
+        for i in listelabeldef:
+            i.place_forget()
+        for i in listelabelspec:
+            i.place_forget()
+        for i in listelabelvit:
+            i.place_forget()
+        for i in listelabelattspec:
+            i.place_forget()
+        for i in listelabeldefspec:
+            i.place_forget()
+        for i in listelabelnum:
+            i.place_forget()
+        
+        inclure.place_forget()
+        supprimer.place_forget()
+        etiquetteequipe.place_forget()
+        pokemon.place_forget()
+        parametres.place_forget()
+        
+        retour_gestion.place(x=160,y=374)
+        supprimerlesmembres.place(x=34,y=36)
+        renommerlequipe.place(x=34,y=84)
+        suprrimerlequipe.place(x=34,y=132)
+        
+        master.bind('<Right>',lambda event:None)
+        master.bind('<Left>',lambda event:None)
+        master.bind('<Return>',lambda event:None)
+        master.bind('<Delete>',lambda event:None)
+        master.bind('<BackSpace>',lambda event:None)
+        
+    def parametres_vers_gestion():
+        
+        retour_gestion.place_forget()
+        supprimerlesmembres.place_forget()
+        renommerlequipe.place_forget()
+        suprrimerlequipe.place_forget()
+        
+        
+        titre()
+        background=PhotoImage(file='images/fonds/fondcreationequipe.png')
+        bg.config(image=background)
+        bg.im=background
+        
+        icone1fond.place(x=10,y=10)
+        icone2fond.place(x=92,y=10)
+        icone3fond.place(x=174,y=10)
+        icone4fond.place(x=10,y=90)
+        icone5fond.place(x=92,y=90)
+        icone6fond.place(x=174,y=90)
+        
+        icone1.place(x=14,y=14)
+        icone2.place(x=96,y=14)
+        icone3.place(x=178,y=14)
+        icone4.place(x=14,y=94)
+        icone5.place(x=96,y=94)
+        icone6.place(x=178,y=94)
+        
+        inclure.place(x=146,y=322)
+        supprimer.place(x=260,y=322)
+        parametres.place(x=378,y=374)
+        
+        label1.place(x=20,y=180)
+        label2.place(x=32,y=180)        
+        label3.place(x=44,y=180)
+        label4.place(x=56,y=180)
+        label5.place(x=68,y=180)
+        label6.place(x=80,y=180)
+        label7.place(x=92,y=180)
+        label8.place(x=104,y=180)
+        label9.place(x=116,y=180)
+        label10.place(x=128,y=180)
+        label11.place(x=140,y=180)
+
+        labelnum1.place(x=152,y=232)
+        labelnum2.place(x=164,y=232)
+        labelnum3.place(x=178,y=232)
+
+        labelpv1.place(x=354,y=180)
+        labelpv2.place(x=366,y=180)
+        labelpv3.place(x=378,y=180)
+
+        labelatt1.place(x=414,y=206)
+        labelatt2.place(x=426,y=206)
+        labelatt3.place(x=438,y=206)
+
+        labeldef1.place(x=414,y=232)
+        labeldef2.place(x=426,y=232)
+        labeldef3.place(x=438,y=232)
+
+        labelvit1.place(x=414,y=258)
+        labelvit2.place(x=426,y=258)
+        labelvit3.place(x=438,y=258)
+
+        labelspec1.place(x=414,y=284)
+        labelspec2.place(x=426,y=284)
+        labelspec3.place(x=438,y=284)
+
+        labelattspec1.place(x=454,y=310)
+        labelattspec2.place(x=466,y=310)
+        labelattspec3.place(x=478,y=310)
+
+        labeldefspec1.place(x=454,y=336)
+        labeldefspec2.place(x=466,y=336)
+        labeldefspec3.place(x=478,y=336)
+        
+        chromatiquelb.place(x=146,y=274)
+        pokemon.place(x=6,y=230)
+        etiquetteequipe.place(x=398,y=4)
+        type1.place(x=214,y=202)
+        type2.place(x=214,y=232)
+        
+        master.bind('<Right>',lambda event:pokemon_suivant())
+        master.bind('<Left>',lambda event:pokemon_precedent())
+        master.bind('<Return>',lambda event:inclure_pokemon())
+        master.bind('<Delete>',lambda event:inclure_pokemon())
+        master.bind('<BackSpace>',lambda event:inclure_pokemon())
+    
+        
+    #LABELS______________________________________________________
+        
     #bouttons
+    
     
     nompokemon=ttk.Combobox(values=listenompokemon,textvariable=nom_du_pokemon,state='readlonly',command=combobox_nom('root'))
     shiny=tk.Checkbutton(master, text='Shiny',variable=isshiny, onvalue=1, offvalue=0)
@@ -1447,36 +1675,44 @@ def creation_equipe(master,equipechoisie,x,y,event):
     supprimer.photo=supprimerimg
     supprimer.bind('<Button-1>',lambda event:supprimer_pokemon())
     
-    path = ('images/fonds/effacerlequipe.png')
-    effacerimg = ImageTk.PhotoImage(Image.open(path))
-    effacer=Label(master,image=effacerimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
-    effacer.place(x=4,y=374)
-    effacer.photo=effacerimg
-    effacer.bind('<Button-1>',lambda event:effacer_equipe())
+    path = ('images/fonds/parametres.png')
+    parametresimg = ImageTk.PhotoImage(Image.open(path))
+    parametres=Label(master,image=parametresimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
+    parametres.place(x=378,y=374)
+    parametres.photo=parametresimg
+    parametres.bind('<Button-1>',lambda event:gerer_vers_parametres())
     
-
+    
     #fonctions du début
     
+
     afficher_equipe()
     
     if event == 'select':
         file=open('txts/num.txt')
         pokemon_a_choisir=file.read()
-        print('pokemon a choisir '+str(pokemon_a_choisir))
         choisir_pokemon(int(pokemon_a_choisir))
         file.close
+        
+    file=open('txts/dernier.txt')
+    nom_du_pokemon.set(file.read())
+    file.close
+    
+    afficher_types()
     
     master.mainloop()
     
-def choix_equipe_plus(master,pos):
+def choix_equipe_plus(master,pos,equipeorigine,fenetre):
     
     master=tk.Toplevel()
     master.title("Plus d'Équipes")
     master.geometry('200x100+800+342')
     master.resizable(False,False)
+    
     background=PhotoImage(file='images/fonds/fondplusequipe.png')
     bg=Label(master, image=background)
     bg.place(x=-2,y=-2)
+    
     master.iconbitmap('images/sprites3g/icones/hyperball.ico')
     
     listelabel=[]
@@ -1495,6 +1731,14 @@ def choix_equipe_plus(master,pos):
     cherche.place(x=-50,y=-50)
     cherche.focus_set()
     bg.place(x=-2,y=-2)
+    
+    def bg_renommer():
+        
+        master.title("Renommer l'équipe")
+                
+        background=PhotoImage(file='images/fonds/chercheequipenouveaunom.png')
+        bg.config(image=background)
+        bg.im=background
     
     def lettre(effacer,liste):
     
@@ -1564,26 +1808,53 @@ def choix_equipe_plus(master,pos):
                 cherchetri=(cherche.get())
                 path=('txts/equipe'+cherchetri)
                 if not os.path.exists(path):
-                    creer_dossier_msg = tkinter.messagebox.askquestion(title='Aucune équipe trouvée!', message=("Il n'y aucune équipe nommée equipe"+cherchetri+", souhaitez vous en créer une?"))
+                    creer_dossier_msg = tkinter.messagebox.askquestion(title='Aucune équipe trouvée!', message=("Il n'y aucune équipe nommée "+cherchetri+", souhaitez vous en créer une?"))
                     if creer_dossier_msg == 'yes':
                         creer_dossier(cherchetri)
-                        acceder_msg = tkinter.messagebox.askquestion(title='Équipe créée!', message=("L'équipe equipe"+cherchetri+" à été créée souhaitez vous y accéder?"))
+                        acceder_msg = tkinter.messagebox.askquestion(title='Équipe créée!', message=("L'équipe "+cherchetri+" à été créée souhaitez vous y accéder?"))
                         if acceder_msg == 'yes':
                             master.destroy()
-                            creation_equipe('equipe',cherchetri,500,500)
+                            creation_equipe('equipe',cherchetri,500,500,'gerer')
                 else:
                     master.destroy()
-                    creation_equipe('equipe',cherchetri,500,500)
+                    creation_equipe('equipe',cherchetri,500,500,None)
                     
         elif pos == 'voir':
             cherchetri=(cherche.get())
             path=('txts/equipe'+cherchetri)
             if not os.path.exists(path):
+
+
                 creer_dossier_msg = tkinter.messagebox.showinfo(title='Aucune équipe trouvée',message="Il n'y a aucune équipe avec cet identifiant, vous pouvez en créer une via le gestionnaire d'équipes")
                 
             else:
                 master.destroy()
                 fenetre_equipe('voir_equipe',cherchetri,('Équipe '+str(cherchetri)))
+                
+        elif pos == 'renommer':
+            
+            if str(equipeorigine)==('1' or '2' or '3' or '4' or '5' or '6' or '7' or '8'):
+                renommer_msg = tkinter.messagebox.showinfo(title="Action impossible",message="Vous ne pouvez pas renommer cette équipe car elle fait partie des 8 équipes par défaut, vous pouvez uniquement renommer les équipes que vous avez créées vous-même")
+                
+            else:
+                
+                bg_renommer()
+            
+                cherchetri=(cherche.get())
+                path=('txts/equipe'+str(cherchetri))
+                
+                if not os.path.exists(path):
+                    renommer_msg = tkinter.messagebox.askquestion(title="Renommer l'équipe?",message=("Voulez vous renommer l'équipe "+str(equipeorigine)+" en "+str(cherchetri)+"?"))
+                    if renommer_msg == 'yes':
+                        xmaster=master.winfo_x()
+                        ymaster=master.winfo_y()
+                        fenetre.destroy()
+                        master.destroy()
+                        os.rename(("txts/equipe"+str(equipeorigine)+"/"),("txts/equipe"+str(cherchetri)+"/"))
+                        renommer_msg = tkinter.messagebox.showinfo(title="Équipe renommée!",message=("L'équipe "+str(equipeorigine)+" à bien été renommée en "+str(cherchetri)))
+                else:
+                    renommer_msg = tkinter.messagebox.showinfo(title="Action impossible",message=("Une équipe nommée "+str(cherchetri)+" éxiste déja"))
+                    
     
     master.bind('<Key-1>',lambda event:lettre('',listelabel))
     master.bind('<Key-2>',lambda event:lettre('',listelabel))
