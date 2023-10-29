@@ -1722,13 +1722,53 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
     
     path=PhotoImage(file='images/font3g/underscore.png')
     
+    label01=Label(master,image=path,borderwidth=0, highlightthickness=0)
+    listelabel.append(label01)
+    label01.place(x=30,y=22)
+            
+    label0=Label(master,image=path,borderwidth=0, highlightthickness=0)
+    listelabel.append(label0)
+    label0.place(x=42,y=22)
+    
     label1=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabel.append(label1)
-    label1.place(x=90,y=22)
+    label1.place(x=54,y=22)
             
     label2=Label(master,image=path,borderwidth=0, highlightthickness=0)
     listelabel.append(label2)
-    label2.place(x=102,y=22)   
+    label2.place(x=66,y=22)
+    
+    label3=Label(master,image=path,borderwidth=0, highlightthickness=0)
+    listelabel.append(label3)
+    label3.place(x=78,y=22)
+            
+    label4=Label(master,image=path,borderwidth=0, highlightthickness=0)
+    listelabel.append(label4)
+    label4.place(x=90,y=22)
+    
+    label5=Label(master,image=path,borderwidth=0, highlightthickness=0)
+    listelabel.append(label5)
+    label5.place(x=102,y=22)
+            
+    label6=Label(master,image=path,borderwidth=0, highlightthickness=0)
+    listelabel.append(label6)
+    label6.place(x=114,y=22)
+    
+    label7=Label(master,image=path,borderwidth=0, highlightthickness=0)
+    listelabel.append(label7)
+    label7.place(x=126,y=22)
+            
+    label8=Label(master,image=path,borderwidth=0, highlightthickness=0)
+    listelabel.append(label8)
+    label8.place(x=138,y=22)
+    
+    label9=Label(master,image=path,borderwidth=0, highlightthickness=0)
+    listelabel.append(label9)
+    label9.place(x=138,y=22)
+            
+    label10=Label(master,image=path,borderwidth=0, highlightthickness=0)
+    listelabel.append(label10)
+    label10.place(x=150,y=22)
     
     cherche=Entry(master)
     cherche.place(x=-50,y=-50)
@@ -1744,15 +1784,20 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
         bg.im=background
     
     def lettre(effacer,liste):
-    
-        cherche.delete(2,10)
+        
+        mot=cherche.get()
+        cherche.delete(len(mot),END)
+        
         if effacer!='':
+            
             mot=''
+            
         else:
+            
             mot=cherche.get()
+            
         for i in range(len(mot)):
                 
-                    
             if mot[i] == ' ':
                         
                 effacer_fonction(listelabel)
@@ -1773,18 +1818,20 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
                 liste[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
                 liste[i].im=img
 
-    
     def effacer_fonction(liste):
-        cherche.delete(0,2)
+        
+        mot=cherche.get()
+        cherche.delete(0,len(mot))
+        
         lettre('e',listelabel)
         
         path = ('images/font3g/underscore.png')
         img = ImageTk.PhotoImage(Image.open(path))
-                        
-        liste[0].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
-        liste[0].im=img
-        liste[1].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
-        liste[1].im=img
+                
+                
+        for i in range(len(mot)):
+            listelabel[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
+            listelabel[i].im=img
 
     
     def creer_dossier(equipe_choix):
