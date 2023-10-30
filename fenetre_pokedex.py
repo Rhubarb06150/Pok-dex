@@ -10,7 +10,12 @@ import winsound
 from fenetre_equipes import *
 import webbrowser
 import urllib
-import requests
+import sys
+print(sys.executable)
+#import requests
+
+listemaj=['A','B','C','D','E','F','G','H','I','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+listemin=['a','b','c','d','e','f','g','h','i','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
 root=Tk()
 root.geometry('700x500+50+50')
@@ -19,7 +24,11 @@ root.resizable(False,False)
 bg=PhotoImage(file='images/fonds/fondsprites3g.png')
 bglabel=Label(image=bg)
 bglabel.place(x=-2,y=-2)
+bglabel.im=bg
 
+file=open('version.txt')
+version=str(file.read())
+file.close
 
 #IMAGES MISES DE BASE
 
@@ -457,7 +466,7 @@ def combobox_nom(event):
     lettre(defspec,listelabeldefspec)
     
     lettre_num()
-    root.title((nom_du_pokemon.get(),':',get_num(nom_du_pokemon.get())))
+    root.title('Pokédex ('+str(version)+') '+nom_du_pokemon.get()+' : '+str(get_num(nom_du_pokemon.get())))
     afficher_pokemon()
     afficher_types()
     icone_switch()
@@ -702,7 +711,7 @@ retouraupokedex=Label(root, image=retouraupokedeximg ,bg='#f8b0a0',borderwidth=0
 retouraupokedex.config(image=retouraupokedeximg)
 retouraupokedex.im=retouraupokedeximg
 retouraupokedex.place(x=484,y=0)
-retouraupokedex.bind('<Button-1>',lambda event:retour_au_pokedex())
+retouraupokedex.bind('<Button-1>',lambda event:pokedex())
 retouraupokedex.place_forget()
 
 parametresimg = Image.open('images/fonds/parametres.png')
@@ -712,6 +721,14 @@ parametres.config(image=parametresimg)
 parametres.im=parametresimg
 parametres.place(x=576,y=0)
 parametres.bind('<Button-1>',lambda event:parametres_f())
+
+pokemonaleatoireimg = Image.open('images/fonds/aleatoire.png')
+pokemonaleatoireimg = ImageTk.PhotoImage(pokemonaleatoireimg)
+pokemonaleatoire=Label(root, image=pokemonaleatoireimg ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+pokemonaleatoire.config(image=pokemonaleatoireimg)
+pokemonaleatoire.im=pokemonaleatoireimg
+pokemonaleatoire.place(x=190,y=406)
+pokemonaleatoire.bind('<Button-1>',lambda event:pokemon_aleatoire())
 
 pokemonprefimg = Image.open('images/fonds/definirpref.png')
 pokemonprefimg = ImageTk.PhotoImage(pokemonprefimg)
@@ -730,6 +747,14 @@ verifiermaj.im=verifiermajimg
 verifiermaj.place(x=18,y=104)
 verifiermaj.bind('<Button-1>',lambda event:maj_switch())
 verifiermaj.place_forget()
+
+avancéimg = Image.open('images/fonds/avancé.png')
+avancéimg = ImageTk.PhotoImage(avancéimg)
+avancé=Label(root, image=avancéimg ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+avancé.config(image=avancéimg)
+avancé.im=avancéimg
+avancé.place(x=404,y=0)
+avancé.bind('<Button-1>',lambda event:avance_f())
 
 #________________________________________________________________________
 
@@ -754,20 +779,16 @@ def pokemon_prefere():
         file.close
         num_pokemon_prefere()
         pokemon_pref = tkinter.messagebox.showinfo(title='Pokémon préféré défini!',message=(str(nom_du_pokemon.get())+' à été défini en tant que Pokémon préféré'))
-        
+
+def pokemon_aleatoire():
+
+    pokemon_aleatoire_var=random.randint(1,len(listenompokemon))
+    nom_du_pokemon.set(listenompokemon[pokemon_aleatoire_var])
+    combobox_nom('e')
+    root.title('Pokédex ('+str(version)+') '+nom_du_pokemon.get()+' : '+str(get_num(nom_du_pokemon.get())))
     
-def parametres_f():
-    
-    num_pokemon_prefere()
-    
-    root.title('Paramètres')
-    
-    img = Image.open('images/fonds/fondparametres.png')
-    img = ImageTk.PhotoImage(img)
-    
-    bglabel.config(image=img)
-    bglabel.im=img
-    
+def cacher_pokedex():
+
     parametres.place_forget()
     
     pokemon.place_forget()
@@ -779,8 +800,7 @@ def parametres_f():
     etiquette_creer_equipe.place_forget()
     chromatiquelb.place_forget()
     imageicone.place_forget()
-    
-    afficher_verifier_maj()
+    pokemonaleatoire.place_forget()
     
     for i in listelabel:
         i.place_forget()
@@ -800,7 +820,19 @@ def parametres_f():
         i.place_forget()
     for i in listelabelnum:
         i.place_forget()
-        
+
+def cacher_parametres():
+
+    listelabelpref1.place_forget()
+    listelabelpref2.place_forget()
+    listelabelpref3.place_forget()
+    pokemonpref.place_forget()
+    verifiermaj.place_forget()
+    verifier_maj_etat.place_forget()
+    retouraupokedex.place_forget()
+
+def afficher_parametres():
+
     retouraupokedex.place(x=484,y=0)
     listelabelpref1.place(x=202,y=48)
     listelabelpref2.place(x=214,y=48)
@@ -808,7 +840,34 @@ def parametres_f():
     pokemonpref.place(x=18,y=76)
     verifiermaj.place(x=18,y=104)
     verifier_maj_etat.place(x=304,y=104)
+
+
+def parametres_f():
     
+    num_pokemon_prefere()
+    
+    root.title('Paramètres')
+    
+    img = Image.open('images/fonds/fondparametres.png')
+    img = ImageTk.PhotoImage(img)
+    
+    bglabel.config(image=img)
+    bglabel.im=img
+    
+    cacher_avance()
+    cacher_pokedex()
+
+    afficher_verifier_maj()
+        
+    afficher_parametres()
+
+    avancé.place(x=404,y=0)
+    retouraupokedex.place(x=484,y=0)
+    parametres.place_forget()
+    
+    for i in listelabeliconeavancelb:
+        i.place_forget()
+
     root.bind('<Control-s>',lambda event:None)
     root.bind('<Control-S>',lambda event:None)
     root.bind('<Right>',lambda event:None)
@@ -817,16 +876,12 @@ def parametres_f():
     root.bind('<Control-Shift-s>',lambda event:None)
     root.bind('<KeyRelease-S>',lambda event:None)
     root.bind('<KeyRelease-s>',lambda event:None)
-    
-def retour_au_pokedex():
-    
-    root.title((nom_du_pokemon.get(),':',get_num(nom_du_pokemon.get())))
-    
-    img = Image.open('images/fonds/fondsprites3g.png')
-    img = ImageTk.PhotoImage(img)
-    
-    bglabel.config(image=img)
-    bglabel.im=img
+
+def afficher_pokedex():
+
+    avancé.place(x=404,y=0)
+    retouraupokedex.place_forget()
+    parametres.place(x=576,y=0)
 
     pokemon.place(x=128,y=74)
     pokemonback.place(x=0,y=74)
@@ -877,15 +932,34 @@ def retour_au_pokedex():
     
     imageicone.place(x=298,y=138)
     parametres.place(x=576,y=0)
+    pokemonaleatoire.place(x=190,y=406)
+
+def afficher_nom_pokemon():
+
+    xpos=20
+    for label in listelabel:
+        label.place(x=xpos,y=20)
+        xpos+=12
+
+def pokedex():
     
-    listelabelpref1.place_forget()
-    listelabelpref2.place_forget()
-    listelabelpref3.place_forget()
-    pokemonpref.place_forget()
-    verifiermaj.place_forget()
-    verifier_maj_etat.place_forget()
+    root.title('Pokédex ('+str(version)+') '+nom_du_pokemon.get()+' : '+str(get_num(nom_du_pokemon.get())))
+    
+    img = Image.open('images/fonds/fondsprites3g.png')
+    img = ImageTk.PhotoImage(img)
+    
+    bglabel.config(image=img)
+    bglabel.im=img
+
+    afficher_pokedex()
+
+    cacher_parametres()
+    cacher_avance()
     
     retouraupokedex.place_forget()
+    
+    for i in listelabeliconeavancelb:
+        i.place_forget()
     
     root.bind('<Control-s>',lambda event:cri_pokemon())
     root.bind('<Control-S>',lambda event:cri_pokemon())
@@ -896,14 +970,168 @@ def retour_au_pokedex():
     root.bind('<KeyRelease-S>',lambda event:desactiver_shiny())
     root.bind('<KeyRelease-s>',lambda event:desactiver_shiny())
 
+def cacher_avance():
+
+    for label in listelabelconditionlb:
+        label.place_forget()
+
+def afficher_condition_evolution():
+    
+    for i in listepokemon:
+        if i.nom == nom_du_pokemon.get():
+            if i.condition_evolution != False:
+                cond_ev=i.condition_evolution
+    
+                place=0
+                posx1=2
+                xpos=2
+    
+                for label in listelabelconditionlb:
+                    label.place(x=xpos,y=208)
+                    xpos+=12
+                for i3 in range(len(cond_ev)):
+                    lettrecondition(listelabelconditionlb[i3],cond_ev,i3)
+                    
+def afficher_icones_avance():
+    
+    for i in listepokemon:
+        if i.nom== nom_du_pokemon.get():
+            if i.evolution != False or i.evolution2 != False:
+                evolutions=get_evo(nom_du_pokemon.get())
+                
+                place=0
+                posx1=0
+                xpos=0
+                
+                for label in listelabeliconeavancelb:
+                    label.place(x=xpos,y=88)
+                    xpos+=64
+                
+                for i3 in range(len(evolutions)):
+                    afficher_levolution(listelabeliconeavancelb[i3],evolutions[i3])
+                
+
+def avance_f():
+
+    avancé.place_forget()
+    
+    root.title('Infos avancées de '+nom_du_pokemon.get())
+    
+    img = Image.open('images/fonds/fondavancé.png')
+    img = ImageTk.PhotoImage(img)
+    
+    bglabel.config(image=img)
+    bglabel.im=img
+
+    cacher_parametres()
+    cacher_pokedex()
+    
+    for i in listepokemon:
+        if i.nom == nom_du_pokemon.get():
+            if i.condition_evolution != False:
+                cond_ev=i.condition_evolution
+    
+    ey=nom_du_pokemon.get()
+    #afficher_condition_evolution()
+    for i in range(5):
+        afficher_levolution(listelabeliconeavancelb[i],'empty')
+    afficher_icones_avance()
+ 
+    afficher_nom_pokemon()
+    lettre('           ',listelabel)
+    lettre(nom_du_pokemon.get(),listelabel)
+
+    retouraupokedex.place(x=484,y=0)
+    parametres.place(x=576,y=0)
+
+listelabelconditionlb=[]
+def listelabelcondition(label,xpos,bg):
+    img = Image.open('images/font3g/minuscule/espace.png')
+    img = ImageTk.PhotoImage(img)
+    label=Label(root,image=img,bg=bg,borderwidth=0, highlightthickness=0)
+    label.im=img
+    label.place(x=xpos,y=208)
+    listelabelconditionlb.append(label)
+    
+listelabeliconeavancelb=[]
+def listelabeliconeavance(label,xpos,bg):
+    img = Image.open('images/sprites3g/icones/empty.png')
+    img = ImageTk.PhotoImage(img)
+    label=Label(root,image=img,bg=bg,borderwidth=0, highlightthickness=0)
+    label.im=img
+    label.place(x=xpos,y=88)
+    listelabeliconeavancelb.append(label)
+    
+#condition evolution    
+
+xpos=2
+place=0
+for i in range(28):
+    bg='#f8b0a0'
+    listelabelcondition(('label'+str(place)),xpos,bg)
+    xpos+=12
+    place+=1
+    
+for i in listelabelconditionlb:
+    i.place_forget()
+    
+xpos=2
+place=0
+
+for i in range(5):
+    bg='#f8b0a0'
+    listelabeliconeavance(('label'+str(place)),xpos,bg)
+    xpos+=64
+    place+=1
+    
+for i in listelabeliconeavancelb:
+    i.place_forget()
+    
+#fin
+    
+def lettrecondition(label,mot,i):
+
+    if mot[i] == ' ':
+
+        img = Image.open('images/font3g/minuscule/espace.png')
+        img = ImageTk.PhotoImage(img)
+        
+        label.config(image=img)
+        label.im=img
+        
+    elif mot[i] in listemaj:
+
+        img = Image.open('images/font3g/minuscule/maj/'+mot[i]+'.png')
+        img = ImageTk.PhotoImage(img)
+        
+        label.config(image=img)
+        label.im=img
+
+    else:
+
+        img = Image.open('images/font3g/minuscule/'+mot[i]+'.png')
+        img = ImageTk.PhotoImage(img)
+        
+        label.config(image=img)
+        label.im=img
+        
+def afficher_levolution(label,pokemon):
+    img = Image.open('images/sprites3g/icones/'+pokemon+'1.png')
+    img = ImageTk.PhotoImage(img)
+        
+    label.config(image=img)
+    label.im=img
+        
 root.bind('<Control-s>',lambda event:cri_pokemon())
 root.bind('<Control-S>',lambda event:cri_pokemon())
+root.bind('<Control-o>',lambda event:choix_equipe_plus('choix_plus_equipes','gerer',None,None))
+root.bind('<Control-O>',lambda event:choix_equipe_plus('choix_plus_equipes','gerer',None,None))
 
 nompokemon.bind("<<ComboboxSelected>>", combobox_nom)
 
 url = 'https://raw.githubusercontent.com/Rhubarb06150/Rhubarb06150.github.io/main/version.txt'
-for line in urllib.request.urlopen(url):
-    version_check=(line.decode('utf-8'))
+#for line in urllib.request.urlopen(url):
+#    version_check=(line.decode('utf-8'))
 
 file=open('txts/maj.txt','r')
 verifier_les_maj.set(int(file.read()))
@@ -919,5 +1147,9 @@ if verifier_les_maj.get() == 1:
     file2.close
         
 file.close
+
+place=0
+posx1=2
+
 
 root.mainloop()

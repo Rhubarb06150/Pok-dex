@@ -141,32 +141,18 @@ def get_pre_evo(nom):
         
 def get_evo(nom):
     nbevolutions=0
-    listeevolution=''
+    evolutions=[]
     for i in range(len(listepokemon)):
         
         if listepokemon[i].nom == nom:
             
             if listepokemon[i].evolution != False:
                 for i2 in range(len(listepokemon[i].evolution)):
-                    if nbevolutions > 0:
-                        listeevolution += ', '
-                    listeevolution += str(listepokemon[i].evolution[i2])
-                    nbevolutions+=1
-                    
-                if listepokemon[i].evolution2 != False:
-                    for i2 in range(len(listepokemon[i].evolution2)):
-                        if nbevolutions > 0:
-                            listeevolution += ', '
-                        listeevolution += str(listepokemon[i].evolution2[i2])
-                        nbevolutions+=1
-                if nbevolutions > 1:
-                    resultat=(listeevolution)
-                    return resultat
-                else:
-                    resultat=(listeevolution)
-                    return resultat
-            if listepokemon[i].evolution == False and listepokemon[i].evolution == False:
-                return 'Aucune évolution'
+                    evolutions.append(listepokemon[i].evolution[i2])
+            if listepokemon[i].evolution2 != False:
+                for i2 in range(len(listepokemon[i].evolution2)):
+                    evolutions.append(listepokemon[i].evolution2[i2])
+    return evolutions
             
 def get_evo_nb(nom):
     nbevolutions=0
@@ -349,24 +335,29 @@ listepokemon.append(Pokemon(21,['piafabec'],'Piafabec',40,60,30,70,31,31,31,Fals
 listepokemon.append(Pokemon(22,['rapasdepic'],'Rapasdepic',65,90,65,61,61,61,100,'Piafabec',False,False,False,False,False,False,False,'Normal','Vol',3825,50,50,255,['Électrik','Glace','Roche'],False,['Insecte','Plante'],False,['Sol','Spectre']))
 listepokemon.append(Pokemon(23,['abo'],'Abo',35,60,44,55,40,40,54,False,['Arbok'],False,False,22,False,False,False,'Poison',False,3825,50,50,255,['Psy','Sol'],False,['Combat','Insecte','Plante','Poison'],False,False))
 listepokemon.append(Pokemon(24,['arbok'],'Arbok',60,95,69,80,65,65,79,'Abo',False,False,False,False,False,False,False,'Poison',False,3825,50,50,90,['Psy','Sol'],False,['Combat','Insecte','Plante','Poison'],False,False))
-listepokemon.append(Pokemon(25,['pikachu'],'Pikachu',35,55,40,90,50,50,50,False,['Raichu'],False,'Pichu',False,False,['Utiliser une Pierre Foudre'],False,'Électrik',False,2295,50,50,190,['Sol'],False,['Acier','Électrik','Vol'],False,False))
+listepokemon.append(Pokemon(25,['pikachu'],'Pikachu',35,55,40,90,50,50,50,False,['Raichu'],False,'Pichu',False,False,'Utiliser une Pierre Foudre',False,'Électrik',False,2295,50,50,190,['Sol'],False,['Acier','Électrik','Vol'],False,False))
 listepokemon.append(Pokemon(26,['raichu'],'Raichu',60,90,55,110,90,90,80,'Pikachu',False,False,False,False,False,False,False,'Électrik',False,2295,50,50,75,['Sol'],False,['Acier','Électrik','Vol'],False,False))
 listepokemon.append(Pokemon(27,['sabelette'],'Sabelette',50,75,85,40,30,20,30,False,['Sablaireau'],False,False,22,False,False,False,'Sol',False,5100,50,50,255,['Eau','Glace','Plante'],False,['Poison','Roche'],False,['Électrik']))
 listepokemon.append(Pokemon(28,['sablaireau'],'Sablaireau',75,100,110,65,55,45,55,'Sabelette',False,False,False,False,False,False,False,'Sol',False,5100,50,50,900,['Eau','Glace','Plante'],False,['Poison','Roche'],False,['Électrik']))
 listepokemon.append(Pokemon(29,['nidoran F','Nidoran F','nidoran f'],'Nidoran F',55,47,52,41,40,40,40,False,['Nidorina'],False,False,16,False,False,False,'Poison',False,5100,0,100,235,['Psy','Sol'],False,['Combat','Insecte','Plante','Poison'],False,False))
-listepokemon.append(Pokemon(30,['nidorina'],'Nidorina',70,62,67,56,55,55,55,'Nidoran F',['Nidoqueen'],False,False,False,False,['Utiliser une Pierre Lune'],False,'Poison',False,5100,0,100,120,['Psy','Sol'],False,['Combat','Insecte','Plante','Poison'],False,False))
+listepokemon.append(Pokemon(30,['nidorina'],'Nidorina',70,62,67,56,55,55,55,'Nidoran F',['Nidoqueen'],False,False,False,False,'Utiliser une Pierre Lune',False,'Poison',False,5100,0,100,120,['Psy','Sol'],False,['Combat','Insecte','Plante','Poison'],False,False))
 listepokemon.append(Pokemon(31,['nidoqueen'],'Nidoqueen',90,92,87,76,75,75,85,'Nidorina',False,False,False,False,False,False,False,'Poison','Sol',5100,0,100,45,['Eau','Glace','Sol','Psy'],False,['Combat','Insecte','Roche'],['Poison'],['Électrik']))
 listepokemon.append(Pokemon(32,['nidoran M','nidoran m','Nidoran M'],'Nidoran M',46,57,40,50,40,40,40,False,['Nidorino'],False,False,16,False,False,False,'Poison',False,5100,100,0,235,['Psy','Sol'],False,['Combat','Insecte','Plante','Poison'],False,False))
-listepokemon.append(Pokemon(33,['nidorino'],'Nidorino',61,72,57,65,55,55,55,'Nidoran M',['Nidoking'],False,False,False,False,['Utiliser une Pierre Lune'],False,'Poison',False,5100,100,0,120,['Psy','Sol'],False,['Combat','Insecte','Plante','Poison'],False,False))
+listepokemon.append(Pokemon(33,['nidorino'],'Nidorino',61,72,57,65,55,55,55,'Nidoran M',['Nidoking'],False,False,False,False,'Utiliser une Pierre Lune',False,'Poison',False,5100,100,0,120,['Psy','Sol'],False,['Combat','Insecte','Plante','Poison'],False,False))
 listepokemon.append(Pokemon(34,['nidoking'],'Nidoking',81,102,77,85,75,85,75,'Nidorino',False,False,False,False,False,False,False,'Poison','Sol',5100,100,0,45,['Eau','Glace','Sol','Psy'],False,['Combat','Insecte','Roche'],['Poison'],['Électrik']))
-#listepokemon.append(Pokemon(35,['mélofée','melofee','Mélofée','Melofee',],'Mélofée',70,45,48,35,
+listepokemon.append(Pokemon(35,['mélofée','melofee','Mélofée','Melofee',],'Mélofée',70,45,48,35,60,60,65,False,['Mélodelefe'],False,'Mélo',False,False,'Utiliser une Pierre Lune',False,'Normal',False,2560,25,75,150,['Combat'],False,False,False,['Spectre']))
+listepokemon.append(Pokemon(36,['mélodelfe','mélodelfe'],'Mélodelfe',95,90,73,60,85,90,85,['Mélofée'],False,False,False,False,False,False,False,'Normal',False,2560,25,75,25,['Combat'],False,False,False,['Spectre']))
+listepokemon.append(Pokemon(37,['goupix'],'Goupix',38,41,40,65,65,50,65,False,['Feunard'],False,False,False,False,'Utiliser une Pierre Feu',False,'Feu',False,5100,25,75,190,['Eau','Roche','Sol'],False,['Acier','Feu','Glace','Insecte','Plante'],False,False))
+listepokemon.append(Pokemon(38,['feunard'],'Feunard',373,76,75,100,100,81,100,'Goupix',False,False,False,False,False,False,False,'Feu',False,5100,25,75,75,['Eau','Roche','Sol'],False,['Acier','Feu','Glace','Insecte','Plante'],False,False))
+listepokemon.append(Pokemon(39,['rondoudou'],'Rondoudou',115,45,20,20,25,45,25,False,'Grodoudou',False,'Toudoudou',False,False,'Utiliser une Pierre Lune',False,'Normal',False,2560,25,75,170,['Combat'],False,False,False,['Spectre']))
+
 listepokemon.append(Pokemon(63,['abra'],'Abra',25,20,15,90,105,105,55,False,['Kadabra'],False,False,16,False,False,False,'Psy',False,5120,75,25,200,['Insecte','Spectre','Ténèbres'],False,['Combat','Psy'],False,False))
 listepokemon.append(Pokemon(64,['kadabra'],'Kadabra',40,35,30,105,120,120,70,'Abra',['Alakazam'],False,False,'Échange',False,False,False,'Psy',False,5120,75,25,100,['Insecte','Spectre','Ténèbres'],False,['Combat','Psy'],False,False))
 listepokemon.append(Pokemon(65,['alakazam'],'Alakazam',55,50,45,120,135,135,85,'Kadabra',False,False,False,False,False,False,False,'Psy',False,5120,75,25,50,['Insecte','Spectre','Ténèbres'],False,['Combat','Psy'],False,False))
 listepokemon.append(Pokemon(92,['fantominus'],'Fantominus',30,35,30,80,100,100,35,False,['Spectrum'],False,False,25,False,False,False,'Spectre','Poison',5120,50,50,190,['Sol','Psy','Spectre','Ténèbres'],False,['Plante','Fée'],['Poison','Insecte'],['Normal','Combat']))
 listepokemon.append(Pokemon(93,['spectrum'],'Spectrum',45,50,45,95,115,115,55,'Ectoplasma',['Ectoplasma'],False,False,'Échange',False,False,False,'Spectre','Poison',5120,50,50,90,['Sol','Psy','Spectre','Ténèbres'],False,['Plante','Fée'],['Poison','Insecte'],['Normal','Combat']))
 listepokemon.append(Pokemon(94,['ectoplasma'],'Ectoplasma',60,65,60,110,130,130,75,'Spectrum',False,False,False,False,False,False,False,'Spectre','Poison',5120,50,50,45,['Sol','Psy','Spectre','Ténèbres'],False,['Plante','Fée'],['Poison','Insecte'],['Normal','Combat']))
-listepokemon.append(Pokemon(102,['noeunoeuf'],'Noeunoeuf',60,40,80,40,60,60,45,False,['Noadkoko'],False,False,False,False,['Utiliser une Pierre Plante'],False,'Plante','Psy',5120,50,50,90,['Feu','Glace','Poison','Vol','Spectre','Ténèbres'],['Insecte'],['Plante','Eau','Électrik','Combat','Sol','Psy'],False,False))
+listepokemon.append(Pokemon(102,['noeunoeuf'],'Noeunoeuf',60,40,80,40,60,60,45,False,['Noadkoko'],False,False,False,False,'Utiliser une Pierre Plante',False,'Plante','Psy',5120,50,50,90,['Feu','Glace','Poison','Vol','Spectre','Ténèbres'],['Insecte'],['Plante','Eau','Électrik','Combat','Sol','Psy'],False,False))
 listepokemon.append(Pokemon(103,['noadkoko'],'Noadkoko',95,95,85,55,125,125,65,'Noeunoeuf',False,False,False,False,False,False,False,'Plante','Psy',5120,50,50,45,['Feu','Glace','Poison','Vol','Spectre','Ténèbres'],['Insecte'],['Plante','Eau','Électrik','Combat','Sol','Psy'],False,False))
 listepokemon.append(Pokemon(128,['tauros'],'Tauros',75,100,95,110,70,40,70,False,False,False,False,False,False,False,False,'Normal',False,5120,100,0,45,['Combat'],False,False,False,['Spectre']))
 listepokemon.append(Pokemon(127,['scarabrute'],'Scarabrute',65,125,100,85,55,55,70,False,False,False,False,False,False,False,False,'Insecte',False,6400,50,50,45,['Feu','Vol','Roche',],False,['Plante','Combat','Sol'],False,False))
@@ -453,10 +444,14 @@ for i in listepokemon:
 print(str(int((int(len(liste2g))/100)*100))+'% des Pokémons 2G implémantés')
 
 for i in listepokemon:
-    
     gererimg = Image.open('images/sprites3g/'+i.nom+'.png')
-    gererimg = Image.open('images/sprites3g/shiny/'+i.nom+'.png')
+for i in listepokemon:
     gererimg = Image.open('images/sprites3g/back/'+i.nom+'.png')
+for i in listepokemon:
+    gererimg = Image.open('images/sprites3g/shiny/'+i.nom+'.png')
+for i in listepokemon:
     gererimg = Image.open('images/sprites3g/shiny/back/'+i.nom+'.png')
+for i in listepokemon:
     gererimg = Image.open('images/sprites3g/icones/'+i.nom+'1.png')
+for i in listepokemon:
     gererimg = Image.open('images/sprites3g/icones/'+i.nom+'2.png')

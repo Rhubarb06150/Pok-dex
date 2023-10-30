@@ -1089,11 +1089,14 @@ def creation_equipe(master,equipechoisie,x,y,event):
             listelabelicone[num-1].config(bg='#f04028')
             listelabelicone[num-1].im=cheminiconechoisi
             
+            
             combobox_nom('e')
             titre()
             chromatique()
                         
         else:
+            
+            
             
             for i in range(6):
                 
@@ -1283,7 +1286,13 @@ def creation_equipe(master,equipechoisie,x,y,event):
         file.close
                     
         file=open('txts/num.txt','r')
-        file.close         
+        file.close
+        
+        dern_poke=open('txts/dernier.txt','r')
+        dernier_pokemon=str(dern_poke.read())
+        dern_poke.close
+        
+        nom_du_pokemon.set(str(dernier_pokemon).replace('1',''))
         
         if numero_membre_choisi == 0:
             
@@ -1291,9 +1300,10 @@ def creation_equipe(master,equipechoisie,x,y,event):
             
         else:
              
-            file=open('txts/equipe'+str(equipechoisie)+'/membre'+str(numero_membre_choisi)+'.txt','r')
-            
-            if file.read() != '':
+            fichier_membre=open('txts/equipe'+str(equipechoisie)+'/membre'+str(numero_membre_choisi)+'.txt','r')
+            fichier_membre_txt=str(fichier_membre.read())
+            fichier_membre.close
+            if fichier_membre_txt != '':
                 
                 remplacer = tkinter.messagebox.askquestion(title='Remplacer le Pokémon', message=("Voulez vous remplacer "+str(equipe[(numero_membre_choisi)-1])+" par "+str(nom_du_pokemon.get()+" dans le Slot "+str(numero_membre_choisi)+"?")))
             
@@ -1366,6 +1376,7 @@ def creation_equipe(master,equipechoisie,x,y,event):
                     file.close()
                     
                     break
+        nom_du_pokemon.set(nom_du_pokemon.get())
                     
                     
     def pokemon_precedent():
@@ -1389,8 +1400,10 @@ def creation_equipe(master,equipechoisie,x,y,event):
                     file.close()
                     
                     break
+        nom_du_pokemon.set(nom_du_pokemon.get())
                 
     def titre():
+        
         if str(numero_membre_choisi) != '0':
             if str(equipe[int(numero_membre_choisi)-1]) == '':
                 master.title("Gestion de l'équipe "+str(equipechoisie)+" : Slot: "+str(numero_membre_choisi)+' (Vide)')
@@ -1467,8 +1480,8 @@ def creation_equipe(master,equipechoisie,x,y,event):
         else:
             supprimer_msg = tkinter.messagebox.askquestion(title="Supprimer l'équipe",message="Êtes-vous sur de vouloir supprimer l'équipe "+str(equipechoisie)+", attention, cette action est irréversible!")
             if supprimer_msg == 'yes':
-                shutil.rmtree("txts/equipe"+str(equipechoisie)+"/")
                 master.destroy()
+                shutil.rmtree("txts/equipe"+str(equipechoisie)+"/")
                 supprimer_msg = tkinter.messagebox.showinfo(title="Équipe supprimée",message="L'équipe "+str(equipechoisie)+" à bien été supprimée")
                 
          
@@ -1763,8 +1776,6 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
     listelabel.append(label10)
     label10.place(x=162,y=22)
     
-    print(len(listelabel))
-    
     cherche=Entry(master)
     cherche.place(x=-50,y=-50)
     cherche.focus_set()
@@ -1880,7 +1891,8 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
                             master.destroy()
                             creation_equipe('equipe',cherchetri,50,600,'gerer')
                 else:
-                    fenetre.destroy()
+                    if fenetre!=None:
+                        fenetre.destroy()
                     master.destroy()
                     creation_equipe('equipe',cherchetri,50,600,None)
                     
@@ -1901,7 +1913,8 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
                 creer_dossier_msg = tkinter.messagebox.showinfo(title='Aucune équipe trouvée',message="Il n'y a aucune équipe avec cet identifiant, vous pouvez en créer une via le gestionnaire d'équipes")
                 
             else:
-                fenetre.destroy()
+                if fenetre!=None:
+                    fenetre.destroy()
                 master.destroy()
                 fenetre_equipe('voir_equipe',cherchetri,('Équipe '+str(cherchetri)))
                 
