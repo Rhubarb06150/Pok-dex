@@ -9,6 +9,8 @@ from threading import Thread
 import winsound
 from fenetre_equipes import *
 import webbrowser
+import urllib
+import requests
 
 root=Tk()
 root.geometry('700x500+50+50')
@@ -263,10 +265,57 @@ listelabelpref.append(listelabelpref3)
 listelabelpref3.place(x=226,y=48)
 listelabelpref3.place_forget()
 
-
 #__________________________________
 
-nom_du_pokemon=StringVar()
+#IMAGES PARAMETRES
+
+img = Image.open('images/fonds/non.png')
+img = ImageTk.PhotoImage(img)
+
+verifier_maj_etat=Label(root,image=img,borderwidth=0, highlightthickness=0)
+verifier_maj_etat.im=img
+verifier_maj_etat.place(x=304,y=104)
+verifier_maj_etat.place_forget()
+
+activer_son_etat=Label(root,image=img,borderwidth=0, highlightthickness=0)
+activer_son_etat.im=img
+activer_son_etat.place(x=76,y=20)
+activer_son_etat.place_forget()
+
+def afficher_verifier_maj():
+    
+    if verifier_les_maj.get() == 1:
+        img = Image.open('images/fonds/oui.png')
+        img = ImageTk.PhotoImage(img)
+        verifier_maj_etat.config(image=img)
+        verifier_maj_etat.im=img
+        
+        
+    else:
+        img = Image.open('images/fonds/non.png')
+        img = ImageTk.PhotoImage(img)
+        verifier_maj_etat.config(image=img)
+        verifier_maj_etat.im=img
+        
+    file1=open('txts/maj.txt','w')
+    file1.write(str(verifier_les_maj.get()))
+    file1.close
+    
+def maj_switch():
+    
+    if verifier_les_maj.get() == 1:
+        verifier_les_maj.set(0)
+    else:
+        verifier_les_maj.set(1)
+    afficher_verifier_maj()
+        
+verifier_les_maj = tk.IntVar()
+verifier_maj=tk.Checkbutton(root,variable=verifier_les_maj, onvalue=1, offvalue=0,)
+
+activer_son_var = tk.IntVar()
+activer_son=tk.Checkbutton(root,variable=activer_son_var, onvalue=1, offvalue=0,)
+
+nom_du_pokemon = StringVar()
 file=open('txts/pkmn_pref.txt')
 pokemon_prefere_num=str(file.read())
 file.close
@@ -673,6 +722,15 @@ pokemonpref.place(x=18,y=76)
 pokemonpref.bind('<Button-1>',lambda event:pokemon_prefere())
 pokemonpref.place_forget()
 
+verifiermajimg = Image.open('images/fonds/verifiermaj.png')
+verifiermajimg = ImageTk.PhotoImage(verifiermajimg)
+verifiermaj=Label(root, image=verifiermajimg ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+verifiermaj.config(image=verifiermajimg)
+verifiermaj.im=verifiermajimg
+verifiermaj.place(x=18,y=104)
+verifiermaj.bind('<Button-1>',lambda event:maj_switch())
+verifiermaj.place_forget()
+
 #________________________________________________________________________
 
 def pokemon_prefere():
@@ -722,6 +780,8 @@ def parametres_f():
     chromatiquelb.place_forget()
     imageicone.place_forget()
     
+    afficher_verifier_maj()
+    
     for i in listelabel:
         i.place_forget()
     for i in listelabelpv:
@@ -746,6 +806,8 @@ def parametres_f():
     listelabelpref2.place(x=214,y=48)
     listelabelpref3.place(x=226,y=48)
     pokemonpref.place(x=18,y=76)
+    verifiermaj.place(x=18,y=104)
+    verifier_maj_etat.place(x=304,y=104)
     
     root.bind('<Control-s>',lambda event:None)
     root.bind('<Control-S>',lambda event:None)
@@ -820,6 +882,8 @@ def retour_au_pokedex():
     listelabelpref2.place_forget()
     listelabelpref3.place_forget()
     pokemonpref.place_forget()
+    verifiermaj.place_forget()
+    verifier_maj_etat.place_forget()
     
     retouraupokedex.place_forget()
     
@@ -836,5 +900,24 @@ root.bind('<Control-s>',lambda event:cri_pokemon())
 root.bind('<Control-S>',lambda event:cri_pokemon())
 
 nompokemon.bind("<<ComboboxSelected>>", combobox_nom)
+
+url = 'https://raw.githubusercontent.com/Rhubarb06150/Rhubarb06150.github.io/main/version.txt'
+for line in urllib.request.urlopen(url):
+    version_check=(line.decode('utf-8'))
+
+file=open('txts/maj.txt','r')
+verifier_les_maj.set(int(file.read()))
+file.close
+
+if verifier_les_maj.get() == 1:
+    file2=open('version.txt','r')
+    if str(file2.read()) != version_check:
+        nouvelle_maj = tkinter.messagebox.askquestion(title='Nouvelle mise à jour disponible!',message='Une nouvelle mise à jour du Pokédex est disponible, souhaitez-vous la télécharger?')
+        if nouvelle_maj == 'yes':
+            webbrowser.open('https://github.com/Rhubarb06150/Pok-dex')
+            root.destroy()
+    file2.close
+        
+file.close
 
 root.mainloop()
