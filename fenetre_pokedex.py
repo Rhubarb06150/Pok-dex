@@ -18,7 +18,11 @@ listemaj=['A','B','C','D','E','F','G','H','I','K','L','M','N','O','P','Q','R','S
 listemin=['a','b','c','d','e','f','g','h','i','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
 root=Tk()
-root.geometry('700x500+50+50')
+
+fenetrex=int((root.winfo_screenwidth()/2)-350)
+fenetrey=int((root.winfo_screenheight()/2)-250)
+
+root.geometry('700x500+'+str(fenetrex)+'+'+str(fenetrey))
 root.resizable(False,False)
 
 bg=PhotoImage(file='images/fonds/fondsprites3g.png')
@@ -756,6 +760,13 @@ avancé.im=avancéimg
 avancé.place(x=404,y=0)
 avancé.bind('<Button-1>',lambda event:avance_f())
 
+img = Image.open('images/sprites3g/icones/empty.png')
+img = ImageTk.PhotoImage(img)
+label_pre_evolution=Label(root, image=img, bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+label_pre_evolution.im=img
+label_pre_evolution.place(x=6,y=270)
+label_pre_evolution.place_forget()
+
 #________________________________________________________________________
 
 def pokemon_prefere():
@@ -856,6 +867,7 @@ def parametres_f():
     
     cacher_avance()
     cacher_pokedex()
+    label_pre_evolution.place_forget()
 
     afficher_verifier_maj()
         
@@ -952,9 +964,9 @@ def pokedex():
     bglabel.im=img
 
     afficher_pokedex()
-
     cacher_parametres()
     cacher_avance()
+    label_pre_evolution.place_forget()
     
     retouraupokedex.place_forget()
     
@@ -974,29 +986,46 @@ def cacher_avance():
 
     for label in listelabelconditionlb:
         label.place_forget()
+    for i in listelabeliconeavancelb:
+        i.place_forget()
+    for i in listelabelflechelb:
+        i.place_forget()
 
 def afficher_condition_evolution():
     
     for i in listepokemon:
         if i.nom == nom_du_pokemon.get():
             if i.condition_evolution != False:
-                cond_ev=i.condition_evolution
-    
+                if type(i.condition_evolution[numero_icone_choisi]) is int:
+                    cond_ev=('Évolue en '+i.evolution[numero_icone_choisi]+' au niveau '+str(i.condition_evolution[numero_icone_choisi]))
+                else:
+                    cond_ev=i.condition_evolution[numero_icone_choisi]
+
                 place=0
                 posx1=2
-                xpos=2
+                xpos=0
+
+                for label2 in listelabelconditionlb:
+
+                    img = Image.open('images/font3g/minuscule/espace.png')
+                    img = ImageTk.PhotoImage(img)
+                    label2.config(image=img)
+                    label2.im=img
     
                 for label in listelabelconditionlb:
+
                     label.place(x=xpos,y=208)
                     xpos+=12
+
                 for i3 in range(len(cond_ev)):
+
                     lettrecondition(listelabelconditionlb[i3],cond_ev,i3)
                     
 def afficher_icones_avance():
     
     for i in listepokemon:
         if i.nom== nom_du_pokemon.get():
-            if i.evolution != False or i.evolution2 != False:
+            if i.evolution != False:
                 evolutions=get_evo(nom_du_pokemon.get())
                 
                 place=0
@@ -1004,10 +1033,12 @@ def afficher_icones_avance():
                 xpos=0
                 
                 for label in listelabeliconeavancelb:
+
                     label.place(x=xpos,y=88)
                     xpos+=64
-                
+
                 for i3 in range(len(evolutions)):
+
                     afficher_levolution(listelabeliconeavancelb[i3],evolutions[i3])
                 
 
@@ -1025,14 +1056,28 @@ def avance_f():
 
     cacher_parametres()
     cacher_pokedex()
+
+    label_pre_evolution.place(x=6,y=270)
+    for i in listepokemon:
+        if i.nom == nom_du_pokemon.get():
+            pre_ev=i.pre_evolution
+            if pre_ev != False:
+                img = Image.open('images/sprites3g/icones/'+pre_ev+'1.png')
+                img = ImageTk.PhotoImage(img)
+                label_pre_evolution.config(image=img)
+                label_pre_evolution.im=img
+            else:
+                img = Image.open('images/sprites3g/icones/empty.png')
+                img = ImageTk.PhotoImage(img)
+                label_pre_evolution.config(image=img)
+                label_pre_evolution.im=img
+
     
     for i in listepokemon:
         if i.nom == nom_du_pokemon.get():
             if i.condition_evolution != False:
                 cond_ev=i.condition_evolution
     
-    ey=nom_du_pokemon.get()
-    #afficher_condition_evolution()
     for i in range(5):
         afficher_levolution(listelabeliconeavancelb[i],'empty')
     afficher_icones_avance()
@@ -1044,6 +1089,15 @@ def avance_f():
     retouraupokedex.place(x=484,y=0)
     parametres.place(x=576,y=0)
 
+    root.bind('<Control-s>',lambda event:None)
+    root.bind('<Control-S>',lambda event:None)
+    root.bind('<Right>',lambda event:None)
+    root.bind('<Left>',lambda event:None)
+    root.bind('<Control-Shift-S>',lambda event:None)
+    root.bind('<Control-Shift-s>',lambda event:None)
+    root.bind('<KeyRelease-S>',lambda event:None)
+    root.bind('<KeyRelease-s>',lambda event:None)
+
 listelabelconditionlb=[]
 def listelabelcondition(label,xpos,bg):
     img = Image.open('images/font3g/minuscule/espace.png')
@@ -1052,21 +1106,57 @@ def listelabelcondition(label,xpos,bg):
     label.im=img
     label.place(x=xpos,y=208)
     listelabelconditionlb.append(label)
+
+listelabelflechelb=[]
+def listelabelfleche(label,xpos,bg):
+    img = Image.open('images/fonds/selectVIDE.png')
+    img = ImageTk.PhotoImage(img)
+    label=Label(root,image=img,bg=bg,borderwidth=0, highlightthickness=0)
+    label.im=img
+    label.place(x=xpos,y=152)
+    listelabelflechelb.append(label)
     
+numero_icone_choisi=-1
+
+def choisir_icone(num):
+
+    for i in listepokemon:
+        if i.nom == nom_du_pokemon.get():
+            if i.condition_evolution != False:
+                cond_ev=i.condition_evolution
+
+    global numero_icone_choisi
+    numero_icone_choisi = num
+
+    if (numero_icone_choisi)+1 <= len(cond_ev):
+
+        for i in listelabelflechelb:
+            i.place_forget()
+
+        position_x= (numero_icone_choisi*64)+25
+        listelabelflechelb[numero_icone_choisi].place(x=position_x,y=152)
+        img = Image.open('images/fonds/select.png')
+        img = ImageTk.PhotoImage(img)
+        listelabelflechelb[numero_icone_choisi].config(image=img,bg='#f8b0a0')
+        listelabelflechelb[numero_icone_choisi].im=img
+        afficher_condition_evolution()
+
 listelabeliconeavancelb=[]
 def listelabeliconeavance(label,xpos,bg):
+    global numero_icone_choisi
     img = Image.open('images/sprites3g/icones/empty.png')
     img = ImageTk.PhotoImage(img)
     label=Label(root,image=img,bg=bg,borderwidth=0, highlightthickness=0)
     label.im=img
     label.place(x=xpos,y=88)
     listelabeliconeavancelb.append(label)
+    label.bind("<Button-1>", lambda event:choisir_icone(int(xpos/64)))
     
 #condition evolution    
 
-xpos=2
+xpos=0
 place=0
-for i in range(28):
+for i in range(37):
     bg='#f8b0a0'
     listelabelcondition(('label'+str(place)),xpos,bg)
     xpos+=12
@@ -1075,9 +1165,19 @@ for i in range(28):
 for i in listelabelconditionlb:
     i.place_forget()
     
-xpos=2
+xpos=0
 place=0
+for i in range(5):
+    bg='#f8b0a0'
+    listelabelfleche(('label'+str(place)),xpos,bg)
+    xpos+=64
+    place+=1
 
+for i in listelabelflechelb:
+    i.place_forget()
+
+xpos=0
+place=0
 for i in range(5):
     bg='#f8b0a0'
     listelabeliconeavance(('label'+str(place)),xpos,bg)
@@ -1124,8 +1224,8 @@ def afficher_levolution(label,pokemon):
         
 root.bind('<Control-s>',lambda event:cri_pokemon())
 root.bind('<Control-S>',lambda event:cri_pokemon())
-root.bind('<Control-o>',lambda event:choix_equipe_plus('choix_plus_equipes','gerer',None,None))
-root.bind('<Control-O>',lambda event:choix_equipe_plus('choix_plus_equipes','gerer',None,None))
+root.bind('<Control-o>',lambda event:choix_equipe_plus('choix_plus_equipes','voir',None,None))
+root.bind('<Control-O>',lambda event:choix_equipe_plus('choix_plus_equipes','voir',None,None))
 
 nompokemon.bind("<<ComboboxSelected>>", combobox_nom)
 

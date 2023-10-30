@@ -21,7 +21,11 @@ def fenetre_equipe(master,equipechoisie,nom):
         file.close
     
     master=tk.Toplevel()
-    master.geometry('500x450+1074+50')
+
+    fenetrex=int((master.winfo_screenwidth()/2)-250)
+    fenetrey=int((master.winfo_screenheight()/2)-225)
+    master.geometry('500x450+'+str(fenetrex)+'+'+str(fenetrey))
+
     master.resizable(False,False)
     background=PhotoImage(file='images/fonds/fondequipes.png')
     bg=Label(master, image=background)
@@ -399,7 +403,12 @@ def choix_equipe(master):
     
     master=tk.Toplevel()
     master.title("Choix de l'équipe")
-    master.geometry('224x232+800+50')
+
+    fenetrex=int((master.winfo_screenwidth()/2)-112)
+    fenetrey=int((master.winfo_screenheight()/2)-116)
+
+    master.geometry('224x232+'+str(fenetrex)+'+'+str(fenetrey))
+
     master.resizable(False,False)
     background=PhotoImage(file='images/fonds/fondchoixequipes.png')
     bg=Label(master, image=background)
@@ -499,7 +508,12 @@ def choix_creation_equipe(master):
     
     master=tk.Toplevel()
     master.title("Choix de l'équipe")
-    master.geometry('224x232+800+342')
+
+    fenetrex=int((master.winfo_screenwidth()/2)-112)
+    fenetrey=int((master.winfo_screenheight()/2)-116)
+
+    master.geometry('224x232+'+str(fenetrex)+'+'+str(fenetrey))
+
     master.resizable(False,False)
     background=PhotoImage(file='images/fonds/fondgererequipes.png')
     bg=Label(master, image=background)
@@ -1715,7 +1729,11 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
     
     master=tk.Toplevel()
     master.title("Plus d'Équipes")
-    master.geometry('200x100+800+342')
+
+    fenetrex=int((master.winfo_screenwidth()/2)-100)
+    fenetrey=int((master.winfo_screenheight()/2)-50)
+
+    master.geometry('200x100+'+str(fenetrex)+'+'+str(fenetrey))
     master.resizable(False,False)
     
     background=PhotoImage(file='images/fonds/nouveaunom.png')
@@ -1924,11 +1942,6 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
                 renommer_msg = tkinter.messagebox.showinfo(title="Action impossible",message="Vous ne pouvez pas renommer cette équipe car elle fait partie des 8 équipes par défaut, vous pouvez uniquement renommer les équipes que vous avez créées vous-même")
                 
             else:
-                
-                background=PhotoImage(file='images/fonds/nouveaunom.png')
-                bg.config(image=background)
-                bg.im=background
-                bg.place(x=-2,y=-2)
                 
                 master.title("Renommer l'équipe")
                 
