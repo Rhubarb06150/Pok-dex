@@ -1854,18 +1854,16 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
     def effacer_fonction(liste):
         
         mot=cherche.get()
-        cherche.delete(0,len(mot))
+        cherche.delete(0,END)
         
         lettre('e',listelabel)
         
         path = ('images/font3g/espace.png')
         img = ImageTk.PhotoImage(Image.open(path))
                 
-                
         for i in range(len(mot)):
             listelabel[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
             listelabel[i].im=img
-
     
     def creer_dossier(equipe_choix):
         
@@ -1877,9 +1875,7 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
         membre4=open('txts/equipe'+equipe_choix+'/membre4.txt','x')
         membre5=open('txts/equipe'+equipe_choix+'/membre5.txt','x')
         membre6=open('txts/equipe'+equipe_choix+'/membre6.txt','x')
-        
-        
-    
+
     def aller():
         
         if pos == None:
@@ -2026,6 +2022,10 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
     master.bind('<y>',lambda event:lettre('',listelabel))
     master.bind('<Z>',lambda event:lettre('',listelabel))
     master.bind('<y>',lambda event:lettre('',listelabel))
+    master.bind('<é>',lambda event:lettre('',listelabel))
+    master.bind('<É>',lambda event:lettre('',listelabel))
+    master.bind('<è>',lambda event:lettre('',listelabel))
+    master.bind('<È>',lambda event:lettre('',listelabel))
 
     master.bind('<BackSpace>',lambda event:effacer_fonction(listelabel))
     

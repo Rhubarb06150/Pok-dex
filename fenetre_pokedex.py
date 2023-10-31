@@ -842,6 +842,9 @@ def cacher_parametres():
     verifier_maj_etat.place_forget()
     retouraupokedex.place_forget()
 
+    for i in listelabelversionlb:
+        i.place_forget()
+
 def afficher_parametres():
 
     retouraupokedex.place(x=484,y=0)
@@ -851,6 +854,10 @@ def afficher_parametres():
     pokemonpref.place(x=18,y=76)
     verifiermaj.place(x=18,y=104)
     verifier_maj_etat.place(x=304,y=104)
+    xpos=636
+    for i in listelabelversionlb:
+        i.place(x=xpos,y=440)
+        xpos+=12
 
 
 def parametres_f():
@@ -873,9 +880,12 @@ def parametres_f():
         
     afficher_parametres()
 
+    cacher_les_types()
+
     avancé.place(x=404,y=0)
     retouraupokedex.place(x=484,y=0)
     parametres.place_forget()
+    afficher_version()
     
     for i in listelabeliconeavancelb:
         i.place_forget()
@@ -966,6 +976,7 @@ def pokedex():
     afficher_pokedex()
     cacher_parametres()
     cacher_avance()
+    cacher_les_types()
     label_pre_evolution.place_forget()
     
     retouraupokedex.place_forget()
@@ -1057,7 +1068,7 @@ def avance_f():
     cacher_parametres()
     cacher_pokedex()
 
-    label_pre_evolution.place(x=6,y=270)
+    label_pre_evolution.place(x=332,y=102)
     for i in listepokemon:
         if i.nom == nom_du_pokemon.get():
             pre_ev=i.pre_evolution
@@ -1089,6 +1100,8 @@ def avance_f():
     retouraupokedex.place(x=484,y=0)
     parametres.place(x=576,y=0)
 
+    afficher_les_types()
+
     root.bind('<Control-s>',lambda event:None)
     root.bind('<Control-S>',lambda event:None)
     root.bind('<Right>',lambda event:None)
@@ -1115,9 +1128,243 @@ def listelabelfleche(label,xpos,bg):
     label.im=img
     label.place(x=xpos,y=152)
     listelabelflechelb.append(label)
+
+listelabelversionlb=[]
+def listelabelversion(label,xpos):
+    img = Image.open('images/font3g/nombres/espace.png')
+    img = ImageTk.PhotoImage(img)
+    label=Label(root,image=img,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    label.im=img
+    label.place(x=xpos,y=440)
+    listelabelversionlb.append(label)
     
+listelabelresistanceslb=[]
+def listelabelresistances(label,xpos):
+    img = Image.open('images/types/empty.png')
+    img = ImageTk.PhotoImage(img)
+    label=Label(root,image=img,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    label.im=img
+    label.place(x=xpos,y=310)
+    listelabelresistanceslb.append(label)
+
+listelabeldbresistanceslb=[]
+def listelabeldbresistances(label,xpos):
+    img = Image.open('images/types/empty.png')
+    img = ImageTk.PhotoImage(img)
+    label=Label(root,image=img,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    label.im=img
+    label.place(x=xpos,y=342)
+    listelabeldbresistanceslb.append(label)
+
+listelabelfaiblesseslb=[]
+def listelabelfaiblesses(label,xpos):
+    img = Image.open('images/types/empty.png')
+    img = ImageTk.PhotoImage(img)
+    label=Label(root,image=img,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    label.im=img
+    label.place(x=xpos,y=374)
+    listelabelfaiblesseslb.append(label)
+
+listelabeldbfaiblesseslb=[]
+def listelabeldbfaiblesses(label,xpos):
+    img = Image.open('images/types/empty.png')
+    img = ImageTk.PhotoImage(img)
+    label=Label(root,image=img,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    label.im=img
+    label.place(x=xpos,y=406)
+    listelabeldbfaiblesseslb.append(label)
+
+listelabelimmuniteslb=[]
+def listelabelimmunites(label,xpos):
+    img = Image.open('images/types/empty.png')
+    img = ImageTk.PhotoImage(img)
+    label=Label(root,image=img,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+    label.im=img
+    label.place(x=xpos,y=438)
+    listelabelimmuniteslb.append(label)
+
 numero_icone_choisi=-1
 
+place=0
+xpos=636
+for i in range(5):
+    listelabelversion((('label')+str(place)),xpos)
+    xpos+=12
+    place+=1
+
+for i in listelabelversionlb:
+        i.place_forget()
+
+place=0
+xpos=42
+for i in range(5):
+    listelabelresistances((('label')+str(place)),xpos)
+    xpos+=66
+for i in listelabelresistanceslb:
+    i.place_forget()
+
+place=0
+xpos=42
+for i in range(5):
+    listelabeldbresistances((('label')+str(place)),xpos)
+    xpos+=66
+    place+=1
+for i in listelabeldbresistanceslb:
+    i.place_forget()
+
+place=0
+xpos=42
+for i in range(5):
+    listelabelfaiblesses((('label')+str(place)),xpos)
+    xpos+=66
+    place+=1
+for i in listelabelfaiblesseslb:
+    i.place_forget()
+
+place=0
+xpos=42
+for i in range(5):
+    listelabeldbfaiblesses((('label')+str(place)),xpos)
+    xpos+=66
+    place+=1
+for i in listelabeldbfaiblesseslb:
+    i.place_forget()
+
+place=0
+xpos=42
+for i in range(5):
+    listelabelimmunites((('label')+str(place)),xpos)
+    xpos+=66
+    place+=1
+for i in listelabelimmuniteslb:
+    i.place_forget()
+
+def afficher_les_types():
+
+    listelabelstypes=[listelabelresistanceslb,listelabeldbresistanceslb,listelabelfaiblesseslb,listelabeldbfaiblesseslb,listelabelimmuniteslb]
+
+    for i in range(5):
+        for liste in listelabelstypes:
+            img = Image.open('images/types/empty.png')
+            img = ImageTk.PhotoImage(img)
+
+            liste[i].config(image=img,bg='#f8b0a0')
+            liste[i].im=img
+            
+    xpos=42
+    for i in range(5):
+        listelabeldbresistanceslb[i].place(x=xpos,y=310)
+        xpos+=66
+
+    xpos=42
+    for i in range(5):
+        listelabelresistanceslb[i].place(x=xpos,y=342)
+        xpos+=66
+
+    xpos=42
+    for i in range(5):
+        listelabelfaiblesseslb[i].place(x=xpos,y=374)
+        xpos+=66
+
+    xpos=42
+    for i in range(5):
+        listelabeldbfaiblesseslb[i].place(x=xpos,y=406)
+        xpos+=66
+
+    xpos=42
+    for i in range(5):
+        listelabelimmuniteslb[i].place(x=xpos,y=438)
+        xpos+=66
+
+    for i in listepokemon:
+        if i.nom == nom_du_pokemon.get():
+            if i.faiblesses != False:
+
+                faiblesses=i.faiblesses
+
+                for i2 in range(len(faiblesses)):
+
+                    img = Image.open('images/types/'+faiblesses[i2]+'.png')
+                    img = ImageTk.PhotoImage(img)
+
+                    listelabelfaiblesseslb[i2].config(image=img,bg='#f8b0a0')
+                    listelabelfaiblesseslb[i2].im=img
+
+            if i.dbfaiblesses != False:
+
+                dbfaiblesses=i.dbfaiblesses
+
+                for i2 in range(len(dbfaiblesses)):
+
+                    img = Image.open('images/types/'+dbfaiblesses[i2]+'.png')
+                    img = ImageTk.PhotoImage(img)
+                    listelabeldbfaiblesseslb[i2].config(image=img,bg='#f8b0a0')
+                    listelabeldbfaiblesseslb[i2].im=img
+
+            if i.resistances != False:
+
+                resistances=i.resistances
+
+                for i2 in range(len(resistances)):
+
+                    img = Image.open('images/types/'+resistances[i2]+'.png')
+                    img = ImageTk.PhotoImage(img)
+                    listelabelresistanceslb[i2].config(image=img,bg='#f8b0a0')
+                    listelabelresistanceslb[i2].im=img
+
+            if i.dbresistances != False:
+
+                dbresistances=i.dbresistances
+
+                for i2 in range(len(dbresistances)):
+
+                    img = Image.open('images/types/'+dbresistances[i2]+'.png')
+                    img = ImageTk.PhotoImage(img)
+                    listelabeldbresistanceslb[i2].config(image=img,bg='#f8b0a0')
+                    listelabeldbresistanceslb[i2].im=img
+
+            if i.immunites != False:
+
+                immunites=i.immunites
+
+                for i2 in range(len(immunites)):
+
+                    img = Image.open('images/types/'+immunites[i2]+'.png')
+                    img = ImageTk.PhotoImage(img)
+                    listelabelimmuniteslb[i2].config(image=img,bg='#f8b0a0')
+                    listelabelimmuniteslb[i2].im=img
+
+def cacher_les_types():
+    for i in listelabelresistanceslb:
+        i.place_forget()
+    for i in listelabeldbresistanceslb:
+        i.place_forget()
+    for i in listelabelfaiblesseslb:
+        i.place_forget()
+    for i in listelabeldbfaiblesseslb:
+        i.place_forget()
+    for i in listelabelimmuniteslb:
+        i.place_forget()
+
+def afficher_version():
+
+    file=open('version.txt')
+    vers=str(file.read())
+    file.close
+
+    for i in range(len(vers)):
+
+        if vers[i] == '.':
+            img = Image.open('images/font3g/nombres/point.png')
+            img = ImageTk.PhotoImage(img)
+            listelabelversionlb[i].config(image=img)
+            listelabelversionlb[i].im=img
+        else:
+            img = Image.open('images/font3g/nombres/'+vers[i]+'.png')
+            img = ImageTk.PhotoImage(img)
+            listelabelversionlb[i].config(image=img)
+            listelabelversionlb[i].im=img
+        
 def choisir_icone(num):
 
     for i in listepokemon:
@@ -1216,6 +1463,7 @@ def lettrecondition(label,mot,i):
         label.im=img
         
 def afficher_levolution(label,pokemon):
+    
     img = Image.open('images/sprites3g/icones/'+pokemon+'1.png')
     img = ImageTk.PhotoImage(img)
         
@@ -1250,6 +1498,5 @@ file.close
 
 place=0
 posx1=2
-
 
 root.mainloop()
