@@ -14,8 +14,7 @@ import sys
 print(sys.executable)
 #import requests
 
-listemaj=['A','B','C','D','E','F','G','H','I','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-listemin=['a','b','c','d','e','f','g','h','i','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+listemaj=['A','B','C','D','E','F','G','H','I','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','É']
 
 root=Tk()
 
@@ -768,6 +767,24 @@ chercher.im=chercherimg
 chercher.place(x=238,y=406)
 chercher.bind('<Button-1>',lambda event:chercher_pokemon())
 
+codesourceimg = Image.open('images/fonds/codesource.png')
+codesourceimg = ImageTk.PhotoImage(codesourceimg)
+codesource=Label(root, image=codesourceimg ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+codesource.config(image=codesourceimg)
+codesource.im=codesourceimg
+codesource.place(x=4,y=440)
+codesource.bind('<Button-1>',lambda event:ouvrir_code_source())
+codesource.place_forget()
+
+controlesimg = Image.open('images/fonds/controles.png')
+controlesimg = ImageTk.PhotoImage(controlesimg)
+controles=Label(root, image=controlesimg ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+controles.config(image=controlesimg)
+controles.im=controlesimg
+controles.place(x=4,y=414)
+controles.bind('<Button-1>',lambda event:webbrowser.open("controles.txt"))
+controles.place_forget()
+
 img = Image.open('images/sprites3g/icones/empty.png')
 img = ImageTk.PhotoImage(img)
 label_pre_evolution=Label(root, image=img, bg='#f8b0a0',borderwidth=0, highlightthickness=0)
@@ -776,6 +793,12 @@ label_pre_evolution.place(x=6,y=270)
 label_pre_evolution.place_forget()
 
 #________________________________________________________________________
+
+def ouvrir_code_source():
+    ouvrir_code=tkinter.messagebox.askquestion(title='Ouvrir le code source?',message='Voulez-vous accéder au code source en allant sur la page GitHub du Pokédex?')
+    if ouvrir_code=='yes':
+        webbrowser.open('https://github.com/Rhubarb06150/Pok-dex')
+
 
 def pokemon_prefere():
     
@@ -849,6 +872,8 @@ def cacher_parametres():
     verifiermaj.place_forget()
     verifier_maj_etat.place_forget()
     retouraupokedex.place_forget()
+    codesource.place_forget()
+    controles.place_forget()
 
     for i in listelabelversionlb:
         i.place_forget()
@@ -862,6 +887,8 @@ def afficher_parametres():
     pokemonpref.place(x=18,y=76)
     verifiermaj.place(x=18,y=104)
     verifier_maj_etat.place(x=304,y=104)
+    codesource.place(x=4,y=440)
+    controles.place(x=4,y=414)
     xpos=636
     for i in listelabelversionlb:
         i.place(x=xpos,y=440)
@@ -890,6 +917,8 @@ def parametres_f():
 
     cacher_les_types()
 
+    chercher.place_forget()
+
     avancé.place(x=404,y=0)
     retouraupokedex.place(x=484,y=0)
     parametres.place_forget()
@@ -908,6 +937,8 @@ def parametres_f():
     root.bind('<KeyRelease-s>',lambda event:None)
     root.bind('<Control-f>',lambda event:None)
     root.bind('<Control-F>',lambda event:None)
+    root.bind('<Control-o>',lambda event:None)
+    root.bind('<Control-O>',lambda event:None)
 
 def afficher_pokedex():
 
@@ -967,6 +998,7 @@ def afficher_pokedex():
     pokemonaleatoire.place(x=190,y=406)
 
     chercher.place(x=238,y=406)
+    codesource.place(x=4,y=440)
 
 def afficher_nom_pokemon():
 
@@ -1006,6 +1038,8 @@ def pokedex():
     root.bind('<KeyRelease-s>',lambda event:desactiver_shiny())
     root.bind('<Control-f>',lambda event:chercher_pokemon())
     root.bind('<Control-F>',lambda event:chercher_pokemon())
+    root.bind('<Control-o>',lambda event:choix_equipe_plus('choix_plus_equipes','voir',None,None))
+    root.bind('<Control-O>',lambda event:choix_equipe_plus('choix_plus_equipes','voir',None,None))
 
 def cacher_avance():
 
@@ -1082,7 +1116,7 @@ def avance_f():
     cacher_parametres()
     cacher_pokedex()
 
-    label_pre_evolution.place(x=332,y=102)
+    label_pre_evolution.place(x=354,y=102)
     for i in listepokemon:
         if i.nom == nom_du_pokemon.get():
             pre_ev=i.pre_evolution
@@ -1128,6 +1162,8 @@ def avance_f():
     root.bind('<KeyRelease-s>',lambda event:None)
     root.bind('<Control-f>',lambda event:None)
     root.bind('<Control-F>',lambda event:None)
+    root.bind('<Control-o>',lambda event:None)
+    root.bind('<Control-O>',lambda event:None)
 
 listelabelconditionlb=[]
 def listelabelcondition(label,xpos,bg):
@@ -1518,6 +1554,8 @@ if verifier_les_maj.get() == 1:
     file2.close
         
 file.close
+
+root.bind('<Escape>',lambda event:root.destroy())
 
 place=0
 posx1=2

@@ -1,0 +1,8 @@
+Gauche : Pokémon précédent
+Droite : Pokémon suivant
+
+Ctrl + O : ouvrir une équipe
+Ctrl + F : chercher un Pokémon
+Ctrl + S : écouter le cri du Pokémon
+
+P (dans la fenêtre de choix d'équipe) : recherche plus d'équipes

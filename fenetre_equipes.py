@@ -392,7 +392,7 @@ def fenetre_equipe(master,equipechoisie,nom):
     gerer.place(x=10,y=424)
     gerer.bind('<Button-1>',lambda event:voir_vers_gerer())
                 
-    
+    master.bind('<Escape>',lambda event:master.destroy())
             
     afficher_equipe()
     master.mainloop()
@@ -502,6 +502,9 @@ def choix_equipe(master):
     
     master.bind('<p>',lambda event:choix_equipe_plus('choix_plus_equipes','voir',None,master))
     master.bind('<P>',lambda event:choix_equipe_plus('choix_plus_equipes','voir',None,master))
+
+    master.bind('<Escape>',lambda event:master.destroy())
+
     master.mainloop()
     
 def choix_creation_equipe(master):
@@ -607,6 +610,8 @@ def choix_creation_equipe(master):
 
     master.bind('<p>',lambda event:choix_equipe_plus('choix_plus_equipes','gerer',None,master))
     master.bind('<P>',lambda event:choix_equipe_plus('choix_plus_equipes','gerer',None,master))
+
+    master.bind('<Escape>',lambda event:master.destroy())
 
     master.mainloop()
     
@@ -1722,6 +1727,8 @@ def creation_equipe(master,equipechoisie,x,y,event):
     file.close
     
     afficher_types()
+
+    master.bind('<Escape>',lambda event:master.destroy())
     
     master.mainloop()
     
@@ -2037,4 +2044,6 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
     
     master.bind('<Return>',lambda event:aller())
     
+    master.bind('<Escape>',lambda event:master.destroy())
+
     master.mainloop()

@@ -317,9 +317,9 @@ listepokemon=[]
 
     #KANTO
 
-listepokemon.append(Pokemon(1,['bulbizarre','bublizarre','Bublizarre','bublizzare','bublizzarre','Bublizzare','Bublizzarre'],'Bulbizarre',45,49,49,45,65,65,65,False,['Herbizarre'],[16],'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrik'],['Plante'],False))
-listepokemon.append(Pokemon(2,['herbizarre','herbizzare','herbizzarre','Herbizzare','Herbizzarre'],'Herbizarre',60,62,63,60,80,80,80,'Bulbizarre',['Florizarre'],[32],'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrik'],['Plante'],False))
-listepokemon.append(Pokemon(3,['florizarre','florizzare','florizzarre','Florizzare','Florizzarre'],'Florizarre',80,82,83,80,100,100,100,'Herbizarre',False,False,'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrik'],['Plante'],False))
+listepokemon.append(Pokemon(1,['bulbizarre','bublizarre','Bublizarre','bublizzare','bublizzarre','Bublizzare','Bublizzarre'],'Bulbizarre',45,49,49,45,65,65,65,False,['Herbizarre'],[16],'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrik'],False,False))
+listepokemon.append(Pokemon(2,['herbizarre','herbizzare','herbizzarre','Herbizzare','Herbizzarre'],'Herbizarre',60,62,63,60,80,80,80,'Bulbizarre',['Florizarre'],[32],'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrik'],False,False))
+listepokemon.append(Pokemon(3,['florizarre','florizzare','florizzarre','Florizzare','Florizzarre'],'Florizarre',80,82,83,80,100,100,100,'Herbizarre',False,False,'Plante','Poison',5100,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrik'],False,False))
 
 listepokemon.append(Pokemon(4,['salameche','salamèche','Salameche'],'Salamèche',39,52,43,65,50,60,50,False,['Reptincel'],[16],'Feu',False,5100,87,13,45,['Eau','Roche','Sol'],False,['Acier','Feu','Glace','Insecte','Plante'],False,False))
 listepokemon.append(Pokemon(5,['reptincel','Reptincel'],'Reptincel',58,64,58,80,80,80,65,'Salamèche',['Dracaufeu'],[36],'Feu',False,5100,87,13,45,['Eau','Roche','Sol'],False,['Acier','Feu','Glace','Insecte','Plante'],False,False))
@@ -376,9 +376,9 @@ listepokemon.append(Pokemon(63,['abra'],'Abra',25,20,15,90,105,105,55,False,['Ka
 listepokemon.append(Pokemon(64,['kadabra'],'Kadabra',40,35,30,105,120,120,70,'Abra',['Alakazam'],['Échange'],'Psy',False,5120,75,25,100,['Insecte','Spectre','Ténèbres'],False,['Combat','Psy'],False,False))
 listepokemon.append(Pokemon(65,['alakazam'],'Alakazam',55,50,45,120,135,135,85,'Kadabra',False,False,'Psy',False,5120,75,25,50,['Insecte','Spectre','Ténèbres'],False,['Combat','Psy'],False,False))
 
-listepokemon.append(Pokemon(92,['fantominus'],'Fantominus',30,35,30,80,100,100,35,False,['Spectrum'],[25],'Spectre','Poison',5120,50,50,190,['Sol','Psy','Spectre','Ténèbres'],False,['Plante','Fée'],['Poison','Insecte'],['Normal','Combat']))
-listepokemon.append(Pokemon(93,['spectrum'],'Spectrum',45,50,45,95,115,115,55,'Fantominus',['Ectoplasma'],['Échange'],'Spectre','Poison',5120,50,50,90,['Sol','Psy','Spectre','Ténèbres'],False,['Plante','Fée'],['Poison','Insecte'],['Normal','Combat']))
-listepokemon.append(Pokemon(94,['ectoplasma'],'Ectoplasma',60,65,60,110,130,130,75,'Spectrum',False,False,'Spectre','Poison',5120,50,50,45,['Sol','Psy','Spectre','Ténèbres'],False,['Plante','Fée'],['Poison','Insecte'],['Normal','Combat']))
+listepokemon.append(Pokemon(92,['fantominus'],'Fantominus',30,35,30,80,100,100,35,False,['Spectrum'],[25],'Spectre','Poison',5120,50,50,190,['Sol','Psy','Spectre','Ténèbres'],False,['Plante'],['Poison','Insecte'],['Normal','Combat']))
+listepokemon.append(Pokemon(93,['spectrum'],'Spectrum',45,50,45,95,115,115,55,'Fantominus',['Ectoplasma'],['Échange'],'Spectre','Poison',5120,50,50,90,['Sol','Psy','Spectre','Ténèbres'],False,['Plante'],['Poison','Insecte'],['Normal','Combat']))
+listepokemon.append(Pokemon(94,['ectoplasma'],'Ectoplasma',60,65,60,110,130,130,75,'Spectrum',False,False,'Spectre','Poison',5120,50,50,45,['Sol','Psy','Spectre','Ténèbres'],False,['Plante'],['Poison','Insecte'],['Normal','Combat']))
 
 listepokemon.append(Pokemon(102,['noeunoeuf'],'Noeunoeuf',60,40,80,40,60,60,45,False,['Noadkoko'],['Utiliser une Pierre Plante'],'Plante','Psy',5120,50,50,90,['Feu','Glace','Poison','Vol','Spectre','Ténèbres'],['Insecte'],['Plante','Eau','Électrik','Combat','Sol','Psy'],False,False))
 listepokemon.append(Pokemon(103,['noadkoko'],'Noadkoko',95,95,85,55,125,125,65,'Noeunoeuf',False,False,'Plante','Psy',5120,50,50,45,['Feu','Glace','Poison','Vol','Spectre','Ténèbres'],['Insecte'],['Plante','Eau','Électrik','Combat','Sol','Psy'],False,False))
@@ -435,9 +435,9 @@ listepokemon.append(Pokemon(243,['raiku','raikou','Raiku'],'Raikou',90,85,75,115
 listepokemon.append(Pokemon(244,['entei'],'Entei',115,115,85,100,0,90,75,False,False,False,'Feu',False,30345,0,0,3,['Eau','Roche','Sol'],False,['Acier','Feu','Glace','Insecte','Plante'],False,False))
 listepokemon.append(Pokemon(245,['suicune'],'Suicune',100,75,115,85,0,90,115,False,False,False,'Eau',False,30345,0,0,3,['Électrik','Plante'],False,['Acier','Eau','Feu','Glace'],False,False))
 
-listepokemon.append(Pokemon(246,['embrylex'],'Embrylex',50,64,50,41,0,45,50,False,['Ymphect'],[30],'Roche','Ténèbres',10240,50,50,45,['Normal','Feu','Vol','Roche'],['Poison'],['Glace','Combat','Sol','Acier'],['Plante','Eau'],['Électrik']))
-listepokemon.append(Pokemon(247,['ymphect'],'Ymphect',70,84,70,51,0,65,70,'Embrylex',['Tyranocif'],[55],'Roche','Ténèbres',10240,50,50,45,['Normal','Feu','Vol','Roche'],['Poison'],['Glace','Combat','Sol','Acier'],['Plante','Eau'],['Électrik']))
-listepokemon.append(Pokemon(248,['tyranocif'],'Tyranocif',100,134,100,61,0,65,100,'Ymphect',False,False,'Roche','Ténèbres',10240,50,50,45,['Normal','Feu','Vol','Roche'],['Poison'],['Glace','Combat','Sol','Acier'],['Plante','Eau'],['Électrik']))
+listepokemon.append(Pokemon(246,['embrylex'],'Embrylex',50,64,50,41,0,45,50,False,['Ymphect'],[30],'Roche','Ténèbres',10240,50,50,45,['Plante','Eau','Sol','Insecte','Acier'],['Combat'],['Normal','Feu','Poison','Vol','Spectre','Ténèbres'],False,['Psy']))
+listepokemon.append(Pokemon(247,['ymphect'],'Ymphect',70,84,70,51,0,65,70,'Embrylex',['Tyranocif'],[55],'Roche','Ténèbres',10240,50,50,45,['Plante','Eau','Sol','Insecte','Acier'],['Combat'],['Normal','Feu','Poison','Vol','Spectre','Ténèbres'],False,['Psy']))
+listepokemon.append(Pokemon(248,['tyranocif'],'Tyranocif',100,134,100,61,0,65,100,'Ymphect',False,False,'Roche','Ténèbres',10240,50,50,45,['Plante','Eau','Sol','Insecte','Acier'],['Combat'],['Normal','Feu','Poison','Vol','Spectre','Ténèbres'],False,['Psy']))
 
 listepokemon.append(Pokemon(249,['lugia'],'Lugia',106,90,130,110,0,90,154,False,False,False,'Psy','Vol',30345,0,0,3,['Électrik','Glace','Roche','Spectre','Ténèbres'],False,['Plante','Psy'],['Combat'],['Sol']))
 listepokemon.append(Pokemon(250,['hooh','ho-oh'],'Ho-Oh',106,130,90,90,0,110,154,False,False,False,'Feu','Vol',30345,0,0,3,['Eau','Électrik'],['Roche'],['Acier','Combat','Feu'],['Insecte','Plante'],['Sol']))
@@ -445,9 +445,9 @@ listepokemon.append(Pokemon(251,['celebi','célébi','Célébi'],'Celebi',100,10
 
     #HOENN
 
-listepokemon.append(Pokemon(252,['arcko'],'Arcko',40,45,35,70,0,65,55,False,['Massko'],[16],'Plante',False,5120,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrik'],['Plante'],False))
-listepokemon.append(Pokemon(253,['massko'],'Massko',50,65,45,95,0,85,65,'Arcko',['Jungko'],[36],'Plante',False,5120,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrik'],['Plante'],False))
-listepokemon.append(Pokemon(254,['jungko'],'Jungko',70,85,65,120,0,105,85,'Massko',False,False,'Plante',False,5120,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrik'],['Plante'],False))
+listepokemon.append(Pokemon(252,['arcko'],'Arcko',40,45,35,70,0,65,55,False,['Massko'],[16],'Plante',False,5120,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrik'],False,False))
+listepokemon.append(Pokemon(253,['massko'],'Massko',50,65,45,95,0,85,65,'Arcko',['Jungko'],[36],'Plante',False,5120,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrik'],False,False))
+listepokemon.append(Pokemon(254,['jungko'],'Jungko',70,85,65,120,0,105,85,'Massko',False,False,'Plante',False,5120,87,13,45,['Feu','Glace','Psy','Vol'],False,['Combat','Eau','Électrik'],False,False))
 
 listepokemon.append(Pokemon(255,['poussifeu'],'Poussifeu',45,60,40,45,0,70,50,False,['Galifeu'],[16],'Feu',False,5100,87,13,45,['Eau','Roche','Sol'],False,['Acier','Feu','Glace','Insecte','Plante'],False,False))
 listepokemon.append(Pokemon(256,['galifeu'],'Galifeu',60,85,60,55,0,85,60,'Poussifeu',['Braségali'],[36],'Feu',False,5100,87,13,45,['Eau','Roche','Sol'],False,['Acier','Feu','Glace','Insecte','Plante'],False,False))
@@ -456,6 +456,10 @@ listepokemon.append(Pokemon(257,['braségali'],'Braségali',80,120,70,80,0,110,7
 listepokemon.append(Pokemon(258,['gobou'],'Gobou',50,70,50,40,0,50,50,False,['Flobio'],[16],'Eau',False,5400,87,13,45,['Électrik','Plante'],False,['Acier','Eau','Feu','Glace'],False,False))
 listepokemon.append(Pokemon(259,['flobio'],'Flobio',70,85,70,50,0,60,70,'Gobou',['Laggron'],[36],'Eau',False,5400,87,13,45,['Électrik','Plante'],False,['Acier','Eau','Feu','Glace'],False,False))
 listepokemon.append(Pokemon(260,['laggron'],'Laggron',100,110,90,60,0,85,90,'Flobio',False,False,'Eau',False,5400,87,13,45,['Électrik','Plante'],False,['Acier','Eau','Feu','Glace'],False,False))
+
+listepokemon.append(Pokemon(304,['galekid','galékid'],'Galekid',50,70,100,30,0,40,40,False,['Galegon'],[32],'Acier','Roche',8960,50,50,180,['Glace','Psy','Insecte','Roche','Dragon'],['Normal','Vol'],['Eau'],['Combat','Sol'],['Poison']))
+listepokemon.append(Pokemon(305,['galegon','galégon'],'Galegon',60,90,140,40,0,50,50,'Galekid',['Galeking'],[42],'Acier','Roche',8960,50,50,90,['Glace','Psy','Insecte','Roche','Dragon'],['Normal','Vol'],['Eau'],['Combat','Sol'],['Poison']))
+listepokemon.append(Pokemon(306,['galeking','galéking'],'Galeking',70,110,180,50,0,60,60,'Galegon',False,False,'Acier','Roche',8960,50,50,45,['Glace','Psy','Insecte','Roche','Dragon'],['Normal','Vol'],['Eau'],['Combat','Sol'],['Poison']))
 
 listepokemon.append(Pokemon(362,['oniglali'],'Oniglali',80,80,80,80,0,80,80,'Stalgamin',False,False,'Glace',False,5120,50,50,75,['Feu','Combat','Roche','Acier'],False,['Glace'],False,False))
 
@@ -495,6 +499,13 @@ for i in listepokemon:
     if i.num <= 251 and i.num >=152:
         liste2g.append(i)
 print(str(int((int(len(liste2g))/100)*100))+'% des Pokémons 2G implémantés')
+
+liste3g=[]
+for i in listepokemon:
+    if i.num >= 252:
+        liste3g.append(i)
+print(str(int((int(len(liste3g))/135)*100))+'% des Pokémons 3G implémantés')
+
 
 for i in listepokemon:
     gererimg = Image.open('images/sprites3g/'+i.nom+'.png')
