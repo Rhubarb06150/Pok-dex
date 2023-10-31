@@ -760,6 +760,14 @@ avancé.im=avancéimg
 avancé.place(x=404,y=0)
 avancé.bind('<Button-1>',lambda event:avance_f())
 
+chercherimg = Image.open('images/fonds/chercher.png')
+chercherimg = ImageTk.PhotoImage(chercherimg)
+chercher=Label(root, image=chercherimg ,bg='#f8b0a0',borderwidth=0, highlightthickness=0)
+chercher.config(image=chercherimg)
+chercher.im=chercherimg
+chercher.place(x=238,y=406)
+chercher.bind('<Button-1>',lambda event:chercher_pokemon())
+
 img = Image.open('images/sprites3g/icones/empty.png')
 img = ImageTk.PhotoImage(img)
 label_pre_evolution=Label(root, image=img, bg='#f8b0a0',borderwidth=0, highlightthickness=0)
@@ -898,6 +906,8 @@ def parametres_f():
     root.bind('<Control-Shift-s>',lambda event:None)
     root.bind('<KeyRelease-S>',lambda event:None)
     root.bind('<KeyRelease-s>',lambda event:None)
+    root.bind('<Control-f>',lambda event:None)
+    root.bind('<Control-F>',lambda event:None)
 
 def afficher_pokedex():
 
@@ -956,6 +966,8 @@ def afficher_pokedex():
     parametres.place(x=576,y=0)
     pokemonaleatoire.place(x=190,y=406)
 
+    chercher.place(x=238,y=406)
+
 def afficher_nom_pokemon():
 
     xpos=20
@@ -992,6 +1004,8 @@ def pokedex():
     root.bind('<Control-Shift-s>',lambda event:shiny_on_hold())
     root.bind('<KeyRelease-S>',lambda event:desactiver_shiny())
     root.bind('<KeyRelease-s>',lambda event:desactiver_shiny())
+    root.bind('<Control-f>',lambda event:chercher_pokemon())
+    root.bind('<Control-F>',lambda event:chercher_pokemon())
 
 def cacher_avance():
 
@@ -1100,6 +1114,8 @@ def avance_f():
     retouraupokedex.place(x=484,y=0)
     parametres.place(x=576,y=0)
 
+    chercher.place_forget()
+
     afficher_les_types()
 
     root.bind('<Control-s>',lambda event:None)
@@ -1110,6 +1126,8 @@ def avance_f():
     root.bind('<Control-Shift-s>',lambda event:None)
     root.bind('<KeyRelease-S>',lambda event:None)
     root.bind('<KeyRelease-s>',lambda event:None)
+    root.bind('<Control-f>',lambda event:None)
+    root.bind('<Control-F>',lambda event:None)
 
 listelabelconditionlb=[]
 def listelabelcondition(label,xpos,bg):
@@ -1197,7 +1215,7 @@ for i in listelabelversionlb:
 
 place=0
 xpos=42
-for i in range(5):
+for i in range(6):
     listelabelresistances((('label')+str(place)),xpos)
     xpos+=66
 for i in listelabelresistanceslb:
@@ -1205,7 +1223,7 @@ for i in listelabelresistanceslb:
 
 place=0
 xpos=42
-for i in range(5):
+for i in range(6):
     listelabeldbresistances((('label')+str(place)),xpos)
     xpos+=66
     place+=1
@@ -1214,7 +1232,7 @@ for i in listelabeldbresistanceslb:
 
 place=0
 xpos=42
-for i in range(5):
+for i in range(6):
     listelabelfaiblesses((('label')+str(place)),xpos)
     xpos+=66
     place+=1
@@ -1223,7 +1241,7 @@ for i in listelabelfaiblesseslb:
 
 place=0
 xpos=42
-for i in range(5):
+for i in range(6):
     listelabeldbfaiblesses((('label')+str(place)),xpos)
     xpos+=66
     place+=1
@@ -1232,7 +1250,7 @@ for i in listelabeldbfaiblesseslb:
 
 place=0
 xpos=42
-for i in range(5):
+for i in range(6):
     listelabelimmunites((('label')+str(place)),xpos)
     xpos+=66
     place+=1
@@ -1243,7 +1261,7 @@ def afficher_les_types():
 
     listelabelstypes=[listelabelresistanceslb,listelabeldbresistanceslb,listelabelfaiblesseslb,listelabeldbfaiblesseslb,listelabelimmuniteslb]
 
-    for i in range(5):
+    for i in range(6):
         for liste in listelabelstypes:
             img = Image.open('images/types/empty.png')
             img = ImageTk.PhotoImage(img)
@@ -1252,27 +1270,27 @@ def afficher_les_types():
             liste[i].im=img
             
     xpos=42
-    for i in range(5):
-        listelabeldbresistanceslb[i].place(x=xpos,y=310)
+    for i in range(6):
+        listelabelresistanceslb[i].place(x=xpos,y=310)
         xpos+=66
 
     xpos=42
-    for i in range(5):
-        listelabelresistanceslb[i].place(x=xpos,y=342)
+    for i in range(6):
+        listelabeldbresistanceslb[i].place(x=xpos,y=342)
         xpos+=66
 
     xpos=42
-    for i in range(5):
+    for i in range(6):
         listelabelfaiblesseslb[i].place(x=xpos,y=374)
         xpos+=66
 
     xpos=42
-    for i in range(5):
+    for i in range(6):
         listelabeldbfaiblesseslb[i].place(x=xpos,y=406)
         xpos+=66
 
     xpos=42
-    for i in range(5):
+    for i in range(6):
         listelabelimmuniteslb[i].place(x=xpos,y=438)
         xpos+=66
 
@@ -1463,17 +1481,22 @@ def lettrecondition(label,mot,i):
         label.im=img
         
 def afficher_levolution(label,pokemon):
-    
+
     img = Image.open('images/sprites3g/icones/'+pokemon+'1.png')
     img = ImageTk.PhotoImage(img)
         
     label.config(image=img)
     label.im=img
+
+def chercher_pokemon():
+    choix_equipe_plus('choix_plus_equipes','chercher',combobox_nom,nom_du_pokemon)
         
 root.bind('<Control-s>',lambda event:cri_pokemon())
 root.bind('<Control-S>',lambda event:cri_pokemon())
 root.bind('<Control-o>',lambda event:choix_equipe_plus('choix_plus_equipes','voir',None,None))
 root.bind('<Control-O>',lambda event:choix_equipe_plus('choix_plus_equipes','voir',None,None))
+root.bind('<Control-f>',lambda event:chercher_pokemon())
+root.bind('<Control-F>',lambda event:chercher_pokemon())
 
 nompokemon.bind("<<ComboboxSelected>>", combobox_nom)
 

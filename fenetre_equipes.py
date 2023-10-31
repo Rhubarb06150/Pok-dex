@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import messagebox,ttk, Tk, Frame, Canvas, NW
 from PIL import ImageTk, Image
-from liste_pokemon import listenompokemon
+from liste_pokemon import listenompokemon,listepokemon
 from liste_pokemon import *
 from threading import Thread
 import winsound
@@ -1891,13 +1891,6 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
                 
             else:
                 
-                master.update()
-                background=PhotoImage(file='images/fonds/fondplusequipe.png')
-                bg.config(image=background)
-                bg.place(x=-2,y=-2)
-                bg.im=background
-                master.update()
-                
                 cherchetri=(cherche.get())
                 path=('txts/equipe'+cherchetri)
                 if not os.path.exists(path):
@@ -1915,13 +1908,6 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
                     creation_equipe('equipe',cherchetri,50,600,None)
                     
         elif pos == 'voir':
-            
-            master.update()
-            background=PhotoImage(file='images/fonds/fondplusequipe.png')
-            bg.config(image=background)
-            bg.place(x=-2,y=-2)
-            bg.im=background
-            master.update()
             
             cherchetri=(cherche.get())
             path=('txts/equipe'+cherchetri)
@@ -1959,8 +1945,28 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
                         renommer_msg = tkinter.messagebox.showinfo(title="Équipe renommée!",message=("L'équipe "+str(equipeorigine)+" à bien été renommée en "+str(cherchetri)))
                 else:
                     renommer_msg = tkinter.messagebox.showinfo(title="Action impossible",message=("Une équipe nommée "+str(cherchetri)+" éxiste déja"))
-                    
-    
+
+        elif pos == 'chercher':
+
+            pokemon_trouve=False
+            for pokemon in listepokemon:
+                if pokemon.nom == cherche.get():
+                    pokemon_trouve=True
+                    resultat=cherche.get()
+                if pokemon.num == cherche.get():
+                    pokemon_trouve=True
+                    resultat=pokemon.nom   
+                for i in pokemon.rawnom:
+                    if i == cherche.get():
+                        pokemon_trouve=True
+                        resultat=pokemon.nom
+            if pokemon_trouve == False:
+                aucun_pokemon = tkinter.messagebox.showinfo(title="Aucun Pokémon trouvé!",message="Aucun Pokémon n'a été trouvé!")
+            else:
+                master.destroy()
+                fenetre.set(resultat)
+                equipeorigine('e')
+                
     master.bind('<Key-1>',lambda event:lettre('',listelabel))
     master.bind('<Key-2>',lambda event:lettre('',listelabel))
     master.bind('<Key-3>',lambda event:lettre('',listelabel))
