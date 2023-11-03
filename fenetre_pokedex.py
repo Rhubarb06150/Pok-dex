@@ -1330,63 +1330,66 @@ def afficher_les_types():
         listelabelimmuniteslb[i].place(x=xpos,y=438)
         xpos+=66
 
-    for i in listepokemon:
-        if i.nom == nom_du_pokemon.get():
-            if i.faiblesses != False:
+    faiblesses=get_faiblesses(nom_du_pokemon.get())
+    dbfaiblesses=get_db_faiblesses(nom_du_pokemon.get())
+    resistances=get_resistances(nom_du_pokemon.get())
+    dbresistances=get_db_resistances(nom_du_pokemon.get())
+    immunites=get_immunites(nom_du_pokemon.get())
 
-                faiblesses=i.faiblesses
+    if faiblesses != False:
 
-                for i2 in range(len(faiblesses)):
+        for i2 in range(len(faiblesses)):
 
-                    img = Image.open('images/types/'+faiblesses[i2]+'.png')
-                    img = ImageTk.PhotoImage(img)
+            img = Image.open('images/types/'+faiblesses[i2]+'.png')
+            img = ImageTk.PhotoImage(img)
 
-                    listelabelfaiblesseslb[i2].config(image=img,bg='#f8b0a0')
-                    listelabelfaiblesseslb[i2].im=img
+            listelabelfaiblesseslb[i2].config(image=img,bg='#f8b0a0')
+            listelabelfaiblesseslb[i2].im=img
 
-            if i.dbfaiblesses != False:
+    if dbfaiblesses != False:
 
-                dbfaiblesses=i.dbfaiblesses
+        for i2 in range(len(dbfaiblesses)):
 
-                for i2 in range(len(dbfaiblesses)):
+            img = Image.open('images/types/'+dbfaiblesses[i2]+'.png')
+            img = ImageTk.PhotoImage(img)
+            listelabeldbfaiblesseslb[i2].config(image=img,bg='#f8b0a0')
+            listelabeldbfaiblesseslb[i2].im=img
 
-                    img = Image.open('images/types/'+dbfaiblesses[i2]+'.png')
-                    img = ImageTk.PhotoImage(img)
-                    listelabeldbfaiblesseslb[i2].config(image=img,bg='#f8b0a0')
-                    listelabeldbfaiblesseslb[i2].im=img
+    if resistances != False:
 
-            if i.resistances != False:
+        for i2 in range(len(resistances)):
 
-                resistances=i.resistances
+            img = Image.open('images/types/'+resistances[i2]+'.png')
+            img = ImageTk.PhotoImage(img)
+            listelabelresistanceslb[i2].config(image=img,bg='#f8b0a0')
+            listelabelresistanceslb[i2].im=img
 
-                for i2 in range(len(resistances)):
+    if dbresistances != False:
 
-                    img = Image.open('images/types/'+resistances[i2]+'.png')
-                    img = ImageTk.PhotoImage(img)
-                    listelabelresistanceslb[i2].config(image=img,bg='#f8b0a0')
-                    listelabelresistanceslb[i2].im=img
+        for i2 in range(len(dbresistances)):
 
-            if i.dbresistances != False:
+            img = Image.open('images/types/'+dbresistances[i2]+'.png')
+            img = ImageTk.PhotoImage(img)
+            listelabeldbresistanceslb[i2].config(image=img,bg='#f8b0a0')
+            listelabeldbresistanceslb[i2].im=img
 
-                dbresistances=i.dbresistances
+    if immunites != False:
+        print(len(immunites))
+        if type(immunites) is str:
 
-                for i2 in range(len(dbresistances)):
+            img = Image.open('images/types/'+str(immunites)+'.png')
+            img = ImageTk.PhotoImage(img)
+            listelabelimmuniteslb[i2].config(image=img,bg='#f8b0a0')
+            listelabelimmuniteslb[i2].im=img
 
-                    img = Image.open('images/types/'+dbresistances[i2]+'.png')
-                    img = ImageTk.PhotoImage(img)
-                    listelabeldbresistanceslb[i2].config(image=img,bg='#f8b0a0')
-                    listelabeldbresistanceslb[i2].im=img
+        else:
 
-            if i.immunites != False:
+            for i2 in range(len(immunites)):
 
-                immunites=i.immunites
-
-                for i2 in range(len(immunites)):
-
-                    img = Image.open('images/types/'+immunites[i2]+'.png')
-                    img = ImageTk.PhotoImage(img)
-                    listelabelimmuniteslb[i2].config(image=img,bg='#f8b0a0')
-                    listelabelimmuniteslb[i2].im=img
+                img = Image.open('images/types/'+immunites[i2]+'.png')
+                img = ImageTk.PhotoImage(img)
+                listelabelimmuniteslb[i2].config(image=img,bg='#f8b0a0')
+                listelabelimmuniteslb[i2].im=img
 
 def cacher_les_types():
     for i in listelabelresistanceslb:
