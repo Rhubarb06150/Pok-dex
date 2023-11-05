@@ -10,6 +10,8 @@ import winsound
 import random
 import os
 import shutil
+import webbrowser
+import subprocess
 
 def fenetre_equipe(master,equipechoisie,nom):
     
@@ -1502,7 +1504,10 @@ def creation_equipe(master,equipechoisie,x,y,event):
                 master.destroy()
                 shutil.rmtree("txts/equipe"+str(equipechoisie)+"/")
                 supprimer_msg = tkinter.messagebox.showinfo(title="Équipe supprimée",message="L'équipe "+str(equipechoisie)+" à bien été supprimée")
-                
+
+    def acceder_dossier():
+        path = ('txt/equipe'+str(equipechoisie)+'/')
+        os.system(f'start {os.path.realpath(path)}')
          
         #_________________________________________________________________________________________________________________
         #PARAMETRES __________________________________________________________________________________________
@@ -1540,6 +1545,14 @@ def creation_equipe(master,equipechoisie,x,y,event):
     suprrimerlequipe.photo=suprrimerlequipeimg
     suprrimerlequipe.bind('<Button-1>',lambda event:supprimer_equipe())
     suprrimerlequipe.place_forget()
+    
+    path = ('images/fonds/accederdossier.png')
+    accederdossierimg = ImageTk.PhotoImage(Image.open(path))
+    accederdossier=Label(master,image=accederdossierimg,borderwidth=0, highlightthickness=0,bg='#f8b0a0')
+    accederdossier.place(x=34,y=180)
+    accederdossier.photo=accederdossierimg
+    accederdossier.bind('<Button-1>',lambda event:acceder_dossier())
+    accederdossier.place_forget()
     
     
     def gerer_vers_parametres():
@@ -1585,6 +1598,7 @@ def creation_equipe(master,equipechoisie,x,y,event):
         supprimerlesmembres.place(x=34,y=36)
         renommerlequipe.place(x=34,y=84)
         suprrimerlequipe.place(x=34,y=132)
+        accederdossier.place(x=34,y=180)
         
         master.bind('<Right>',lambda event:None)
         master.bind('<Left>',lambda event:None)
@@ -1598,6 +1612,7 @@ def creation_equipe(master,equipechoisie,x,y,event):
         supprimerlesmembres.place_forget()
         renommerlequipe.place_forget()
         suprrimerlequipe.place_forget()
+        accederdossier.place_forget()
         
         
         titre()
@@ -1918,16 +1933,22 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
     def creer_dossier(equipe_choix):
         
         os.mkdir('txts/equipe'+equipe_choix)
-        
-        membre1=open('txts/equipe'+equipe_choix+'/membre1.txt','x')
-        membre2=open('txts/equipe'+equipe_choix+'/membre2.txt','x')
-        membre3=open('txts/equipe'+equipe_choix+'/membre3.txt','x')
-        membre4=open('txts/equipe'+equipe_choix+'/membre4.txt','x')
-        membre5=open('txts/equipe'+equipe_choix+'/membre5.txt','x')
-        membre6=open('txts/equipe'+equipe_choix+'/membre6.txt','x')
-        
-        
-    
+
+        a=0
+        for i in range(6):
+            a+=1
+            nommembre=('membre'+str(a))
+            membre=open('txts/equipe'+equipe_choix+'/'+str(nommembre)+'.txt','x')
+            os.mkdir('txts/equipe'+equipe_choix+'/'+str(nommembre)+'/')
+            os.mkdir('txts/equipe'+equipe_choix+'/'+str(nommembre)+'/attaques/')
+            for i2 in range(4):
+                membre=open('txts/equipe'+equipe_choix+'/'+str(nommembre)+'/attaques/attaque'+str(i2+1)+'.txt','x')
+                membre=open('txts/equipe'+equipe_choix+'/'+str(nommembre)+'/attaques/pp'+str(i2+1)+'.txt','x')
+            membre=open('txts/equipe'+equipe_choix+'/'+str(nommembre)+'/niveau.txt','x')
+            membre=open('txts/equipe'+equipe_choix+'/'+str(nommembre)+'/objet.txt','x')
+            membre=open('txts/equipe'+equipe_choix+'/'+str(nommembre)+'/pv.txt','x')
+            membre=open('txts/equipe'+equipe_choix+'/'+str(nommembre)+'/statut.txt','x')
+
     def aller():
         
         if pos == None:
