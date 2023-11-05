@@ -1733,6 +1733,42 @@ def creation_equipe(master,equipechoisie,x,y,event):
     master.mainloop()
     
 def choix_equipe_plus(master,pos,equipeorigine,fenetre):
+
+    def tri(text):
+        
+        res=text
+        res=res.replace('é','e')
+        res=res.replace('É','e')
+        res=res.replace('A','a')
+        res=res.replace('B','b')
+        res=res.replace('C','c')
+        res=res.replace('D','d')
+        res=res.replace('E','e')
+        res=res.replace('F','f')
+        res=res.replace('G','g')
+        res=res.replace('H','h')
+        res=res.replace('I','i')
+        res=res.replace('J','j')
+        res=res.replace('K','k')
+        res=res.replace('L','l')
+        res=res.replace('M','m')
+        res=res.replace('N','n')
+        res=res.replace('O','o')
+        res=res.replace('P','p')
+        res=res.replace('Q','q')
+        res=res.replace('R','r')
+        res=res.replace('S','s')
+        res=res.replace('T','t')
+        res=res.replace('U','u')
+        res=res.replace('V','v')
+        res=res.replace('W','w')
+        res=res.replace('X','x')
+        res=res.replace('Y','y')
+        res=res.replace('Z','z')
+        res=res.replace('è','e')
+        res=res.replace('È','e')
+
+        return res
     
     master=tk.Toplevel()
     master.title("Plus d'Équipes")
@@ -1807,61 +1843,66 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
     bg.place(x=-2,y=-2)
     
     def lettre(effacer,liste):
-        
-        mot=cherche.get()
-        cherche.delete(12,END)
-        
-        if effacer!='':
-            
-            for i in range(len(listelabel)):
-            
-                mot=''
-                path = ('images/font3g/espace.png')
+
+        mot=tri(cherche.get())
+
+        if effacer == 'e':
+
+            for i in range(len(mot)):
+
+                path = ('images/font3g/nombres/espace.png')
                 img = ImageTk.PhotoImage(Image.open(path))
-                                
-                listelabel[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
-                listelabel[i].im=img
+                            
+                liste[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
+                liste[i].im=img
+
+            cherche.delete(0,END)
+
+        mot=tri(cherche.get())
+        cherche.delete(12,END)
+
+        for i in range(12):
+
+            path = ('images/font3g/nombres/espace.png')
+            img = ImageTk.PhotoImage(Image.open(path))
+                        
+            liste[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
+            liste[i].im=img
             
-        else:
+        for i in range((len(mot))):
             
-            for i in range((len(mot))):
+            if i == 12:
+                break
                 
-                if i == 12:
-                    break
-                    
-                if mot[i] == ' ':
-                            
-                    effacer_fonction(listelabel)
-                    
-                elif mot[i] == '':
-                            
-                    path = ('images/font3g/nombres/espace.png')
-                    img = ImageTk.PhotoImage(Image.open(path))
-                            
-                    liste[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
-                    liste[i].im=img
-                    
-                elif mot[i] == '_':
-                            
-                    path = ('images/font3g/nombres/underscore.png')
-                    img = ImageTk.PhotoImage(Image.open(path))
-                            
-                    liste[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
-                    liste[i].im=img
-                    
-                else:
-                            
-                    path = ('images/font3g/'+mot[i]+'.png')
-                    img = ImageTk.PhotoImage(Image.open(path))
-                            
-                    liste[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
-                    liste[i].im=img
+            elif mot[i] == ' ' or mot[i] == '':
+                        
+                path = ('images/font3g/nombres/espace.png')
+                img = ImageTk.PhotoImage(Image.open(path))
+                        
+                liste[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
+                liste[i].im=img
+                
+            elif mot[i] == '_':
+                        
+                path = ('images/font3g/nombres/underscore.png')
+                img = ImageTk.PhotoImage(Image.open(path))
+                        
+                liste[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
+                liste[i].im=img
+                
+            else:
+                        
+                path = ('images/font3g/'+mot[i]+'.png')
+                img = ImageTk.PhotoImage(Image.open(path))
+                        
+                liste[i].configure(image=img, borderwidth=0, highlightthickness=0, bg='#f04028')
+                liste[i].im=img
             
 
     def effacer_fonction(liste):
         
         mot=cherche.get()
-        cherche.delete(0,len(mot))
+        cherche.delete(0,12)
         
         lettre('e',listelabel)
         
@@ -1893,12 +1934,12 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
             a=None
         elif pos == 'gerer':
             
-            if cherche.get()== '' or cherche.get()==  ' ' or cherche.get()==  '  ':
+            if cherche.get()== '':
                 erreur_msg = tkinter.messagebox.showinfo(title='Erreur!', message=("Veuillez entrer un nom d'équipe valide"))
                 
             else:
                 
-                cherchetri=(cherche.get())
+                cherchetri=tri(cherche.get())
                 path=('txts/equipe'+cherchetri)
                 if not os.path.exists(path):
                     creer_dossier_msg = tkinter.messagebox.askquestion(title='Aucune équipe trouvée!', message=("Il n'y aucune équipe nommée "+cherchetri+", souhaitez vous en créer une?"))
@@ -1916,7 +1957,7 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
                     
         elif pos == 'voir':
             
-            cherchetri=(cherche.get())
+            cherchetri=tri(cherche.get())
             path=('txts/equipe'+cherchetri)
             if not os.path.exists(path):
 
@@ -1938,7 +1979,7 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
                 
                 master.title("Renommer l'équipe")
                 
-                cherchetri=(cherche.get())
+                cherchetri=tri(cherche.get())
                 path=('txts/equipe'+str(cherchetri))
                 
                 if not os.path.exists(path):
@@ -1957,14 +1998,14 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
 
             pokemon_trouve=False
             for pokemon in listepokemon:
-                if pokemon.nom == cherche.get():
+                if pokemon.nom == tri(cherche.get()):
                     pokemon_trouve=True
-                    resultat=cherche.get()
-                if pokemon.num == cherche.get():
+                    resultat=tri(cherche.get())
+                if pokemon.num == tri(cherche.get()):
                     pokemon_trouve=True
                     resultat=pokemon.nom   
                 for i in pokemon.rawnom:
-                    if i == cherche.get():
+                    if i == tri(cherche.get()):
                         pokemon_trouve=True
                         resultat=pokemon.nom
             if pokemon_trouve == False:
@@ -1984,7 +2025,6 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
     master.bind('<Key-8>',lambda event:lettre('',listelabel))
     master.bind('<Key-9>',lambda event:lettre('',listelabel))
     master.bind('<Key-0>',lambda event:lettre('',listelabel))
-    master.bind('<space>',lambda event:effacer_fonction(listelabel))
     master.bind('<A>',lambda event:lettre('',listelabel))
     master.bind('<a>',lambda event:lettre('',listelabel))
     master.bind('<B>',lambda event:lettre('',listelabel))
@@ -1995,6 +2035,10 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
     master.bind('<d>',lambda event:lettre('',listelabel))
     master.bind('<E>',lambda event:lettre('',listelabel))
     master.bind('<e>',lambda event:lettre('',listelabel))
+    master.bind('<egrave>',lambda event:lettre('',listelabel))
+    master.bind('<eacute>',lambda event:lettre('',listelabel))
+    master.bind('<Egrave>',lambda event:lettre('',listelabel))
+    master.bind('<Eacute>',lambda event:lettre('',listelabel))
     master.bind('<E>',lambda event:lettre('',listelabel))
     master.bind('<e>',lambda event:lettre('',listelabel))
     master.bind('<F>',lambda event:lettre('',listelabel))
@@ -2039,8 +2083,9 @@ def choix_equipe_plus(master,pos,equipeorigine,fenetre):
     master.bind('<y>',lambda event:lettre('',listelabel))
     master.bind('<Z>',lambda event:lettre('',listelabel))
     master.bind('<y>',lambda event:lettre('',listelabel))
+    master.bind('<BackSpace>',lambda event:lettre('',listelabel))
+    master.bind('<Control-BackSpace>',lambda event:lettre('e',listelabel))
 
-    master.bind('<BackSpace>',lambda event:effacer_fonction(listelabel))
     
     master.bind('<Return>',lambda event:aller())
     
